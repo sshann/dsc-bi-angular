@@ -8,9 +8,9 @@ import { of } from 'rxjs/observable/of';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'app';
+  title = 'BI Application';
 
   ngOnInit(){
-    console.log(of([1,2,3]));
+   
   }
 }
