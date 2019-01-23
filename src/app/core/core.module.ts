@@ -7,6 +7,7 @@ import {AppRoutingModule} from '../app-routing.module';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthorizationInterceptor} from '../shared/authorization.interceptor';
 import {UserService} from '../auth/user.service';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import {UserService} from '../auth/user.service';
     FlexLayoutModule,
     AppRoutingModule
   ],
-  declarations: [HeaderComponent],
+  declarations: [HeaderComponent, HomeComponent],
   exports: [
     HeaderComponent
   ],
