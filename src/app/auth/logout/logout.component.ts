@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { UserService } from '../../user.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-logout',

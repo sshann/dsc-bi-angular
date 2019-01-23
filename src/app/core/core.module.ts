@@ -4,6 +4,9 @@ import {HeaderComponent} from './header/header.component';
 import {AngularMaterialModule} from '../angular_material.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {AppRoutingModule} from '../app-routing.module';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {AuthorizationInterceptor} from '../shared/authorization.interceptor';
+import {UserService} from '../auth/user.service';
 
 @NgModule({
   imports: [
@@ -15,6 +18,14 @@ import {AppRoutingModule} from '../app-routing.module';
   declarations: [HeaderComponent],
   exports: [
     HeaderComponent
+  ],
+  providers: [
+    UserService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthorizationInterceptor,
+      multi: true
+    }
   ]
 })
 export class CoreModule {
