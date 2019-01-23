@@ -1,6 +1,6 @@
 import { Component, OnInit , Input} from '@angular/core';
-import { User } from '../User';
-import { UserService } from '../user.service';
+import { User } from '../../User';
+import { UserService } from '../../user.service';
 
 @Component({
   selector: 'app-login',
@@ -18,13 +18,13 @@ export class LoginComponent implements OnInit {
 		  password: " "
 	  };
   }
-  
+
   login(email:string, password:string): void {
 	  this.user.email = email;
 	  this.user.password = password;
 	  this.userService.login(this.user).subscribe();
-	  
+
 }
-  
+
 
 }

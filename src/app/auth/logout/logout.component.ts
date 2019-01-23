@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { UserService } from '../user.service';
+import { UserService } from '../../user.service';
 
 @Component({
   selector: 'app-logout',
@@ -13,10 +13,10 @@ export class LogoutComponent implements OnInit {
 
   ngOnInit() {
   }
-  
+
   logout():void{
 	  this.userService.logout().subscribe();
   }
-  
+
 
 }
