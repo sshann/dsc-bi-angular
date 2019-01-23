@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {environment} from '../environments/environment';
 import { catchError, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
+import { Router } from '@angular/router';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -17,7 +18,7 @@ export class UserService {
 
 	private userURL = environment.apiBaseURL + '/api/Users';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   
   login(user:User): Observable<any>{
@@ -26,9 +27,22 @@ export class UserService {
 			  localStorage.setItem('currentUser',loginOutput.userId);
 			  localStorage.setItem('accessToken',loginOutput.id);
 			  console.log("accepted");
+			  this.router.navigate(["./logout"]);
 		  }
 		  return loginOutput;
 	  }), catchError(this.handleError('login', [])))
+  }
+  
+  logout():Observable<any>{
+	  let accessToken = localStorage.getItem('accessToken');
+	  return this.http.post(this.userURL+"/logout", httpOptions).pipe(
+	  tap(() => {
+		  localStorage.removeItem('currentUser');
+		  localStorage.removeItem('accessToken');
+		  console.log("successfully logged out user");
+		  this.router.navigate(["./login"]);  
+	  }),
+	  catchError(this.handleError('logout User')));
   }
   
   private handleError<T> (operation = 'operation', result?: T) {
@@ -41,4 +55,5 @@ export class UserService {
     return of(result as T);
   };
 }
+
 }

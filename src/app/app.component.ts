@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { of } from 'rxjs/observable/of';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,5 +13,14 @@ export class AppComponent implements OnInit{
 
   ngOnInit(){
    
+  }
+  
+  constructor(private router: Router){}
+  
+  redirect(url:string):void{
+	  let accessToken = localStorage.getItem('accessToken');
+	  if(!accessToken){
+		  this.router.navigate(["/login"]);
+	  }
   }
 }
