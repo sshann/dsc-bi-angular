@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { of } from 'rxjs/observable/of';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -8,9 +9,18 @@ import { of } from 'rxjs/observable/of';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'app';
+  title = 'BI Application';
 
   ngOnInit(){
-    console.log(of([1,2,3]));
+   
+  }
+  
+  constructor(private router: Router){}
+  
+  redirect(url:string):void{
+	  let accessToken = localStorage.getItem('accessToken');
+	  if(!accessToken){
+		  this.router.navigate(["/login"]);
+	  }
   }
 }
