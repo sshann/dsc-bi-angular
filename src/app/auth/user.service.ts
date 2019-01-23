@@ -25,7 +25,7 @@ export class UserService {
         localStorage.setItem('currentUser', loginOutput.userId);
         localStorage.setItem('accessToken', loginOutput.id);
         console.log('accepted');
-        this.router.navigate(['./logout']);
+        this.router.navigate(['./']);
       }
       return loginOutput;
     }), catchError(this.handleError('login', [])));

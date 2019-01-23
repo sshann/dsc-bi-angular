@@ -6,6 +6,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {CoreModule} from './core/core.module';
 import {AppRoutingModule} from './/app-routing.module';
 import {AuthModule} from './auth/auth.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import {AuthModule} from './auth/auth.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AngularMaterialModule,
     FlexLayoutModule,
     AppRoutingModule,
