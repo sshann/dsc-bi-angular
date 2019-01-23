@@ -43,6 +43,10 @@ export class UserService {
       catchError(this.handleError('logout User')));
   }
 
+  isAuthenticate() {
+    return localStorage.getItem('accessToken') != null;
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

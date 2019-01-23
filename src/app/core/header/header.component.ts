@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {environment} from '../../../environments/environment';
+import {UserService} from '../../auth/user.service';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,7 @@ import {environment} from '../../../environments/environment';
 export class HeaderComponent implements OnInit {
   title = environment.title;
 
-  constructor() {
+  constructor(private userService: UserService) {
   }
 
   ngOnInit() {
@@ -19,4 +20,7 @@ export class HeaderComponent implements OnInit {
     console.log('Logging out.');
   }
 
+  isAuthenticated() {
+    return this.userService.isAuthenticate();
+  }
 }
