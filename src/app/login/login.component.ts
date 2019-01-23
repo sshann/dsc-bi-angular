@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 	  };
   }
   
-  login(email:String, password:String): void {
+  login(email:string, password:string): void {
 	  this.user.email = email;
 	  this.user.password = password;
 	  this.userService.login(this.user).subscribe();
