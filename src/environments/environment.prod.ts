@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  title: 'BI Solution',
+  apiBaseURL: 'https://toolchain-dsc-bi.eu-gb.mybluemix.net'
 };

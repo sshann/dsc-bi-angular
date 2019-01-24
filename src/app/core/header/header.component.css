@@ -1,0 +1,10 @@
+.home-title {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+
+.home-title:active,
+.home-title:hover {
+  color: lightgrey;
+}

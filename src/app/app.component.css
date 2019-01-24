@@ -1,4 +1,18 @@
+
+.page {
+  height: 100%;
+}
+
+.container {
+}
+
+.main-card{
+  margin: 25px;
+}
+
+/*
 .header{
 	text-align:center
-	
+
 }
+*/

@@ -13,10 +13,10 @@ export class LogoutComponent implements OnInit {
 
   ngOnInit() {
   }
-  
+
   logout():void{
 	  this.userService.logout().subscribe();
   }
-  
+
 
 }
