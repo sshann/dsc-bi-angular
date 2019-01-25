@@ -9,13 +9,15 @@ import {AuthorizationInterceptor} from '../shared/authorization.interceptor';
 import {UserService} from '../auth/user.service';
 import {HomeComponent} from './home/home.component';
 import {AuthGuard} from '../auth/auth-guard.service';
+import {DataPanelModule} from '../data-panel/data-panel.module';
 
 @NgModule({
   imports: [
     CommonModule,
     AngularMaterialModule,
     FlexLayoutModule,
-    AppRoutingModule
+    AppRoutingModule,
+    DataPanelModule
   ],
   declarations: [HeaderComponent, HomeComponent],
   exports: [
