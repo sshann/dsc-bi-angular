@@ -15,11 +15,11 @@ import {DataRoutingModule} from './data-routing.module';
 @NgModule({
   imports: [
     CommonModule,
+    DataRoutingModule,
     FlexLayoutModule,
     AngularMaterialModule,
     FormsModule,
-    HttpClientModule,
-    DataRoutingModule
+    HttpClientModule
   ],
   declarations: [
     DataPanelComponent,

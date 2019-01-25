@@ -13,6 +13,7 @@ import {DataPanelModule} from '../data-panel/data-panel.module';
 import {EmployeeDataService} from '../data-panel/employee-data/employee-data.service';
 import {ProductDataService} from '../data-panel/product-data/product-data.service';
 import {TransactionDataService} from '../data-panel/transaction-data/transaction-data.service';
+import {AuthModule} from '../auth/auth.module';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import {TransactionDataService} from '../data-panel/transaction-data/transaction
     AngularMaterialModule,
     FlexLayoutModule,
     AppRoutingModule,
+    AuthModule,
     DataPanelModule
   ],
   declarations: [HeaderComponent, HomeComponent],
