@@ -4,7 +4,7 @@ import {
   MatCardModule,
   MatCheckboxModule,
   MatFormFieldModule, MatInputModule,
-  MatMenuModule, MatSnackBarModule,
+  MatMenuModule, MatRippleModule, MatSnackBarModule,
   MatToolbarModule
 } from '@angular/material';
 
@@ -16,7 +16,8 @@ const materialComponents = [
   MatCardModule,
   MatFormFieldModule,
   MatInputModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatRippleModule
 ];
 
 @NgModule({
