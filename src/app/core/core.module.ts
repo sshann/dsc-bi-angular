@@ -10,6 +10,9 @@ import {UserService} from '../auth/user.service';
 import {HomeComponent} from './home/home.component';
 import {AuthGuard} from '../auth/auth-guard.service';
 import {DataPanelModule} from '../data-panel/data-panel.module';
+import {EmployeeDataService} from '../data-panel/employee-data/employee-data.service';
+import {ProductDataService} from '../data-panel/product-data/product-data.service';
+import {TransactionDataService} from '../data-panel/transaction-data/transaction-data.service';
 
 @NgModule({
   imports: [
@@ -26,6 +29,9 @@ import {DataPanelModule} from '../data-panel/data-panel.module';
   providers: [
     AuthGuard,
     UserService,
+    EmployeeDataService,
+    ProductDataService,
+    TransactionDataService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthorizationInterceptor,
