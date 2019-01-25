@@ -6,10 +6,20 @@ import {ImportComponent} from './import/import.component';
 import {EmployeeDataComponent} from './employee-data/employee-data.component';
 import {TransactionDataComponent} from './transaction-data/transaction-data.component';
 import {ProductDataComponent} from './product-data/product-data.component';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {AngularMaterialModule} from '../angular_material.module';
+import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {DataRoutingModule} from './data-routing.module';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    FlexLayoutModule,
+    AngularMaterialModule,
+    FormsModule,
+    HttpClientModule,
+    DataRoutingModule
   ],
   declarations: [
     DataPanelComponent,
