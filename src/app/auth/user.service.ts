@@ -6,7 +6,6 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {catchError, map, tap} from 'rxjs/operators';
 import {of} from 'rxjs/observable/of';
-import {Router} from '@angular/router';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -16,19 +15,19 @@ const httpOptions = {
 export class UserService {
   private userURL = environment.apiBaseURL + '/api/Users';
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient) {
   }
 
   login(user: User): Observable<any> {
-    return this.http.post<LoginOutput>(this.userURL + '/login', user, httpOptions).pipe(map(loginOutput => {
-      if (loginOutput.id && loginOutput.userId) {
-        localStorage.setItem('currentUser', loginOutput.userId);
-        localStorage.setItem('accessToken', loginOutput.id);
-        console.log('accepted');
-        this.router.navigate(['./']);
-      }
-      return loginOutput;
-    }), catchError(this.handleError('login', [])));
+    return this.http.post<LoginOutput>(this.userURL + '/login', user, httpOptions).pipe(
+      map(loginOutput => {
+        if (loginOutput.id && loginOutput.userId) {
+          localStorage.setItem('currentUser', loginOutput.userId);
+          localStorage.setItem('accessToken', loginOutput.id);
+          console.log('accepted');
+        }
+        return loginOutput;
+      }), catchError(this.handleError('login', null)));
   }
 
   logout(): Observable<any> {
@@ -38,7 +37,6 @@ export class UserService {
         localStorage.removeItem('currentUser');
         localStorage.removeItem('accessToken');
         console.log('successfully logged out user');
-        this.router.navigate(['./login']);
       }),
       catchError(this.handleError('logout User')));
   }

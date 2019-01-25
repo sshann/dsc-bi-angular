@@ -7,7 +7,8 @@ import {AppRoutingModule} from '../app-routing.module';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthorizationInterceptor} from '../shared/authorization.interceptor';
 import {UserService} from '../auth/user.service';
-import { HomeComponent } from './home/home.component';
+import {HomeComponent} from './home/home.component';
+import {AuthGuard} from '../auth/auth-guard.service';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { HomeComponent } from './home/home.component';
     HeaderComponent
   ],
   providers: [
+    AuthGuard,
     UserService,
     {
       provide: HTTP_INTERCEPTORS,

@@ -1,4 +1,13 @@
 <div>
-<p>Are you sure you want to logout ?</p>
-<button (click)="logout()">Yes</button>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <h1 class="mat-display-2"> Logout</h1>
+  </div>
+
+
+  <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (submit)="logout(f)">
+    <p>Are you sure you want to logout ?</p>
+
+
+    <button mat-raised-button color="primary" type="submit">Logout</button>
+  </form>
 </div>
