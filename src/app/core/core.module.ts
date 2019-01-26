@@ -5,7 +5,7 @@ import {AngularMaterialModule} from '../angular_material.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {AppRoutingModule} from '../app-routing.module';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {AuthorizationInterceptor} from '../shared/authorization.interceptor';
+import {AuthorizationInterceptor} from '../shared/interceptors/authorization.interceptor';
 import {UserService} from '../auth/user.service';
 import {HomeComponent} from './home/home.component';
 import {AuthGuard} from '../auth/guards/auth-guard.service';
@@ -14,6 +14,7 @@ import {EmployeeDataService} from '../data-panel/employee-data/employee-data.ser
 import {ProductDataService} from '../data-panel/product-data/product-data.service';
 import {TransactionDataService} from '../data-panel/transaction-data/transaction-data.service';
 import {AuthModule} from '../auth/auth.module';
+import {HTTPListener, HTTPStatus} from '../shared/interceptors/loader.interceptor';
 
 @NgModule({
   imports: [
@@ -24,7 +25,10 @@ import {AuthModule} from '../auth/auth.module';
     AuthModule,
     DataPanelModule
   ],
-  declarations: [HeaderComponent, HomeComponent],
+  declarations: [
+    HeaderComponent,
+    HomeComponent
+  ],
   exports: [
     HeaderComponent
   ],
@@ -34,9 +38,15 @@ import {AuthModule} from '../auth/auth.module';
     EmployeeDataService,
     ProductDataService,
     TransactionDataService,
+    HTTPListener,
+    HTTPStatus,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthorizationInterceptor,
+      multi: true
+    }, {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HTTPListener,
       multi: true
     }
   ]

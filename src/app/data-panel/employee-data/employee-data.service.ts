@@ -4,7 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {catchError, map, tap} from 'rxjs/operators';
 import {of} from 'rxjs/observable/of';
-import {EmployeeData} from '../../shared/employee-data.model';
+import {EmployeeData} from '../../shared/models/employee-data.model';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})

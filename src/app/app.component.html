@@ -1,8 +1,7 @@
 <div fxLayout="column" class="page">
   <app-header></app-header>
+  <mat-progress-bar mode="indeterminate" color="accent" fxHide.xs [fxHide]="!loading"></mat-progress-bar>
   <div class="container" fxFlex>
-    <!--<mat-card class="main-card" fxFlex fxLayout="column">-->
-      <router-outlet></router-outlet>
-    <!--</mat-card>-->
+    <router-outlet></router-outlet>
   </div>
 </div>

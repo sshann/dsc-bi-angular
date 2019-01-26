@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { of } from 'rxjs/observable/of';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {HTTPStatus} from './shared/interceptors/loader.interceptor';
 
 
 @Component({
@@ -8,19 +7,16 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
-  title = 'BI Application';
+export class AppComponent implements OnInit {
+  loading: boolean;
 
-  ngOnInit(){
-   
+  constructor(private httpStatus: HTTPStatus) {
+    this.httpStatus.getHttpStatus().subscribe((status: boolean) => {
+      this.loading = status;
+      console.log(status);
+    });
   }
-  
-  constructor(private router: Router){}
-  
-  redirect(url:string):void{
-	  let accessToken = localStorage.getItem('accessToken');
-	  if(!accessToken){
-		  this.router.navigate(["/login"]);
-	  }
+
+  ngOnInit(): void {
   }
 }

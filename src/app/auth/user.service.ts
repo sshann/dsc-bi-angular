@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {User} from '../shared/User.model';
-import {LoginOutput} from '../shared/LoginOutput.model';
+import {User} from '../shared/models/User.model';
+import {LoginOutput} from '../shared/models/LoginOutput.model';
 import {Observable} from 'rxjs/Observable';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
