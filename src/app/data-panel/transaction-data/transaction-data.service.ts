@@ -2,16 +2,13 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {catchError, map, tap} from 'rxjs/operators';
 import {of} from 'rxjs/observable/of';
 import {TransactionData} from '../../shared/models/transaction-data.model';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Credentials': 'true'
-  })
-};
+const httpOptions = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Credentials': 'true'
+});
 
 @Injectable()
 export class TransactionDataService {
@@ -22,12 +19,7 @@ export class TransactionDataService {
 
   list(): Observable<TransactionData[]> {
     const url = this.userURL;
-    return this.http.get<TransactionData[]>(url, httpOptions)
-      .pipe(
-        map(response => {
-          console.log('response', response);
-          return response;
-        }));
+    return this.http.get<TransactionData[]>(url, {headers: httpOptions});
   }
 
   create(): TransactionData {
