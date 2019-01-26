@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {DataPanelComponent} from './data-panel/data-panel.component';
-import {AuthGuard} from '../auth/auth-guard.service';
+import {AuthGuard} from '../auth/guards/auth-guard.service';
 import {EmployeeDataComponent} from './employee-data/employee-data.component';
 import {TransactionDataComponent} from './transaction-data/transaction-data.component';
 import {ProductDataComponent} from './product-data/product-data.component';
