@@ -3,4 +3,5 @@ export class LoginOutput {
   ttl: number;
   created: string;
   userId: string;
+  user: object;
 }

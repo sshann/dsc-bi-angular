@@ -19,26 +19,36 @@ export class UserService {
   }
 
   login(user: User): Observable<any> {
-    return this.http.post<LoginOutput>(this.userURL + '/login', user, httpOptions).pipe(
+    return this.http.post<LoginOutput>(this.userURL + '/login?include=user', user, httpOptions).pipe(
       map(loginOutput => {
         if (loginOutput.id && loginOutput.userId) {
-          localStorage.setItem('currentUser', loginOutput.userId);
+          localStorage.setItem('currentUser', JSON.stringify(loginOutput.user));
           localStorage.setItem('accessToken', loginOutput.id);
-          console.log('accepted');
         }
         return loginOutput;
       }), catchError(this.handleError('login', null)));
   }
 
   logout(): Observable<any> {
-    let accessToken = localStorage.getItem('accessToken');
     return this.http.post(this.userURL + '/logout', httpOptions).pipe(
       tap(() => {
         localStorage.removeItem('currentUser');
         localStorage.removeItem('accessToken');
-        console.log('successfully logged out user');
       }),
       catchError(this.handleError('logout User')));
+  }
+
+  getUserRoles(id: string): Observable<any> {
+    const url = this.userURL + '/getRolesById?id=' + id;
+    return this.http.get<any>(url, httpOptions).pipe(
+      map(response => {
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        user.role = response.payload.roles[0];
+        /*The current app have being designed as a user having only one role*/
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        return user.role;
+      }),
+      catchError(this.handleError('Get user roles', null)));
   }
 
   isAuthenticate() {

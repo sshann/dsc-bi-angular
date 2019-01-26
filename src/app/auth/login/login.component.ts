@@ -31,12 +31,24 @@ export class LoginComponent implements OnInit {
       password: form.value.password
     };
     this.userService.login(this.user).subscribe(
-      response => {
-        if (response) {
-          this.router.navigate([this.returnURL]);
-          this.snackBar.open('Login successful! ', null, {
-            duration: 3000,
-          });
+      user => {
+        if (user) {
+          /* Added a timer here as the user roles were not being returned without it. */
+          setTimeout(() => {
+            this.userService.getUserRoles(user.userId).subscribe(roles => {
+              let message: string;
+              this.router.navigate([this.returnURL]);
+              message = 'Login successful! ';
+
+              if (!roles) {
+                message += 'You have no access permissions! ';
+              }
+
+              this.snackBar.open(message, null, {
+                duration: 4000,
+              });
+            });
+          }, 1000);
         } else {
           this.snackBar.open('Failed to login, user not registered! ', null, {
             duration: 3000,
