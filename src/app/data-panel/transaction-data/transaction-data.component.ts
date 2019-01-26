@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {TransactionDataService} from './transaction-data.service';
 
 @Component({
   selector: 'app-transaction-data',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TransactionDataComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http: HttpClient,
+              private TDservice: TransactionDataService) {
+  }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.TDservice.list().subscribe(response => {
+      });
+    });
   }
 
 }
+

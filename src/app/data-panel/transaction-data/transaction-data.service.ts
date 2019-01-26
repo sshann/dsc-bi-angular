@@ -4,36 +4,45 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {catchError, map, tap} from 'rxjs/operators';
 import {of} from 'rxjs/observable/of';
-import {EmployeeData} from '../../shared/models/employee-data.model';
+import {TransactionData} from '../../shared/models/transaction-data.model';
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Credentials': 'true'
+  })
 };
 
 @Injectable()
 export class TransactionDataService {
-  private userURL = environment.apiBaseURL + '/api/Users';
+  private userURL = environment.apiBaseURL + '/api/TransactionData';
 
   constructor(private http: HttpClient) {
   }
 
-  list(): EmployeeData[] {
+  list(): Observable<TransactionData[]> {
+    const url = this.userURL;
+    return this.http.get<TransactionData[]>(url, httpOptions)
+      .pipe(
+        map(response => {
+          console.log('response', response);
+          return response;
+        }));
+  }
+
+  create(): TransactionData {
     return [];
   }
 
-  create(): EmployeeData {
+  get(): TransactionData {
     return [];
   }
 
-  get(): EmployeeData {
+  update(): TransactionData[] {
     return [];
   }
 
-  update(): EmployeeData[] {
-    return [];
-  }
-
-  delete(): EmployeeData[] {
+  delete(): TransactionData[] {
     return [];
   }
 
