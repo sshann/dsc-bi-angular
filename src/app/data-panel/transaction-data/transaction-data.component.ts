@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {TransactionDataService} from './transaction-data.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {TransactionData} from '../../shared/models/transaction-data.model';
 
 /* Expandable row source conde found at https://stackblitz.com/edit/angular-material-expandable-table-rows?file=app%2Ftable%2Ftable.component.html */
 @Component({
@@ -21,6 +22,8 @@ export class TransactionDataComponent implements OnInit {
   displayedColumns = ['date', 'type', 'value', 'amount', 'reference', 'actions'];
   dataSource = new MatTableDataSource();
   expandedElement: any;
+  dataFetched = false;
+  transactions: TransactionData[];
 
   isExpansionDetailRow = (i: number, row: any) => row.hasOwnProperty('detailRow');
 
@@ -35,8 +38,10 @@ export class TransactionDataComponent implements OnInit {
     setTimeout(() => {
       this.TDservice.list().subscribe(response => {
         const rows = [];
-        response.forEach(element => rows.push(element, { detailRow: true, element }));
+        this.transactions = response;
+        response.forEach(element => rows.push(element, {detailRow: true, element}));
         this.dataSource.data = rows;
+        this.dataFetched = true;
       });
 
     });

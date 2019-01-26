@@ -9,6 +9,8 @@
     </div>
   </div>
 
+  <app-transaction-line-graph [transactions]="transactions" *ngIf="dataFetched"></app-transaction-line-graph>
+
   <mat-table #table [dataSource]="dataSource" class="example-container mat-elevation-z8"
              matSort matSortDisableClear matSortDirection="asc">
     <ng-container matColumnDef="date">

@@ -25,3 +25,7 @@
 .element-row.expanded {
   border-bottom-color: transparent;
 }
+
+app-transaction-line-graph {
+  height: 350px;
+}
