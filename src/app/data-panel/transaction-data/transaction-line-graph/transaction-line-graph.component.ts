@@ -11,7 +11,7 @@ export class TransactionLineGraphComponent implements OnInit {
   @Input() transactions: TransactionData[];
   data: any[];
   colorScheme = {
-    domain: ['#5AA454', '#A10A28']
+    domain: ['#A10A28', '#5AA454']
   };
 
   constructor() {
@@ -33,7 +33,7 @@ export class TransactionLineGraphComponent implements OnInit {
     this.transactions.forEach(transaction => {
       const obj = {
         name: transaction.date.substr(0, 10),
-        value: transaction.value
+        value: parseFloat(transaction.value).toFixed(2)
       };
       const index = transaction.type === 'Buy' ? 0 : 1;
       this.data[index].series.push(obj);
