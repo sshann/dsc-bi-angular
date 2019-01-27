@@ -22,19 +22,16 @@ export class TransactionDataService {
     return this.http.get<TransactionData[]>(url, {headers: httpOptions});
   }
 
-  create(): Observable<TransactionData> {
+  create(transaction: TransactionData): Observable<TransactionData> {
     const url = this.userURL;
-    return this.http.post<TransactionData>(url, {headers: httpOptions});
+    return this.http.post<TransactionData>(url, transaction, {headers: httpOptions});
   }
 
-  //
-  // get(): TransactionData {
-  //   return [];
-  // }
-  //
-  // update(): TransactionData[] {
-  //   return [];
-  // }
+  update(transaction: TransactionData): Observable<TransactionData> {
+    const url = this.userURL + '/' + transaction.id;
+    return this.http.put<TransactionData>(url, transaction, {headers: httpOptions});
+  }
+
   //
   // delete(): TransactionData[] {
   //   return [];

@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {TransactionData} from '../../../shared/models/transaction-data.model';
+import {TransactionDataService} from '../transaction-data.service';
 
 @Component({
   selector: 'app-transaction-form-dialog',
@@ -12,7 +13,8 @@ export class TransactionFormDialogComponent implements OnInit {
   form: FormGroup;
   isNew = true;
 
-  constructor(private dialogRef: MatDialogRef<TransactionFormDialogComponent>,
+  constructor(private TDservice: TransactionDataService,
+              private dialogRef: MatDialogRef<TransactionFormDialogComponent>,
               @Inject(MAT_DIALOG_DATA) private data) {
   }
 
@@ -40,7 +42,27 @@ export class TransactionFormDialogComponent implements OnInit {
       value: this.form.value.value,
       amount: this.form.value.amount
     };
-    this.dialogRef.close(transaction);
+
+    if (this.data) {
+      transaction.id = this.data.transaction.id;
+      // @ts-ignore
+      transaction._rev = this.data.transaction._rev;
+    }
+    console.log(JSON.stringify(transaction));
+
+    if (this.isNew) {
+      this.TDservice.create(transaction).subscribe(response => {
+        console.log(response);
+        this.dialogRef.close(transaction);
+
+      });
+    } else {
+      this.TDservice.update(transaction).subscribe(response => {
+        console.log(response);
+        this.dialogRef.close(transaction);
+
+      });
+    }
   }
 
 }
