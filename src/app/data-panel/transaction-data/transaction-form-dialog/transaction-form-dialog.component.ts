@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {TransactionData} from '../../../shared/models/transaction-data.model';
 
 @Component({
@@ -12,17 +12,22 @@ export class TransactionFormDialogComponent implements OnInit {
   form: FormGroup;
   isNew = true;
 
-  constructor(private dialogRef: MatDialogRef<TransactionFormDialogComponent>) {
+  constructor(private dialogRef: MatDialogRef<TransactionFormDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) private data) {
   }
 
   ngOnInit() {
+    console.log(this.data);
+    this.isNew = this.data != null;
     this.form = new FormGroup({
-      date: new FormControl(new Date().toISOString().substring(0, 10), [Validators.required]),
-      type: new FormControl('', [Validators.required]),
-      amount: new FormControl('', [Validators.required]),
-      value: new FormControl('', [Validators.required]),
-      reference: new FormControl('', []),
-      description: new FormControl('', [])
+      date: new FormControl(
+        this.data ? this.data.transaction.date : new Date().toISOString().substring(0, 10),
+        [Validators.required]),
+      type: new FormControl(this.data ? this.data.transaction.type : '', [Validators.required]),
+      amount: new FormControl(this.data ? this.data.transaction.amount : '', [Validators.required]),
+      value: new FormControl(this.data ? this.data.transaction.value : '', [Validators.required]),
+      reference: new FormControl(this.data ? this.data.transaction.reference : '', []),
+      description: new FormControl(this.data ? this.data.transaction.description : '', [])
     });
   }
 
