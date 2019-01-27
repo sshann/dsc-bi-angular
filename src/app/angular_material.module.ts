@@ -2,10 +2,21 @@ import {NgModule} from '@angular/core';
 import {
   MatButtonModule,
   MatCardModule,
-  MatCheckboxModule,
-  MatFormFieldModule, MatIconModule, MatInputModule,
-  MatMenuModule, MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule, MatRippleModule, MatSnackBarModule, MatTableModule,
-  MatToolbarModule, MatTooltipModule
+  MatCheckboxModule, MatDatepickerModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatMenuModule, MatNativeDateModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSnackBarModule, MatSortModule,
+  MatTableModule,
+  MatToolbarModule,
+  MatTooltipModule
 } from '@angular/material';
 
 const materialComponents = [
@@ -23,7 +34,12 @@ const materialComponents = [
   MatTableModule,
   MatProgressSpinnerModule,
   MatPaginatorModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatDialogModule,
+  MatSelectModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatSortModule
 ];
 
 @NgModule({

@@ -1,11 +1,12 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {TransactionDataService} from './transaction-data.service';
-import {animate, state, style, transition, trigger} from '@angular/animations';
 import {TransactionData} from '../../shared/models/transaction-data.model';
+import {TransactionFormDialogComponent} from './transaction-form-dialog/transaction-form-dialog.component';
 
-/* Expandable row source conde found at https://stackblitz.com/edit/angular-material-expandable-table-rows?file=app%2Ftable%2Ftable.component.html */
+// Expandable row source conde found at
+// https://stackblitz.com/edit/angular-material-expandable-table-rows?file=app%2Ftable%2Ftable.component.html
 @Component({
   selector: 'app-transaction-data',
   templateUrl: './transaction-data.component.html',
@@ -15,19 +16,21 @@ export class TransactionDataComponent implements OnInit, AfterViewInit {
   displayedColumns = ['date', 'type', 'value', 'amount', 'reference', 'actions'];
   dataSource = new MatTableDataSource();
   dataFetched = false;
-  transactions: TransactionData[];
+  transactions: TransactionData[] = [];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private http: HttpClient,
-              private TDservice: TransactionDataService) {
+              private TDservice: TransactionDataService,
+              private dialog: MatDialog) {
   }
 
   ngOnInit() {
     setTimeout(() => {
       this.TDservice.list().subscribe(response => {
         this.transactions = response;
-        this.dataSource.data = response;
+        this.dataSource.data = this.transactions;
         this.dataFetched = true;
       });
 
@@ -36,10 +39,19 @@ export class TransactionDataComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   openCreateDialog() {
-    console.log('create');
+    const createDialogRef = this.dialog.open(TransactionFormDialogComponent);
+    createDialogRef
+      .afterClosed()
+      .subscribe(transaction => {
+        if (transaction) {
+          this.transactions.push(transaction);
+          this.dataSource.data = this.transactions;
+        }
+      });
   }
 
   openDeleteDialog(event, transaction) {
@@ -49,7 +61,12 @@ export class TransactionDataComponent implements OnInit, AfterViewInit {
 
   openEditDialog(event, transaction) {
     event.stopPropagation();
-    console.log('edit', transaction);
+    const editDialogRef = this.dialog.open(TransactionFormDialogComponent, {
+      data: {
+        transaction: transaction
+      }
+    });
+
   }
 
 

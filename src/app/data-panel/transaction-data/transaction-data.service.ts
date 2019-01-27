@@ -18,9 +18,10 @@ export class TransactionDataService {
   }
 
   list(): Observable<TransactionData[]> {
-    const url = this.userURL;
+    const url = this.userURL + '?filter[order]=date DESC';
     return this.http.get<TransactionData[]>(url, {headers: httpOptions});
   }
+
   //
   // create(): TransactionData {
   //   return [];

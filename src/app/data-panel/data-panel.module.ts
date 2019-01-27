@@ -8,11 +8,12 @@ import {TransactionDataComponent} from './transaction-data/transaction-data.comp
 import {ProductDataComponent} from './product-data/product-data.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {AngularMaterialModule} from '../angular_material.module';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {DataRoutingModule} from './data-routing.module';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {TransactionLineGraphComponent} from './transaction-data/transaction-line-graph/transaction-line-graph.component';
+import {TransactionFormDialogComponent} from './transaction-data/transaction-form-dialog/transaction-form-dialog.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import {TransactionLineGraphComponent} from './transaction-data/transaction-line
     FlexLayoutModule,
     AngularMaterialModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     NgxChartsModule
   ],
@@ -31,7 +33,11 @@ import {TransactionLineGraphComponent} from './transaction-data/transaction-line
     EmployeeDataComponent,
     TransactionDataComponent,
     ProductDataComponent,
-    TransactionLineGraphComponent]
+    TransactionLineGraphComponent,
+    TransactionFormDialogComponent],
+  entryComponents: [
+    TransactionFormDialogComponent
+  ]
 })
 export class DataPanelModule {
 }
