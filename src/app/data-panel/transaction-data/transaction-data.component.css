@@ -1,3 +1,7 @@
 app-transaction-line-graph {
   height: 350px;
 }
+
+mat-row {
+  cursor: pointer;
+}

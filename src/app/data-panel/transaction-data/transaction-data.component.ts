@@ -38,5 +38,20 @@ export class TransactionDataComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
+  openCreateDialog() {
+    console.log('create');
+  }
+
+  openDeleteDialog(event, transaction) {
+    event.stopPropagation();
+    console.log('delete', transaction);
+  }
+
+  openEditDialog(event, transaction) {
+    event.stopPropagation();
+    console.log('edit', transaction);
+  }
+
+
 }
 
