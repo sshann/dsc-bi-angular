@@ -21,22 +21,22 @@ export class TransactionDataService {
     const url = this.userURL;
     return this.http.get<TransactionData[]>(url, {headers: httpOptions});
   }
-
-  create(): TransactionData {
-    return [];
-  }
-
-  get(): TransactionData {
-    return [];
-  }
-
-  update(): TransactionData[] {
-    return [];
-  }
-
-  delete(): TransactionData[] {
-    return [];
-  }
+  //
+  // create(): TransactionData {
+  //   return [];
+  // }
+  //
+  // get(): TransactionData {
+  //   return [];
+  // }
+  //
+  // update(): TransactionData[] {
+  //   return [];
+  // }
+  //
+  // delete(): TransactionData[] {
+  //   return [];
+  // }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
