@@ -18,7 +18,6 @@ export class TransactionLineGraphComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('T', this.transactions);
     this.data = [
       {
         name: 'Buy',
