@@ -17,8 +17,7 @@ export class TransactionFormDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.data);
-    this.isNew = this.data != null;
+    this.isNew = this.data == null;
     this.form = new FormGroup({
       date: new FormControl(
         this.data ? this.data.transaction.date : new Date().toISOString().substring(0, 10),

@@ -22,10 +22,11 @@ export class TransactionDataService {
     return this.http.get<TransactionData[]>(url, {headers: httpOptions});
   }
 
-  //
-  // create(): TransactionData {
-  //   return [];
-  // }
+  create(): Observable<TransactionData> {
+    const url = this.userURL;
+    return this.http.post<TransactionData>(url, {headers: httpOptions});
+  }
+
   //
   // get(): TransactionData {
   //   return [];

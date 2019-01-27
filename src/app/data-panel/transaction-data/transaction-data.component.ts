@@ -54,18 +54,26 @@ export class TransactionDataComponent implements OnInit, AfterViewInit {
       });
   }
 
-  openDeleteDialog(event, transaction) {
+  openDeleteDialog(event, transaction, index) {
     event.stopPropagation();
     console.log('delete', transaction);
   }
 
-  openEditDialog(event, transaction) {
+  openEditDialog(event, transaction, index) {
     event.stopPropagation();
     const editDialogRef = this.dialog.open(TransactionFormDialogComponent, {
       data: {
         transaction: transaction
       }
     });
+    editDialogRef
+      .afterClosed()
+      .subscribe(updatedTransaction => {
+        if (updatedTransaction) {
+          this.transactions[index] = updatedTransaction;
+          this.dataSource.data = this.transactions;
+        }
+      });
 
   }
 
