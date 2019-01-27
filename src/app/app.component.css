@@ -4,11 +4,12 @@
 }
 
 .container {
-}
-
-.main-card{
   margin: 25px;
 }
+
+/*.main-card{
+  margin: 25px;
+}*/
 
 /*
 .header{
@@ -16,3 +17,7 @@
 
 }
 */
+
+app-header {
+  padding-bottom: 63px;
+}

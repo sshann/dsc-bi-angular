@@ -5,6 +5,8 @@ import {LogoutComponent} from './logout/logout.component';
 import {AuthRoutingModule} from './auth-routing.module';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {AngularMaterialModule} from '../angular_material.module';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
   imports: [
@@ -12,6 +14,8 @@ import {HttpClientModule} from '@angular/common/http';
     AuthRoutingModule,
     FormsModule,
     HttpClientModule,
+    AngularMaterialModule,
+    FlexLayoutModule
   ],
   declarations: [
     LoginComponent,

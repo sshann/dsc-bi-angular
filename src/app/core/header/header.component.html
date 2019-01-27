@@ -4,9 +4,13 @@
       <a routerLink="" class="home-title">{{title}}</a>
     </div>
 
-    <button mat-button routerLink="/companies">Companies</button>
-    <button mat-button>Data</button>
-    <button mat-button routerLink="/login">Login</button>
-    <button mat-button routerLink="/logout">Logout</button>
+    <div fxLayout="row" fxFLayoutGap="5px" *ngIf="isAuthenticated()">
+      <button mat-button>Companies</button>
+      <button mat-button routerLink="/data">Data</button>
+      <button mat-button routerLink="/logout">Logout</button>
+    </div>
+
+    <button mat-button routerLink="/login" *ngIf="!isAuthenticated()">Login</button>
+
   </div>
 </mat-toolbar>

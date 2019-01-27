@@ -5,9 +5,7 @@ import {AngularMaterialModule} from './angular_material.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {CoreModule} from './core/core.module';
 import {AppRoutingModule} from './/app-routing.module';
-import {AuthModule} from './auth/auth.module';
-import {CompaniesModule} from './companies/companies.module';
-
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -16,12 +14,11 @@ import {CompaniesModule} from './companies/companies.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AngularMaterialModule,
     FlexLayoutModule,
     AppRoutingModule,
     CoreModule,
-    AuthModule,
-	CompaniesModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

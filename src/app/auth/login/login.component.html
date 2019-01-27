@@ -1,8 +1,21 @@
 <div>
-<div>Login</div>
-<label>Email: </label>
-<input #email placeholder="email"><br><br>
-<label>Password: </label>
-<input #password type= "password" placeholder="password"><br>
-<button (click)="login(email.value,password.value)">Login</button>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <h1 class="mat-display-2"> Login</h1>
+  </div>
+
+  <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (submit)="login(f)">
+    <mat-form-field>
+      <input matInput ngModel email required #emailInput="ngModel" type="email" name="email" placeholder="Email">
+      <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid!</mat-error>
+      <mat-error *ngIf="emailInput.hasError('required')">Email is required!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput ngModel required #passwordInput="ngModel" type="password" name="password"
+             placeholder="Password">
+      <mat-error>Password is required!</mat-error>
+    </mat-form-field>
+
+    <button [disabled]="f.invalid" mat-raised-button color="primary" type="submit">Login</button>
+  </form>
 </div>

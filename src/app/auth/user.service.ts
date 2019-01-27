@@ -1,12 +1,11 @@
 import {Injectable} from '@angular/core';
-import {User} from '../shared/User';
-import {LoginOutput} from '../shared/LoginOutput';
+import {User} from '../shared/models/User.model';
+import {LoginOutput} from '../shared/models/LoginOutput.model';
 import {Observable} from 'rxjs/Observable';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {catchError, map, tap} from 'rxjs/operators';
 import {of} from 'rxjs/observable/of';
-import {Router} from '@angular/router';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -16,31 +15,44 @@ const httpOptions = {
 export class UserService {
   private userURL = environment.apiBaseURL + '/api/Users';
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient) {
   }
 
   login(user: User): Observable<any> {
-    return this.http.post<LoginOutput>(this.userURL + '/login', user, httpOptions).pipe(map(loginOutput => {
-      if (loginOutput.id && loginOutput.userId) {
-        localStorage.setItem('currentUser', loginOutput.userId);
-        localStorage.setItem('accessToken', loginOutput.id);
-        console.log('accepted');
-        this.router.navigate(['./logout']);
-      }
-      return loginOutput;
-    }), catchError(this.handleError('login', [])));
+    return this.http.post<LoginOutput>(this.userURL + '/login?include=user', user, httpOptions).pipe(
+      map(loginOutput => {
+        if (loginOutput.id && loginOutput.userId) {
+          localStorage.setItem('currentUser', JSON.stringify(loginOutput.user));
+          localStorage.setItem('accessToken', loginOutput.id);
+        }
+        return loginOutput;
+      }), catchError(this.handleError('login', null)));
   }
 
   logout(): Observable<any> {
-    let accessToken = localStorage.getItem('accessToken');
     return this.http.post(this.userURL + '/logout', httpOptions).pipe(
       tap(() => {
         localStorage.removeItem('currentUser');
         localStorage.removeItem('accessToken');
-        console.log('successfully logged out user');
-        this.router.navigate(['./login']);
       }),
       catchError(this.handleError('logout User')));
+  }
+
+  getUserRoles(id: string): Observable<any> {
+    const url = this.userURL + '/getRolesById?id=' + id;
+    return this.http.get<any>(url, httpOptions).pipe(
+      map(response => {
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        user.role = response.payload.roles[0];
+        /*The current app have being designed as a user having only one role*/
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        return user.role;
+      }),
+      catchError(this.handleError('Get user roles', null)));
+  }
+
+  isAuthenticate() {
+    return localStorage.getItem('accessToken') != null;
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
