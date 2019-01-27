@@ -15,6 +15,7 @@ import {ProductDataService} from '../data-panel/product-data/product-data.servic
 import {TransactionDataService} from '../data-panel/transaction-data/transaction-data.service';
 import {AuthModule} from '../auth/auth.module';
 import {HTTPListener, HTTPStatus} from '../shared/interceptors/loader.interceptor';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import {HTTPListener, HTTPStatus} from '../shared/interceptors/loader.intercepto
     FlexLayoutModule,
     AppRoutingModule,
     AuthModule,
-    DataPanelModule
+    DataPanelModule,
+    SharedModule
   ],
   declarations: [
     HeaderComponent,
