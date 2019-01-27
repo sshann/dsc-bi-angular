@@ -45,7 +45,6 @@ export class TransactionFormDialogComponent implements OnInit {
 
     if (this.data) {
       transaction.id = this.data.transaction.id;
-      // @ts-ignore
       transaction._rev = this.data.transaction._rev;
     }
     console.log(JSON.stringify(transaction));
