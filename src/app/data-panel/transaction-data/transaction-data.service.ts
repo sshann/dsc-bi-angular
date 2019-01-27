@@ -32,10 +32,10 @@ export class TransactionDataService {
     return this.http.put<TransactionData>(url, transaction, {headers: httpOptions});
   }
 
-  //
-  // delete(): TransactionData[] {
-  //   return [];
-  // }
+  delete(transaction: TransactionData): Observable<object> {
+    const url = this.userURL + '/' + transaction.id;
+    return this.http.delete(url, {headers: httpOptions});
+  }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

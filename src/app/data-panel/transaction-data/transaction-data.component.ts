@@ -1,9 +1,10 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
 import {TransactionDataService} from './transaction-data.service';
 import {TransactionData} from '../../shared/models/transaction-data.model';
 import {TransactionFormDialogComponent} from './transaction-form-dialog/transaction-form-dialog.component';
+import {DeleteConfirmationComponent} from '../../shared/dialog/delete-confirmation/delete-confirmation.component';
 
 // Expandable row source conde found at
 // https://stackblitz.com/edit/angular-material-expandable-table-rows?file=app%2Ftable%2Ftable.component.html
@@ -23,7 +24,8 @@ export class TransactionDataComponent implements OnInit, AfterViewInit {
 
   constructor(private http: HttpClient,
               private TDservice: TransactionDataService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -56,7 +58,25 @@ export class TransactionDataComponent implements OnInit, AfterViewInit {
 
   openDeleteDialog(event, transaction, index) {
     event.stopPropagation();
-    console.log('delete', transaction);
+    const deleteDialogRef = this.dialog.open(DeleteConfirmationComponent, {
+      data: {
+        modelId: transaction.id,
+        modelName: 'transaction'
+      }
+    });
+
+    deleteDialogRef.afterClosed().subscribe(confirmation => {
+      console.log(confirmation);
+      if (confirmation) {
+        this.TDservice.delete(transaction).subscribe(response => {
+          this.snackBar.open('Transaction deleted! ', null, {
+            duration: 3000,
+          });
+          this.transactions.splice(index, 1);
+          this.dataSource.data = this.transactions;
+        });
+      }
+    });
   }
 
   openEditDialog(event, transaction, index) {

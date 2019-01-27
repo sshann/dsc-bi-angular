@@ -1,8 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
 import {TransactionData} from '../../../shared/models/transaction-data.model';
 import {TransactionDataService} from '../transaction-data.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-transaction-form-dialog',
@@ -15,7 +16,8 @@ export class TransactionFormDialogComponent implements OnInit {
 
   constructor(private TDservice: TransactionDataService,
               private dialogRef: MatDialogRef<TransactionFormDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) private data) {
+              @Inject(MAT_DIALOG_DATA) private data,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -51,15 +53,18 @@ export class TransactionFormDialogComponent implements OnInit {
 
     if (this.isNew) {
       this.TDservice.create(transaction).subscribe(response => {
-        console.log(response);
-        this.dialogRef.close(transaction);
+        this.snackBar.open('Transaction created! ', null, {
+          duration: 3000,
+        });
+        this.dialogRef.close(response);
 
       });
     } else {
       this.TDservice.update(transaction).subscribe(response => {
-        console.log(response);
-        this.dialogRef.close(transaction);
-
+        this.snackBar.open('Transaction Updated! ', null, {
+          duration: 3000,
+        });
+        this.dialogRef.close(response);
       });
     }
   }
