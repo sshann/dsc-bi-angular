@@ -1,0 +1,65 @@
+<div>
+<table border="1">
+    <thead>
+        <tr>
+           <th>Name</th>
+           <th>ResponsibleName</th>
+           <th>ResponsibleEmail</th>
+		   <th>ResponsiblePhone</th>
+         </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of company">
+			<td>{{item?.name }}</td>
+			<td>{{ item?.responsibleName }}</td>
+			<td> {{ item?.responsibleEmail }}</td>
+			<td>{{ item?.responsiblePhone }}</td>
+			<td>
+			<button style= "width:100px; height:50px" (click)="delete(item)" [disabled]="(updateComponent)||(addComponent)"> Delete {{item.name}}</button>
+			<button style= "width:100px; height:50px" (click)="displayUpdate(item)" [disabled]="((updateComponent) && (item.id != temp.id)) || addComponent"> Update {{item?.name}} details </button>
+			</td>
+        </tr>
+     </tbody>
+</table>
+<button (click)="displayAddCompoenent()" [disabled]="updateComponent">+</button>
+</div>
+
+
+<!--
+Form to add a company-->
+<div *ngIf="addComponent">
+<h2>Add a company</h2>
+<label>Company Name: </label>
+<input #name type="text" placeholder="Company Name"><br><br>
+
+<label> Company Responsible Name: </label>
+<input #user type="text" placeholder="User Name"><br><br>
+
+<label> Company Responsible Email: </label>
+<input #email type="email" placeholder="User Email"><br><br>
+
+<label> Company Responsible Phone#: </label>
+<input #phone type="text" placeholder="User Phone#"><br><br>
+
+<button (click)= "addCompany(name.value, user.value, email.value, phone.value)" >Add Company</button>
+</div>
+
+<!--
+Form to update a company's details-->
+<div *ngIf="updateComponent">
+<h2>Update company {{temp.name}}</h2>
+<label>Company Name: </label>
+<input #compName type="text" placeholder="Company Name" value="{{temp.name}}"><br><br>
+
+<label> Company Responsible Name: </label>
+<input #compUser type="text" placeholder="User Name" value="{{temp.responsibleName}}"><br><br>
+
+<label> Company Responsible Email: </label>
+<input #userEmail type="email" placeholder="User Email" value="{{temp.responsibleEmail}}"><br><br>
+
+<label> Company Responsible Phone#: </label>
+<input #userPhone type="text" placeholder="User Phone#" value="{{temp.responsiblePhone}}"><br><br>
+
+<button (click)= "updateCompany(compName?.value, compUser?.value, userEmail?.value, userPhone?.value)" routerLink="/companies">Update Company</button>
+
+</div>

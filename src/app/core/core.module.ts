@@ -8,6 +8,7 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthorizationInterceptor} from '../shared/authorization.interceptor';
 import {UserService} from '../auth/user.service';
 import { HomeComponent } from './home/home.component';
+import {CompanyService} from '../companies/company.service';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { HomeComponent } from './home/home.component';
   ],
   providers: [
     UserService,
+	CompanyService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthorizationInterceptor,

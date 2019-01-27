@@ -6,11 +6,13 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {CoreModule} from './core/core.module';
 import {AppRoutingModule} from './/app-routing.module';
 import {AuthModule} from './auth/auth.module';
+import {CompaniesModule} from './companies/companies.module';
+
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -18,7 +20,8 @@ import {AuthModule} from './auth/auth.module';
     FlexLayoutModule,
     AppRoutingModule,
     CoreModule,
-    AuthModule
+    AuthModule,
+	CompaniesModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
