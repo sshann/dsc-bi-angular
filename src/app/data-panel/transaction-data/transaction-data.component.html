@@ -11,6 +11,10 @@
 
   <app-transaction-line-graph [transactions]="transactions" *ngIf="dataFetched"></app-transaction-line-graph>
 
+  <div>
+    <span class="mat-body-2">Total Transactions:</span>
+    <span> {{' ' + transactions.length}}</span>
+  </div>
   <mat-table #table [dataSource]="dataSource" class="mat-elevation-z2"
              matSort matSortDirection="desc" matSortActive="date">
     <ng-container matColumnDef="date">
