@@ -2,5 +2,5 @@ applications:
 - name: ApplicationBI
   buildpack: staticfile_buildpack
   routes:
-  - route: VUSpace.eu-gb.bluemix.net
+  - route: wgenizshannstudentvunl-dev.apic.eu-gb.mybluemix.net
   memory: 256M
