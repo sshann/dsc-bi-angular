@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build:win": "ng build --prod --base-href && copy manifest.yml dist && copy Staticfile dist",
+    "build:win": "ng build --prod && copy manifest.yml dist && copy Staticfile dist",
     "build:mac": "ng build --prod --base-href && cp manifest.yml dist && cp Staticfile dist",
     "test": "ng test",
     "lint": "ng lint",
