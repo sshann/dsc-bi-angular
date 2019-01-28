@@ -2,5 +2,5 @@ applications:
 - name: ApplicationBI
   buildpack: staticfile_buildpack
   routes:
-  - route: vu.eu.gb.mybluemix.net
+  - route: eu-gb.bluemix.net
   memory: 256M
