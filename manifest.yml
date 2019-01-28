@@ -1,5 +1,5 @@
 applications:
--name: BI application
+-name : BI application
  buildpack : staticfile-buildpack
  routes :
  -route : angularBI-vu.eu.gb.mybluemix.net
