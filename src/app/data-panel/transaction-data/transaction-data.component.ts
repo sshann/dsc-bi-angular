@@ -56,7 +56,7 @@ export class TransactionDataComponent implements OnInit, AfterViewInit {
       });
   }
 
-  openDeleteDialog(event, transaction, index) {
+  openDeleteDialog(event, transaction) {
     event.stopPropagation();
     const deleteDialogRef = this.dialog.open(DeleteConfirmationComponent, {
       data: {
@@ -72,14 +72,14 @@ export class TransactionDataComponent implements OnInit, AfterViewInit {
           this.snackBar.open('Transaction deleted! ', null, {
             duration: 3000,
           });
-          this.transactions.splice(index, 1);
+          this.transactions.splice(this.getTransactionIndex(transaction), 1);
           this.dataSource.data = this.transactions;
         });
       }
     });
   }
 
-  openEditDialog(event, transaction, index) {
+  openEditDialog(event, transaction) {
     event.stopPropagation();
     const editDialogRef = this.dialog.open(TransactionFormDialogComponent, {
       data: {
@@ -90,11 +90,17 @@ export class TransactionDataComponent implements OnInit, AfterViewInit {
       .afterClosed()
       .subscribe(updatedTransaction => {
         if (updatedTransaction) {
-          this.transactions[index] = updatedTransaction;
+          this.transactions[this.getTransactionIndex(transaction)] = updatedTransaction;
           this.dataSource.data = this.transactions;
         }
       });
 
+  }
+
+  private getTransactionIndex(transaction) {
+    return this.transactions.findIndex(element => {
+      return element.id === transaction.id;
+    });
   }
 
 

@@ -30,7 +30,7 @@
 
     <ng-container matColumnDef="reference">
       <mat-header-cell *matHeaderCellDef>Reference</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.reference}}</mat-cell>
+      <mat-cell *matCellDef="let row;">{{ row.reference}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="amount">
@@ -44,11 +44,11 @@
           <mat-icon aria-label="Add transaction">add</mat-icon>
         </button>
       </mat-header-cell>
-      <mat-cell *matCellDef="let row; let index = index;" fxFlex="85px" fxLayout="row" fxLayoutAlign="end">
-        <button mat-icon-button color="primary" (click)="openEditDialog($event, row, index);">
+      <mat-cell *matCellDef="let row;" fxFlex="85px" fxLayout="row" fxLayoutAlign="end">
+        <button mat-icon-button color="primary" (click)="openEditDialog($event, row);">
           <mat-icon aria-label="Edit transaction">edit</mat-icon>
         </button>
-        <button mat-icon-button color="warn" (click)="openDeleteDialog($event, row, index)">
+        <button mat-icon-button color="warn" (click)="openDeleteDialog($event, row)">
           <mat-icon aria-label="Delete transaction">delete</mat-icon>
         </button>
 
@@ -56,8 +56,8 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns; let index = index;" [matTooltip]="row.description"
-             (click)="openEditDialog($event, row, index)"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" [matTooltip]="row.description"
+             (click)="openEditDialog($event, row)"></mat-row>
   </mat-table>
 
   <mat-paginator #paginator
