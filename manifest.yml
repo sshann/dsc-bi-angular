@@ -2,5 +2,5 @@ applications:
 - name: ApplicationBI
   buildpack: staticfile_buildpack
   routes:
-  - route: angularBI-vu.eu.gb.mybluemix.net
+  - route: vu.eu.gb.mybluemix.net
   memory: 256M
