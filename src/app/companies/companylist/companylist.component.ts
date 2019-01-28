@@ -16,6 +16,7 @@ export class CompanylistComponent implements OnInit {
 	tempAdd: Company;
 	addComponent: boolean = false; //variable to make add form visible on click
 	updateComponent: boolean = false; //variable to make the update form visible on click
+	index: number = 0;
 
   constructor(private companyService: CompanyService) {
 	  this.company = [];
@@ -48,7 +49,7 @@ export class CompanylistComponent implements OnInit {
   }
  
 // Display the form to update a selected company
-  displayUpdate(comp: CompanyOutput): void{
+  displayUpdate(comp: CompanyOutput, index: number): void{
 	  this.updateComponent = !(this.updateComponent);	
 	  this.temp.id = comp.id;
 	  this.temp.name = comp.name;
@@ -56,6 +57,7 @@ export class CompanylistComponent implements OnInit {
 	  this.temp.responsibleEmail = comp.responsibleEmail;
 	  this.temp.responsiblePhone = comp.responsiblePhone;
 	  this.temp._rev = comp._rev;
+	  this.index = index;
 	}
 	
 // Call the service that retrieves the list of company from the database
@@ -98,8 +100,11 @@ export class CompanylistComponent implements OnInit {
 		  this.temp.responsibleName = user;
 		  this.temp.responsibleEmail = email;
 		  this.temp.responsiblePhone = phone;
-		  this.companyService.updateCompany(this.temp).subscribe();
-		  window.location.reload();
+		  this.companyService.updateCompany(this.temp).subscribe(comp => {
+			  this.temp._rev = comp._rev;
+			  this.company[this.index] = comp;
+			  
+		  });
 	  }
 	}
 	

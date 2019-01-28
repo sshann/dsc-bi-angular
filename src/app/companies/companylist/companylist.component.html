@@ -16,7 +16,7 @@
 			<td>{{ item?.responsiblePhone }}</td>
 			<td>
 			<button style= "width:100px; height:50px" (click)="delete(item)" [disabled]="(updateComponent)||(addComponent)"> Delete {{item.name}}</button>
-			<button style= "width:100px; height:50px" (click)="displayUpdate(item)" [disabled]="((updateComponent) && (item.id != temp.id)) || addComponent"> Update {{item?.name}} details </button>
+			<button style= "width:100px; height:50px" (click)="displayUpdate(item, company.indexOf(item))" [disabled]="((updateComponent) && (item.id != temp.id)) || addComponent"> Update {{item?.name}} details </button>
 			</td>
         </tr>
      </tbody>
