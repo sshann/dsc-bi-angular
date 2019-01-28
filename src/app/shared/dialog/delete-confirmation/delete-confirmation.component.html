@@ -1,0 +1,10 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+  <h1 mat-dialog-title>Remove Data</h1>
+</div>
+<mat-dialog-content>
+  <p>Are you sure that you want to remove the {{modelName}} with ID {{modelId}}</p>
+</mat-dialog-content>
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+  <button mat-raised-button color="warn" (click)="confirmation()"> Remove </button>
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

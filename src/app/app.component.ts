@@ -13,7 +13,6 @@ export class AppComponent implements OnInit {
   constructor(private httpStatus: HTTPStatus) {
     this.httpStatus.getHttpStatus().subscribe((status: boolean) => {
       this.loading = status;
-      console.log(status);
     });
   }
 
