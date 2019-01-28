@@ -2,5 +2,5 @@ applications:
 - name: ApplicationBI
   buildpack: staticfile_buildpack
   routes:
-  - route: api.eu-gb.bluemix.net
+  - route: empty-toolchain-20190128130015479.eu-gb.bluemix.net
   memory: 256M
