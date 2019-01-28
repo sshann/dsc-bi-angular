@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Company} from '../shared/Company';
+import {CompanyOutput} from '../shared/CompanyOutput';
 import { Observable } from 'rxjs/Observable';
 import {environment} from '../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
@@ -44,8 +45,8 @@ addCompany(comp: Company): Observable<Company> {
   );
 }
 
-updateCompany(comp:Company): Observable<Company>{
-	return this.http.put<Company>(this.companyURL,comp,httpOptions).pipe(tap(() => {
+updateCompany(comp:Company): Observable<CompanyOutput>{
+	return this.http.put<CompanyOutput>(this.companyURL,comp,httpOptions).pipe(tap(() => {
 		console.log("Company is updated");
 	})
 	);
