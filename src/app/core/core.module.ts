@@ -7,7 +7,7 @@ import {AppRoutingModule} from '../app-routing.module';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthorizationInterceptor} from '../shared/interceptors/authorization.interceptor';
 import {UserService} from '../auth/user.service';
-import { HomeComponent } from './home/home.component';
+import {HomeComponent} from './home/home.component';
 import {CompanyService} from '../companies/company.service';
 import {CompaniesModule} from '../companies/companies.module';
 import {AuthGuard} from '../auth/guards/auth-guard.service';
@@ -17,6 +17,7 @@ import {ProductDataService} from '../data-panel/product-data/product-data.servic
 import {TransactionDataService} from '../data-panel/transaction-data/transaction-data.service';
 import {AuthModule} from '../auth/auth.module';
 import {HTTPListener, HTTPStatus} from '../shared/interceptors/loader.interceptor';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -25,8 +26,9 @@ import {HTTPListener, HTTPStatus} from '../shared/interceptors/loader.intercepto
     FlexLayoutModule,
     AppRoutingModule,
     AuthModule,
-	CompaniesModule,
-    DataPanelModule
+    CompaniesModule,
+    DataPanelModule,
+    SharedModule
   ],
   declarations: [
     HeaderComponent,
@@ -38,7 +40,7 @@ import {HTTPListener, HTTPStatus} from '../shared/interceptors/loader.intercepto
   providers: [
     AuthGuard,
     UserService,
-	CompanyService,
+    CompanyService,
     EmployeeDataService,
     ProductDataService,
     TransactionDataService,

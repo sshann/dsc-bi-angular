@@ -2,39 +2,39 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {catchError, map, tap} from 'rxjs/operators';
 import {of} from 'rxjs/observable/of';
-import {EmployeeData} from '../../shared/models/employee-data.model';
+import {TransactionData} from '../../shared/models/transaction-data.model';
 
-const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
-};
+const httpOptions = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Credentials': 'true'
+});
 
 @Injectable()
 export class TransactionDataService {
-  private userURL = environment.apiBaseURL + '/api/Users';
+  private userURL = environment.apiBaseURL + '/api/TransactionData';
 
   constructor(private http: HttpClient) {
   }
 
-  list(): EmployeeData[] {
-    return [];
+  list(): Observable<TransactionData[]> {
+    const url = this.userURL + '?filter[order]=date DESC';
+    return this.http.get<TransactionData[]>(url, {headers: httpOptions});
   }
 
-  create(): EmployeeData {
-    return [];
+  create(transaction: TransactionData): Observable<TransactionData> {
+    const url = this.userURL;
+    return this.http.post<TransactionData>(url, transaction, {headers: httpOptions});
   }
 
-  get(): EmployeeData {
-    return [];
+  update(transaction: TransactionData): Observable<TransactionData> {
+    const url = this.userURL + '/' + transaction.id;
+    return this.http.put<TransactionData>(url, transaction, {headers: httpOptions});
   }
 
-  update(): EmployeeData[] {
-    return [];
-  }
-
-  delete(): EmployeeData[] {
-    return [];
+  delete(transaction: TransactionData): Observable<object> {
+    const url = this.userURL + '/' + transaction.id;
+    return this.http.delete(url, {headers: httpOptions});
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

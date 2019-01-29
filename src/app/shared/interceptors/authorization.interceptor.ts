@@ -8,11 +8,10 @@ export class AuthorizationInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    let currentUser = localStorage.getItem('currentUser');
-    let accessToken = localStorage.getItem('accessToken');
+    const currentUser = localStorage.getItem('currentUser');
+    const accessToken = localStorage.getItem('accessToken');
 
     if (currentUser && accessToken) {
-      console.log('Adding Authorization header: ' + accessToken);
       request = request.clone({
         headers: request.headers.set('Authorization', accessToken)
       });

@@ -8,7 +8,11 @@ import {catchError, map, tap} from 'rxjs/operators';
 import {of} from 'rxjs/observable/of';
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Credentials': 'true',
+    'Access-Control-Allow-Origin': '*'
+  })
 };
 
 @Injectable()

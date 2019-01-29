@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
       user => {
         if (user) {
           /* Added a timer here as the user roles were not being returned without it. */
-          setTimeout(() => {
+          // setTimeout(() => {
             this.userService.getUserRoles(user.userId).subscribe(roles => {
               let message: string;
               this.router.navigate([this.returnURL]);
@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
                 duration: 4000,
               });
             });
-          }, 1000);
+          // }, 1000);
         } else {
           this.snackBar.open('Failed to login, user not registered! ', null, {
             duration: 3000,
