@@ -41,6 +41,7 @@ export class CompanylistComponent implements OnInit {
 //Retrieve list of companies on the component initialization
   ngOnInit() {
 	  this.getCompanyList();
+	  console.log(this.company);
   }
   
 //Display the form to add a company to the list
@@ -58,6 +59,7 @@ export class CompanylistComponent implements OnInit {
 	  this.temp.responsiblePhone = comp.responsiblePhone;
 	  this.temp._rev = comp._rev;
 	  this.index = index;
+	  console.log(this.temp);
 	}
 	
 // Call the service that retrieves the list of company from the database

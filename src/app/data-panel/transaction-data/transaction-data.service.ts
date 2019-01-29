@@ -36,6 +36,14 @@ export class TransactionDataService {
     const url = this.userURL + '/' + transaction.id;
     return this.http.delete(url, {headers: httpOptions});
   }
+  
+  import(json:any[], selectedData:string): Observable<any[]>{
+	  console.log(json);
+	  //let data:TransactionData = json[0];
+	  //data.value = +json[0].value;
+	  console.log(json[0].date);
+	  return this.http.post<any[]>(environment.apiBaseURL+"/api/"+selectedData,json,{headers: httpOptions});
+  }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

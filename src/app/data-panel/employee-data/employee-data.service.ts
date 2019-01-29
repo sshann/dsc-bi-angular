@@ -22,11 +22,11 @@ export class EmployeeDataService {
   }
 
   create(): EmployeeData {
-    return [];
+    return ;
   }
 
   get(): EmployeeData {
-    return [];
+    return ;
   }
 
   update(): EmployeeData[] {
