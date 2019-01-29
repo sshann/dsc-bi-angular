@@ -1,3 +1,13 @@
-<p>
-  import works!
-</p>
+<div style="text-align:center">
+<select name="data" #ddl (change)="selected(ddl.value)">
+  <option value="EmployeeData">Employee Data</option>
+  <option value="ProductData">Product Data</option>
+  <option value="TransactionData">Transaction Data</option>
+</select><br><br>
+
+<input #importData type="file" accept=".csv"(change)="import($event)">
+<br><br>
+<button (click)="selected()">Import {{submit}}</button>
+
+<label>{{trial}}</label>
+</div>
