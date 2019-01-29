@@ -1,5 +1,5 @@
 <ngx-charts-line-chart
-  [scheme]="colorScheme"
+  [scheme]="_colorScheme"
   [results]="data"
   [gradient]="false"
   [xAxis]="true"
@@ -8,7 +8,7 @@
   [showXAxisLabel]="true"
   [showYAxisLabel]="true"
   [xAxisLabel]="'Date'"
-  [yAxisLabel]="'Value (€)'"
+  [yAxisLabel]="_graphTitle"
   [autoScale]="false"
   [timeline]="true">
 </ngx-charts-line-chart>

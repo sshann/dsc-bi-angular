@@ -9,16 +9,31 @@ import {TransactionData} from '../../../shared/models/transaction-data.model';
 })
 export class TransactionLineGraphComponent implements OnInit {
   @Input() transactions: TransactionData[];
+  @Input() graphData: { name: string, series: any[] }[];
+  @Input() graphTitle: string;
+  @Input() colorScheme: { domain: string[] };
   data: any[];
-  colorScheme = {
-    domain: ['#A10A28', '#5AA454']
-  };
+  _colorScheme: { domain: string[] };
+  _graphTitle: string;
 
   constructor() {
   }
 
   ngOnInit() {
-    this.data = [
+    if (this.graphData) {
+      this.data = this.graphData;
+    } else {
+      this.data = this.formatData();
+    }
+
+    this._graphTitle = this.graphTitle ? this.graphTitle : 'Value (€)';
+    this._colorScheme = this.colorScheme ? this.colorScheme : {
+      domain: ['#A10A28', '#5AA454']
+    };
+  }
+
+  private formatData() {
+    const array = [
       {
         name: 'Buy',
         series: []
@@ -35,10 +50,11 @@ export class TransactionLineGraphComponent implements OnInit {
         value: parseFloat(transaction.value).toFixed(2)
       };
       const index = transaction.type === 'Buy' ? 0 : 1;
-      this.data[index].series.push(obj);
+      array[index].series.push(obj);
     });
-    this.data[0].series = this.sumSameDayTransactions(this.data[0].series);
-    this.data[1].series = this.sumSameDayTransactions(this.data[1].series);
+    array[0].series = this.sumSameDayTransactions(array[0].series);
+    array[1].series = this.sumSameDayTransactions(array[1].series);
+    return array;
   }
 
   private sumSameDayTransactions(array) {

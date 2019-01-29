@@ -37,6 +37,9 @@ import {TransactionFormDialogComponent} from './transaction-data/transaction-for
     TransactionFormDialogComponent],
   entryComponents: [
     TransactionFormDialogComponent
+  ],
+  exports: [
+    TransactionLineGraphComponent
   ]
 })
 export class DataPanelModule {

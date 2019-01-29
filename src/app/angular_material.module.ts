@@ -4,9 +4,9 @@ import {
   MatCardModule,
   MatCheckboxModule, MatDatepickerModule,
   MatDialogModule,
-  MatFormFieldModule,
+  MatFormFieldModule, MatGridListModule,
   MatIconModule,
-  MatInputModule,
+  MatInputModule, MatListModule,
   MatMenuModule, MatNativeDateModule,
   MatPaginatorModule,
   MatProgressBarModule,
@@ -39,7 +39,9 @@ const materialComponents = [
   MatSelectModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatSortModule
+  MatSortModule,
+  MatListModule,
+  MatGridListModule
 ];
 
 @NgModule({

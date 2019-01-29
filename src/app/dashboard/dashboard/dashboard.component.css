@@ -1,0 +1,57 @@
+app-transaction-line-graph {
+  height: 400px;
+}
+
+.summary mat-card {
+  width: 200px;
+  height: 85px;
+}
+
+
+.my-caption {
+  font-size: 8px;
+}
+
+.transaction-item span {
+  padding-right: 10px;
+}
+
+.transaction-item .type {
+  width: 40px;
+}
+
+.transaction-item .value {
+  width: 50px;
+}
+
+.transaction-item .itens {
+  width: 50px;
+}
+
+.product-item span {
+  padding-right: 5px;
+}
+
+.product-item .name {
+  padding-right: 40px;
+}
+
+.product-item .category {
+  padding-right: 40px;
+}
+
+.product-item .value {
+  padding-right: 40px;
+}
+
+.product-item .stock {
+  /*padding-right: 50px;*/
+}
+
+.user-item span {
+  padding-right: 10px;
+}
+
+.user-item .username {
+  font-style: italic;
+}
