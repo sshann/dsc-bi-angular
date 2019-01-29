@@ -4,37 +4,38 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {catchError, map, tap} from 'rxjs/operators';
 import {of} from 'rxjs/observable/of';
-import {EmployeeData} from '../../shared/models/employee-data.model';
+import {ProductData} from '../../shared/models/product-data.model';
 
-const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
-};
+const httpOptions = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Credentials': 'true'
+});
 
 @Injectable()
 export class ProductDataService {
-  private userURL = environment.apiBaseURL + '/api/Users';
+  private userURL = environment.apiBaseURL + '/api/ProductData';
 
   constructor(private http: HttpClient) {
   }
 
-  list(): EmployeeData[] {
-    return [];
+  list(): Observable<ProductData[]> {
+    const url = this.userURL + '?filter[order]=date DESC';
+    return this.http.get<ProductData[]>(url, {headers: httpOptions});
   }
 
-  create(): EmployeeData {
-    return ;
+  create(product: ProductData): Observable<ProductData> {
+    const url = this.userURL;
+    return this.http.post<ProductData>(url, product, {headers: httpOptions});
   }
 
-  get(): EmployeeData {
-    return ;
+  update(product: ProductData): Observable<ProductData> {
+    const url = this.userURL + '/' + product.id;
+    return this.http.put<ProductData>(url, product, {headers: httpOptions});
   }
 
-  update(): EmployeeData[] {
-    return [];
-  }
-
-  delete(): EmployeeData[] {
-    return [];
+  delete(product: ProductData): Observable<object> {
+    const url = this.userURL + '/' + product.id;
+    return this.http.delete(url, {headers: httpOptions});
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

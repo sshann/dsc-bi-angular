@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ProductDataService} from './product-data.service';
 
 @Component({
   selector: 'app-product-data',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductDataComponent implements OnInit {
 
-  constructor() { }
+  constructor(private productService: ProductDataService) {
+  }
 
   ngOnInit() {
+    this.productService.list().subscribe(response => {
+      console.log(response);
+    });
   }
 
 }
