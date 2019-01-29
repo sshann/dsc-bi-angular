@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {TransactionDataService} from '../transaction-data/transaction-data.service';
+import {TransactionData} from '../../shared/models/transaction-data.model';
+import {ProductData} from '../../shared/models/product-data.model';
+import {EmployeeData} from '../../shared/models/employee-data.model';
 
 @Component({
   selector: 'app-import',
@@ -8,18 +12,56 @@ import { Component, OnInit } from '@angular/core';
 export class ImportComponent implements OnInit {
 	
 	trial: any ;
-	submit:String = "";
-	json: any = [];
+	selectedData:string = "EmployeeData";
+	transactionJson: TransactionData[] = [];
+	temp: TransactionData;
+	productJson: ProductData[] = [];
+	tempProduct: ProductData;
+	employeeJson: EmployeeData[] = [];
+	tempEmployee: EmployeeData;
+	file:number= 0;
+	
 
-  constructor() { }
+  constructor(private dataService: TransactionDataService) {
+		  
+		this.temp = {
+			date:" ",
+			value: " ",
+			type: " ",
+			amount:0,
+			description: " ",
+			reference: " "
+		};
+		
+		this.tempProduct= {
+			date:" ",
+			category:" ",
+			current_value:0,
+			current_stock:0,
+			name:" ",
+			description:""
+		};
+		this.tempEmployee={
+			date:"",
+			department:"",
+			total_employees:0,
+			total_salary_paid:0,
+			total_teams:0,
+		}
+		 
+	  }
+	  
 
   ngOnInit() {
-	
   }
   
-  import(t:any):void{
-	  if(t != ""){
-		  this.trial = t;
+  selected(ddlValue:string):void{
+	  this.selectedData = ddlValue;
+  }
+  
+  csvToJson(t:any):void{
+	  this.file = t.srcElement.files.length;
+	  if(this.file !=0){
 		  this.trial = t.target.files[0];
 		  
 		  let reader: FileReader = new FileReader();
@@ -38,25 +80,84 @@ export class ImportComponent implements OnInit {
 				  if (data.length === header.length) {
 					  let attribute = [];
 					  for (let j = 0; j < header.length; j++) {
+						  header[j]= header[j].trim();
 						  attribute[header[j]]=data[j];
 						  }
-						  lines.push(attribute);
+						  lines.push(attribute);	
 					}
 				}
 				// all rows in the csv file 
 				console.log(">>>>>>>>>>>>>>>>>", lines);
-				this.json = lines
+				if(this.selectedData == "TransactionData"){
+					alert("IN TransactionData");
+					for(let i = 0; i < lines.length; i++){
+						this.temp.date = lines[i].date;
+						this.temp.description = lines[i].description;
+						this.temp.value = lines[i].value;
+						this.temp.amount = lines[i].amount;
+						this.temp.type = lines[i].type;
+						this.temp.reference = lines[i].reference;
+						
+						
+						this.transactionJson.push(this.temp);
+						this.temp = {date:"",description:"",value:"",amount:0,type:"",reference:""};
+						
+					}
+					console.log(this.transactionJson);
+				}
+				else if(this.selectedData == "ProductData"){
+					alert("IN ProductData");
+					for(let i = 0; i < lines.length; i++){
+						this.tempProduct.date = lines[i].date;
+						this.tempProduct.name = lines[i].name;
+						this.tempProduct.current_value = lines[i].current_value;
+						this.tempProduct.current_stock = lines[i].current_stock;
+						this.tempProduct.category = lines[i].category;
+						this.tempProduct.description = lines[i].description;
+						
+						
+						this.productJson.push(this.tempProduct);
+						this.tempProduct = {date:"",name:"",current_value:0,current_stock:0,category:"",description:""};
+				}
+				}
+				else{
+					for(let i = 0; i < lines.length; i++){
+						this.tempEmployee.date = lines[i].date;
+						this.tempEmployee.department = lines[i].department;
+						this.tempEmployee.total_employees = lines[i].total_employees;
+						this.tempEmployee.total_salary_paid = lines[i].total_salary_paid;
+						this.tempEmployee.total_teams = lines[i].total_teams;
+						
+						
+						this.employeeJson.push(this.tempEmployee);
+						this.tempEmployee = {date:"",department:"",total_employees:0,total_salary_paid:0,total_teams:0};
+				}
 
 			}
-		}
+		  }
+	  }
 	  else{
-		  alert("File not selected! Please select a file");
-		 
+		  alert("Choose a file to import")
 	  }
   }
   
-  selected():void{
-	  
+  
+  import():void{
+	  if(this.selectedData=="TransactionData"){
+	  this.dataService.import(this.transactionJson,this.selectedData).subscribe(comp => {
+		console.log(comp);
+	});
+	  }
+	  else if (this.selectedData=="ProductData"){
+		  this.dataService.import(this.productJson,this.selectedData).subscribe(comp => {
+		console.log(comp);
+	});
+	  }
+	  else{
+		  this.dataService.import(this.employeeJson,this.selectedData).subscribe(comp => {
+		console.log(comp);
+	});
+	  }
   }
 
 }

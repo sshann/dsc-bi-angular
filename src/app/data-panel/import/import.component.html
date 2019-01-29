@@ -5,9 +5,8 @@
   <option value="TransactionData">Transaction Data</option>
 </select><br><br>
 
-<input #importData type="file" accept=".csv"(change)="import($event)">
+<input #importData type="file" accept=".csv"(change)="csvToJson($event)" required>
 <br><br>
-<button (click)="selected()">Import {{submit}}</button>
+<button (click)="import()" [disabled]="file == 0">Import {{selectedData}}</button>
 
-<label>{{trial}}</label>
 </div>
