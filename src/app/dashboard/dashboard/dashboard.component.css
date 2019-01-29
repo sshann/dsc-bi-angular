@@ -3,7 +3,7 @@ app-transaction-line-graph {
 }
 
 .summary mat-card {
-  width: 200px;
+  /*width: 200px;*/
   height: 85px;
 }
 

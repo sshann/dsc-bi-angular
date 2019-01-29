@@ -19,6 +19,7 @@ import {AuthModule} from '../auth/auth.module';
 import {HTTPListener, HTTPStatus} from '../shared/interceptors/loader.interceptor';
 import {SharedModule} from '../shared/shared.module';
 import {DashboardModule} from '../dashboard/dashboard.module';
+import {LoadingService} from '../shared/loading.service';
 
 @NgModule({
   imports: [
@@ -48,6 +49,7 @@ import {DashboardModule} from '../dashboard/dashboard.module';
     TransactionDataService,
     HTTPListener,
     HTTPStatus,
+    LoadingService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthorizationInterceptor,

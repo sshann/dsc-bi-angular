@@ -1,23 +1,30 @@
+<mat-progress-bar mode="indeterminate" color="accent" fxHide.xs style="margin:-25px; width:125%" *ngIf="isDownloading"></mat-progress-bar>
+<!--For some reason, The main progress bar is not displaying when setting to true here-->
+<br *ngIf="isDownloading">
 <div>
-  <div fxLayout="row" fxLayoutAlign="center center">
-    <h1 class="headline"> Dashboard</h1>
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <div fxLayout="row" fxLayoutAlign="center center" style="padding-left: 94px" fxFlex>
+      <h1 class=""> Dashboard</h1>
+    </div>
+
+    <button mat-raised-button [disabled]="!dataFeched" color="primary" (click)="downloadReport()">Download</button>
   </div>
 
-  <div fxLayout="column" *ngIf="dataFeched">
+  <div fxLayout="column" *ngIf="dataFeched" id="dashboard">
     <!--SUMMARY-->
     <div fxLayout="row" fxLayoutGap="15px" class="summary" fxLayoutAlign="center center">
-      <mat-card fxLayout="column" fxLayoutAlign="center center">
+      <mat-card fxLayout="column" fxLayoutAlign="center center" fxFlex>
         <span>{{report.summary.transactions.countBuy + ' Purchases'}}</span>
         <span>{{report.summary.transactions.valueBuy | currency:'EUR'}}</span>
       </mat-card>
-      <mat-card fxLayout="column" fxLayoutAlign="center center">
+      <mat-card fxLayout="column" fxLayoutAlign="center center" fxFlex>
         <span>{{report.summary.transactions.countSell + ' Sales'}}</span>
         <span>{{report.summary.transactions.valueSell | currency:'EUR'}}</span>
       </mat-card>
-      <mat-card fxLayout="column" fxLayoutAlign="center center">
+      <mat-card fxLayout="column" fxLayoutAlign="center center" fxFlex>
         <span>{{report.summary.products.amount + ' Products'}}</span>
       </mat-card>
-      <mat-card fxLayout="column" fxLayoutAlign="center center">
+      <mat-card fxLayout="column" fxLayoutAlign="center center" fxFlex>
         <span>{{report.summary.users.amount + ' Users'}}</span>
         <span class="my-caption">In this app</span>
       </mat-card>
