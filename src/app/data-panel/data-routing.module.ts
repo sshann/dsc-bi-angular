@@ -7,26 +7,47 @@ import {TransactionDataComponent} from './transaction-data/transaction-data.comp
 import {ProductDataComponent} from './product-data/product-data.component';
 import {ReportComponent} from './report/report.component';
 import {ImportComponent} from './import/import.component';
+import {AdminGuard} from '../auth/guards/admin-guard.service';
+import {BusinessOwnerGuard} from '../auth/guards/business-owner-guard.service';
+import {BusinessManagerGuard} from '../auth/guards/business-manager-guard.service';
 
 const routes: Routes = [
-  {path: 'data', component: DataPanelComponent, canActivate: [AuthGuard]},
   {
-    path: 'data/employee', children: [
+    path: 'data',
+    component: DataPanelComponent,
+    canActivate: [AuthGuard, AdminGuard, BusinessOwnerGuard, BusinessManagerGuard]
+  },
+  {
+    path: 'data/employee',
+    canActivate: [AuthGuard, AdminGuard, BusinessOwnerGuard, BusinessManagerGuard],
+    children: [
       {path: '', component: EmployeeDataComponent}
     ]
   },
   {
-    path: 'data/product', children: [
+    path: 'data/product',
+    canActivate: [AuthGuard, AdminGuard, BusinessOwnerGuard, BusinessManagerGuard],
+    children: [
       {path: '', component: ProductDataComponent}
     ]
   },
   {
-    path: 'data/transaction', children: [
+    path: 'data/transaction',
+    canActivate: [AuthGuard, AdminGuard, BusinessOwnerGuard, BusinessManagerGuard],
+    children: [
       {path: '', component: TransactionDataComponent}
     ]
   },
-  {path: 'data/export', component: ReportComponent},
-  {path: 'data/import', component: ImportComponent}
+  {
+    path: 'data/export',
+    component: ReportComponent,
+    canActivate: [AuthGuard, AdminGuard, BusinessOwnerGuard, BusinessManagerGuard]
+  },
+  {
+    path: 'data/import',
+    component: ImportComponent,
+    canActivate: [AuthGuard, AdminGuard, BusinessOwnerGuard, BusinessManagerGuard]
+  }
 ];
 
 @NgModule({

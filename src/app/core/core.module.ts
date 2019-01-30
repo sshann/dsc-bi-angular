@@ -20,6 +20,9 @@ import {HTTPListener, HTTPStatus} from '../shared/interceptors/loader.intercepto
 import {SharedModule} from '../shared/shared.module';
 import {DashboardModule} from '../dashboard/dashboard.module';
 import {LoadingService} from '../shared/loading.service';
+import {AdminGuard} from '../auth/guards/admin-guard.service';
+import {BusinessManagerGuard} from '../auth/guards/business-manager-guard.service';
+import {BusinessOwnerGuard} from '../auth/guards/business-owner-guard.service';
 
 @NgModule({
   imports: [
@@ -42,6 +45,9 @@ import {LoadingService} from '../shared/loading.service';
   ],
   providers: [
     AuthGuard,
+    AdminGuard,
+    BusinessManagerGuard,
+    BusinessOwnerGuard,
     UserService,
     CompanyService,
     EmployeeDataService,
