@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {UserService} from '../../auth/user.service';
-import {AdminGuard} from '../../auth/guards/admin-guard.service';
 
 @Component({
   selector: 'app-header',

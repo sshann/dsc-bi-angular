@@ -4,7 +4,7 @@
       <a routerLink="" class="home-title">{{title}}</a>
     </div>
 
-    <div fxLayout="row" fxFLayoutGap="5px" *ngIf="isAuthenticated()">
+    <div fxLayout="row" fxFLayoutGap="5px" *ngIf="isAuthenticated()" fxHide.xs>
       <button mat-button routerLink="/dashboard">Dashboard</button>
       <button mat-button routerLink="/companies" *ngIf="isAdmin()">Companies</button>
       <button mat-button routerLink="/data">Data</button>

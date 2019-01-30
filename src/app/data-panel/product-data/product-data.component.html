@@ -9,7 +9,7 @@
     </div>
   </div>
 
-  <div fxLayout="row">
+  <div fxLayout="row" fxLayout.sm="column">
     <app-product-by-day-graph fxFlex [products]="products" *ngIf="dataFetched"
                               dataProperty="current_value"></app-product-by-day-graph>
     <app-product-by-day-graph fxFlex [products]="products" *ngIf="dataFetched" dataProperty="current_stock"
