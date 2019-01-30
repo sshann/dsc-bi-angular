@@ -53,7 +53,6 @@ export class TransactionByDayGraphComponent implements OnInit {
       const index = transaction.type === 'Buy' ? 0 : 1;
       array[index].series.push(obj);
     });
-    console.log('first', JSON.stringify(array));
     array[0].series = this.sumSameDayTransactions(array[0].series);
     array[1].series = this.sumSameDayTransactions(array[1].series);
     return array;
@@ -67,7 +66,6 @@ export class TransactionByDayGraphComponent implements OnInit {
 
     newArray.push(array[0]);
     array.slice(1).forEach((element) => {
-      console.log(JSON.stringify(array));
       if (newArray[index].name === element.name) {
         newArray[index].value = (parseFloat(newArray[index].value) + parseFloat(element.value)).toFixed(fractionDigits);
       } else {

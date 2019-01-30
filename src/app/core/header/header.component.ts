@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {UserService} from '../../auth/user.service';
+import {AdminGuard} from '../../auth/guards/admin-guard.service';
 
 @Component({
   selector: 'app-header',
@@ -18,5 +19,9 @@ export class HeaderComponent implements OnInit {
 
   isAuthenticated() {
     return this.userService.isAuthenticate();
+  }
+
+  isAdmin() {
+    return JSON.parse(localStorage.getItem('currentUser')).role === 'admin';
   }
 }
