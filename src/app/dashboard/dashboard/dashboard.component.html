@@ -59,16 +59,15 @@
       <div fxLayout="row" fxLayoutGap="10px" fxFlex>
         <div fxLayout="column" fxFlex>
           <div fxLayout="row" fxLayoutAlign="center center"> Product Value by Day</div>
-          <!--This is not a transaction, but due time limitation, the component have been reused-->
-          <app-transaction-by-day-graph
+          <app-product-by-day-graph
             fxFlex [colorScheme]="{domain: ['#4e93ff']}"
-            [graphData]="report.graph.products.valueByDay"></app-transaction-by-day-graph>
+            [graphData]="report.graph.products.valueByDay"></app-product-by-day-graph>
         </div>
         <div fxLayout="column" fxFlex>
           <div fxLayout="row" fxLayoutAlign="center center"> Product Stock by Day</div>
-          <app-transaction-by-day-graph
+          <app-product-by-day-graph
             fxFlex [graphData]="report.graph.products.stockByDay"
-            [graphTitle]="'Stock'" [colorScheme]="{domain: ['#4e93ff']}"></app-transaction-by-day-graph>
+            [graphTitle]="'Stock'" [colorScheme]="{domain: ['#4e93ff']}"></app-product-by-day-graph>
         </div>
 
 

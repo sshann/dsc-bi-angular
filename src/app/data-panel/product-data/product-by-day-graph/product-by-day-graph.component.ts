@@ -31,6 +31,7 @@ export class ProductByDayGraphComponent implements OnInit {
     this._colorScheme = this.colorScheme ? this.colorScheme : {
       domain: ['#4b7ca1']
     };
+    console.log('Graph data', this.data);
   }
 
   private formatData() {
@@ -59,14 +60,14 @@ export class ProductByDayGraphComponent implements OnInit {
 
     newArray.push(array[0]);
     array.slice(1).forEach((element) => {
+      console.log(JSON.stringify(array));
       if (newArray[index].name === element.name) {
-        newArray[index][this.dataProperty] = (parseFloat(newArray[index][this.dataProperty]) + parseFloat(element[this.dataProperty])).toFixed(fractionDigits);
+        newArray[index].value = (parseFloat(newArray[index].value) + parseFloat(element.value)).toFixed(fractionDigits);
       } else {
         index++;
         newArray.push(element);
       }
     });
-
 
     return newArray;
   }
