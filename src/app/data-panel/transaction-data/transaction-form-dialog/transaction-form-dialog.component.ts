@@ -50,8 +50,6 @@ export class TransactionFormDialogComponent implements OnInit {
       transaction.id = this.data.transaction.id;
       transaction._rev = this.data.transaction._rev;
     }
-    console.log(JSON.stringify(transaction));
-
     if (this.isNew) {
       this.TDservice.create(transaction).subscribe(response => {
         this.snackBar.open('Transaction created! ', null, {

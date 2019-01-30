@@ -31,7 +31,6 @@ export class ProductDataComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     setTimeout(() => {
       this.productService.list().subscribe(response => {
-        console.log(response);
         this.products = response;
         this.dataSource.data = this.products;
         this.dataFetched = true;
@@ -67,7 +66,6 @@ export class ProductDataComponent implements OnInit, AfterViewInit {
     });
 
     deleteDialogRef.afterClosed().subscribe(confirmation => {
-      console.log(confirmation);
       if (confirmation) {
         this.productService.delete(product).subscribe(response => {
           this.snackBar.open('Product deleted! ', null, {

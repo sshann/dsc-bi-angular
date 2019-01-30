@@ -39,13 +39,13 @@
       <div fxLayout="row" fxLayoutGap="10px" fxFlex>
         <div fxLayout="column" fxFlex>
           <div fxLayout="row" fxLayoutAlign="center center"> Transaction Value by Day</div>
-          <app-transaction-by-day-graph fxFlex
+          <app-transaction-by-day-graph fxFlex dataProperty="value"
                                       [graphData]="report.graph.transactions.valueByDay"></app-transaction-by-day-graph>
         </div>
         <div fxLayout="column" fxFlex>
           <div fxLayout="row" fxLayoutAlign="center center"> Transaction Amount by Day</div>
           <app-transaction-by-day-graph fxFlex [graphData]="report.graph.transactions.amountByDay"
-                                      [graphTitle]="'Amount'"></app-transaction-by-day-graph>
+                                      [graphTitle]="'Amount'" dataProperty="amount"></app-transaction-by-day-graph>
         </div>
       </div>
     </mat-card>
