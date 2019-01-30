@@ -3,11 +3,11 @@ import {TransactionData} from '../../../shared/models/transaction-data.model';
 
 
 @Component({
-  selector: 'app-transaction-line-graph',
-  templateUrl: './transaction-line-graph.component.html',
-  styleUrls: ['./transaction-line-graph.component.css']
+  selector: 'app-transaction-by-day-graph',
+  templateUrl: './transaction-by-day-graph.component.html',
+  styleUrls: ['./transaction-by-day-graph.component.css']
 })
-export class TransactionLineGraphComponent implements OnInit {
+export class TransactionByDayGraphComponent implements OnInit {
   @Input() transactions: TransactionData[];
   @Input() graphData: { name: string, series: any[] }[];
   @Input() graphTitle: string;

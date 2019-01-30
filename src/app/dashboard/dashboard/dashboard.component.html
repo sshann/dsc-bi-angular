@@ -39,13 +39,13 @@
       <div fxLayout="row" fxLayoutGap="10px" fxFlex>
         <div fxLayout="column" fxFlex>
           <div fxLayout="row" fxLayoutAlign="center center"> Transaction Value by Day</div>
-          <app-transaction-line-graph fxFlex
-                                      [graphData]="report.graph.transactions.valueByDay"></app-transaction-line-graph>
+          <app-transaction-by-day-graph fxFlex
+                                      [graphData]="report.graph.transactions.valueByDay"></app-transaction-by-day-graph>
         </div>
         <div fxLayout="column" fxFlex>
           <div fxLayout="row" fxLayoutAlign="center center"> Transaction Amount by Day</div>
-          <app-transaction-line-graph fxFlex [graphData]="report.graph.transactions.amountByDay"
-                                      [graphTitle]="'Amount'"></app-transaction-line-graph>
+          <app-transaction-by-day-graph fxFlex [graphData]="report.graph.transactions.amountByDay"
+                                      [graphTitle]="'Amount'"></app-transaction-by-day-graph>
         </div>
       </div>
     </mat-card>
@@ -60,15 +60,15 @@
         <div fxLayout="column" fxFlex>
           <div fxLayout="row" fxLayoutAlign="center center"> Product Value by Day</div>
           <!--This is not a transaction, but due time limitation, the component have been reused-->
-          <app-transaction-line-graph
+          <app-transaction-by-day-graph
             fxFlex [colorScheme]="{domain: ['#4e93ff']}"
-            [graphData]="report.graph.products.valueByDay"></app-transaction-line-graph>
+            [graphData]="report.graph.products.valueByDay"></app-transaction-by-day-graph>
         </div>
         <div fxLayout="column" fxFlex>
           <div fxLayout="row" fxLayoutAlign="center center"> Product Stock by Day</div>
-          <app-transaction-line-graph
+          <app-transaction-by-day-graph
             fxFlex [graphData]="report.graph.products.stockByDay"
-            [graphTitle]="'Stock'" [colorScheme]="{domain: ['#4e93ff']}"></app-transaction-line-graph>
+            [graphTitle]="'Stock'" [colorScheme]="{domain: ['#4e93ff']}"></app-transaction-by-day-graph>
         </div>
 
 

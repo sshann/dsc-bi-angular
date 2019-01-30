@@ -42,7 +42,8 @@ export class TransactionFormDialogComponent implements OnInit {
       reference: this.form.value.reference,
       date: this.form.value.date,
       value: this.form.value.value,
-      amount: this.form.value.amount
+      amount: this.form.value.amount,
+      company_id: JSON.parse(localStorage.getItem('currentUser')).company_id
     };
 
     if (this.data) {

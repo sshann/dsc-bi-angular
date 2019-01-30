@@ -12,8 +12,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {DataRoutingModule} from './data-routing.module';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
-import {TransactionLineGraphComponent} from './transaction-data/transaction-line-graph/transaction-line-graph.component';
+import {TransactionByDayGraphComponent} from './transaction-data/transaction-by-day-graph/transaction-by-day-graph.component';
 import {TransactionFormDialogComponent} from './transaction-data/transaction-form-dialog/transaction-form-dialog.component';
+import {ProductFormDialogComponent} from './product-data/product-form-dialog/product-form-dialog.component';
+import {ProductByDayGraphComponent} from './product-data/product-by-day-graph/product-by-day-graph.component';
 
 @NgModule({
   imports: [
@@ -33,13 +35,19 @@ import {TransactionFormDialogComponent} from './transaction-data/transaction-for
     EmployeeDataComponent,
     TransactionDataComponent,
     ProductDataComponent,
-    TransactionLineGraphComponent,
-    TransactionFormDialogComponent],
+    TransactionByDayGraphComponent,
+    TransactionFormDialogComponent,
+    ProductDataComponent,
+    ProductFormDialogComponent,
+    ProductByDayGraphComponent
+  ],
   entryComponents: [
-    TransactionFormDialogComponent
+    TransactionFormDialogComponent,
+    ProductFormDialogComponent
   ],
   exports: [
-    TransactionLineGraphComponent
+    TransactionByDayGraphComponent,
+    ProductByDayGraphComponent
   ]
 })
 export class DataPanelModule {

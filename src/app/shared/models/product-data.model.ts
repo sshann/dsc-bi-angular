@@ -5,6 +5,7 @@ export class ProductData {
   current_stock: number;
   name: string;
   description?: string;
+  company_id: string;
   id?: string;
   _rev?: string;
 }

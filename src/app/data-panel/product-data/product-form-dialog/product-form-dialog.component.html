@@ -1,0 +1,53 @@
+<form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="form" (submit)="onSubmit()">
+
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <h1 *ngIf="isNew" mat-dialog-title>Create Product</h1>
+    <h1 *ngIf="!isNew" mat-dialog-title>Edit Product</h1>
+  </div>
+  <mat-dialog-content>
+
+    <div fxLayout="row" fxLayoutGap="15px">
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Date" formControlName="date" name="date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="form.get('date').hasError('required')"> Date is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput formControlName="category" type="text" name="category" placeholder="Category">
+        <mat-error *ngIf="form.get('category').hasError('required')"> Category is required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="15px">
+      <mat-form-field>
+        <input matInput formControlName="current_stock" type="number" name="current_stock" placeholder="Current Stock">
+        <mat-error *ngIf="form.get('current_stock').hasError('required')"> Current Stock is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput formControlName="current_value" type="number" name="current_value" placeholder="Current Value">
+        <mat-error *ngIf="form.get('current_value').hasError('required')"> Current Value is required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="15px">
+      <mat-form-field>
+        <input matInput formControlName="name" type="text" name="name" placeholder="name">
+        <mat-error *ngIf="form.get('name').hasError('required')"> Name is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput formControlName="description" type="text" name="description" placeholder="Description">
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <button mat-raised-button color="primary" [disabled]="!form.valid">
+      <span *ngIf="isNew">Create</span>
+      <span *ngIf="!isNew">Update</span>
+    </button>
+    <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</form>
