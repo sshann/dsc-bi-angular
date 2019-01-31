@@ -14,6 +14,7 @@ import {DataRoutingModule} from './data-routing.module';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {TransactionLineGraphComponent} from './transaction-data/transaction-line-graph/transaction-line-graph.component';
 import {TransactionFormDialogComponent} from './transaction-data/transaction-form-dialog/transaction-form-dialog.component';
+import { ExportComponent } from './export/export.component';
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import {TransactionFormDialogComponent} from './transaction-data/transaction-for
     TransactionDataComponent,
     ProductDataComponent,
     TransactionLineGraphComponent,
-    TransactionFormDialogComponent],
+    TransactionFormDialogComponent,
+    ExportComponent],
   entryComponents: [
     TransactionFormDialogComponent
   ]

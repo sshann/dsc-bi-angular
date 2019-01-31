@@ -7,6 +7,8 @@ import {TransactionDataComponent} from './transaction-data/transaction-data.comp
 import {ProductDataComponent} from './product-data/product-data.component';
 import {ReportComponent} from './report/report.component';
 import {ImportComponent} from './import/import.component';
+import {ExportComponent} from './export/export.component';
+
 
 const routes: Routes = [
   {path: 'data', component: DataPanelComponent, canActivate: [AuthGuard]},
@@ -25,8 +27,8 @@ const routes: Routes = [
       {path: '', component: TransactionDataComponent}
     ]
   },
-  {path: 'data/export', component: ReportComponent},
-  {path: 'data/import', component: ImportComponent}
+  {path: 'data/export', component: ExportComponent},
+  {path: 'data/import', component: ImportComponent},
 ];
 
 @NgModule({
