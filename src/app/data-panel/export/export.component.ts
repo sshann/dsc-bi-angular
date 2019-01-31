@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TransactionDataService} from '../transaction-data/transaction-data.service';
+import {ProductDataService} from '../product-data/product-data.service';
+import {EmployeeDataService} from '../employee-data/employee-data.service';
 
 @Component({
   selector: 'app-export',
@@ -9,9 +11,8 @@ import {TransactionDataService} from '../transaction-data/transaction-data.servi
 export class ExportComponent implements OnInit {
 	
 	selected:string = "ProductData";
-	result: any;
 
-  constructor(private transactionService: TransactionDataService) {	  }
+  constructor(private transactionService: TransactionDataService, private productService: ProductDataService, private employeeService: EmployeeDataService) {	  }
 
   ngOnInit() {
   }
@@ -45,21 +46,44 @@ export class ExportComponent implements OnInit {
 	  if(this.selected=="TransactionData"){
 		  this.transactionService.list().subscribe(comp => {
 			console.log(comp);
-			this.result= comp;
 			
-			let csv = this.toCSV(this.result);
+			let csv = this.toCSV(comp);
 			let a = document.createElement("a");
 			a.setAttribute('style','display:none');
 			let load = new Blob([csv],{type:'text/csv'});
 			let url = window.URL.createObjectURL(load);
 			a.href = url;
-			a.download = 'yourData.csv';
+			a.download = 'TransactionData.csv';
 			a.click();
 			});
 	  }
 	  else if (this.selected == "ProductData"){
+		  this.productService.list().subscribe(comp => {
+			console.log(comp);
+			
+			let csv = this.toCSV(comp);
+			let a = document.createElement("a");
+			a.setAttribute('style','display:none');
+			let load = new Blob([csv],{type:'text/csv'});
+			let url = window.URL.createObjectURL(load);
+			a.href = url;
+			a.download = 'ProductData.csv';
+			a.click();
+			});
 	  }
 	  else{
+		  this.employeeService.list().subscribe(comp => {
+			console.log(comp);
+			
+			let csv = this.toCSV(comp);
+			let a = document.createElement("a");
+			a.setAttribute('style','display:none');
+			let load = new Blob([csv],{type:'text/csv'});
+			let url = window.URL.createObjectURL(load);
+			a.href = url;
+			a.download = 'EmployeeData.csv';
+			a.click();
+			});
 		  
 	  }
 	

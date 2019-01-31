@@ -41,7 +41,7 @@ const routes: Routes = [
   },
   {
     path: 'data/export',
-    component: ReportComponent,
+    component: ExportComponent,
     canActivate: [AuthGuard, BusinessManagerGuard || BusinessOwnerGuard || AdminGuard]
   },
   {
