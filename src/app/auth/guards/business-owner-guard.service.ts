@@ -12,7 +12,8 @@ export class BusinessOwnerGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    const isBO = JSON.parse(localStorage.getItem('currentUser')).role.name === 'business_owner';
+    const userRole = JSON.parse(localStorage.getItem('currentUser')).role;
+    const isBO = userRole === 'business_owner' || userRole === 'admin';
 
     if (!isBO) {
       this.snackBar.open('Permission denied. You can not access this module', null, {

@@ -66,7 +66,6 @@ export class TransactionDataComponent implements OnInit, AfterViewInit {
     });
 
     deleteDialogRef.afterClosed().subscribe(confirmation => {
-      console.log(confirmation);
       if (confirmation) {
         this.TDservice.delete(transaction).subscribe(response => {
           this.snackBar.open('Transaction deleted! ', null, {

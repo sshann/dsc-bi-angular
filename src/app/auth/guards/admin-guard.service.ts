@@ -12,7 +12,7 @@ export class AdminGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    const isAdmin = JSON.parse(localStorage.getItem('currentUser')).role.name === 'admin';
+    const isAdmin = JSON.parse(localStorage.getItem('currentUser')).role === 'admin';
 
     if (!isAdmin) {
       this.snackBar.open('Permission denied. You can not access this module', null, {

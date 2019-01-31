@@ -6,35 +6,36 @@ import {catchError, map, tap} from 'rxjs/operators';
 import {of} from 'rxjs/observable/of';
 import {EmployeeData} from '../../shared/models/employee-data.model';
 
-const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
-};
+const httpOptions = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Credentials': 'true'
+});
 
 @Injectable()
 export class EmployeeDataService {
-  private userURL = environment.apiBaseURL + '/api/Users';
+  private userURL = environment.apiBaseURL + '/api/EmployeeData';
 
   constructor(private http: HttpClient) {
   }
 
-  list(): EmployeeData[] {
-    return [];
+  list(): Observable<EmployeeData[]> {
+    const url = this.userURL + '?filter[order]=date DESC';
+    return this.http.get<EmployeeData[]>(url, {headers: httpOptions});
   }
 
-  create(): EmployeeData {
-    return ;
+  create(employee: EmployeeData): Observable<EmployeeData> {
+    const url = this.userURL;
+    return this.http.post<EmployeeData>(url, employee, {headers: httpOptions});
   }
 
-  get(): EmployeeData {
-    return ;
+  update(employee: EmployeeData): Observable<EmployeeData> {
+    const url = this.userURL + '/' + employee.id;
+    return this.http.put<EmployeeData>(url, employee, {headers: httpOptions});
   }
 
-  update(): EmployeeData[] {
-    return [];
-  }
-
-  delete(): EmployeeData[] {
-    return [];
+  delete(employee: EmployeeData): Observable<object> {
+    const url = this.userURL + '/' + employee.id;
+    return this.http.delete(url, {headers: httpOptions});
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

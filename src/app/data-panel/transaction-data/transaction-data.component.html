@@ -9,7 +9,12 @@
     </div>
   </div>
 
-  <app-transaction-line-graph [transactions]="transactions" *ngIf="dataFetched"></app-transaction-line-graph>
+  <div fxLayout="row" fxLayout.sm="column">
+    <app-transaction-by-day-graph fxFlex [transactions]="transactions" *ngIf="dataFetched"
+                                  [dataProperty]="'value'"></app-transaction-by-day-graph>
+    <app-transaction-by-day-graph fxFlex [transactions]="transactions" *ngIf="dataFetched"
+                                  [dataProperty]="'amount'" graphTitle="Amount"></app-transaction-by-day-graph>
+  </div>
 
   <div>
     <span class="mat-body-2">Total Transactions:</span>

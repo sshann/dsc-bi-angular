@@ -5,6 +5,7 @@ export class TransactionData {
   amount: number;
   description: string;
   reference: string;
+  company_id: string;
   id?: string;
   _rev?: string;
 }

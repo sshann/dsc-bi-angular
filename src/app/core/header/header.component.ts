@@ -19,4 +19,8 @@ export class HeaderComponent implements OnInit {
   isAuthenticated() {
     return this.userService.isAuthenticate();
   }
+
+  isAdmin() {
+    return JSON.parse(localStorage.getItem('currentUser')).role === 'admin';
+  }
 }

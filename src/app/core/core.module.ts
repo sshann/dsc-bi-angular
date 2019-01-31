@@ -18,6 +18,11 @@ import {TransactionDataService} from '../data-panel/transaction-data/transaction
 import {AuthModule} from '../auth/auth.module';
 import {HTTPListener, HTTPStatus} from '../shared/interceptors/loader.interceptor';
 import {SharedModule} from '../shared/shared.module';
+import {DashboardModule} from '../dashboard/dashboard.module';
+import {LoadingService} from '../shared/loading.service';
+import {AdminGuard} from '../auth/guards/admin-guard.service';
+import {BusinessManagerGuard} from '../auth/guards/business-manager-guard.service';
+import {BusinessOwnerGuard} from '../auth/guards/business-owner-guard.service';
 
 @NgModule({
   imports: [
@@ -28,7 +33,8 @@ import {SharedModule} from '../shared/shared.module';
     AuthModule,
     CompaniesModule,
     DataPanelModule,
-    SharedModule
+    SharedModule,
+    DashboardModule
   ],
   declarations: [
     HeaderComponent,
@@ -39,6 +45,9 @@ import {SharedModule} from '../shared/shared.module';
   ],
   providers: [
     AuthGuard,
+    AdminGuard,
+    BusinessManagerGuard,
+    BusinessOwnerGuard,
     UserService,
     CompanyService,
     EmployeeDataService,
@@ -46,6 +55,7 @@ import {SharedModule} from '../shared/shared.module';
     TransactionDataService,
     HTTPListener,
     HTTPStatus,
+    LoadingService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthorizationInterceptor,

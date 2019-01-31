@@ -1,0 +1,153 @@
+<mat-progress-bar mode="indeterminate" color="accent" fxHide.xs style="margin:-25px; width:125%"
+                  *ngIf="isDownloading"></mat-progress-bar>
+<!--For some reason, The main progress bar is not displaying when setting to true here-->
+<br *ngIf="isDownloading">
+<div>
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <div fxLayout="row" fxLayoutAlign="center center" style="padding-left: 94px" fxFlex>
+      <h1 class=""> Dashboard</h1>
+    </div>
+
+    <button mat-raised-button [disabled]="!dataFeched" color="primary" (click)="downloadReport()">Download</button>
+  </div>
+
+  <div fxLayout="column" *ngIf="dataFeched" id="dashboard">
+    <!--SUMMARY-->
+    <div fxLayout="row" class="summary" fxLayout.sm="column" fxLayoutGap="15px">
+      <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center center" fxFlex>
+        <mat-card fxLayout="column" fxLayoutAlign="center center" fxFlex>
+          <span>{{report.summary.transactions.countBuy + ' Purchases'}}</span>
+          <span>{{report.summary.transactions.valueBuy | currency:'EUR'}}</span>
+        </mat-card>
+        <mat-card fxLayout="column" fxLayoutAlign="center center" fxFlex>
+          <span>{{report.summary.transactions.countSell + ' Sales'}}</span>
+          <span>{{report.summary.transactions.valueSell | currency:'EUR'}}</span>
+        </mat-card>
+      </div>
+      <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center center" fxFlex>
+      <mat-card fxLayout="column" fxLayoutAlign="center center" fxFlex>
+          <span>{{report.summary.products.amount + ' Products'}}</span>
+        </mat-card>
+        <mat-card fxLayout="column" fxLayoutAlign="center center" fxFlex>
+          <span>{{report.summary.users.amount + ' Users'}}</span>
+          <span class="my-caption">In this app</span>
+        </mat-card>
+      </div>
+    </div>
+
+    <!--TRANSACTIONS GRAPHS-->
+    <br>
+    <mat-card fxLayout="column">
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <h2 class="h2">Transactions</h2>
+      </div>
+      <div fxLayout="row" fxLayoutGap="10px" fxFlex fxLayout.sm="column">
+        <div fxLayout="column" fxFlex>
+          <div fxLayout="row" fxLayoutAlign="center center"> Transaction Value by Day</div>
+          <app-transaction-by-day-graph fxFlex dataProperty="value"
+                                        [graphData]="report.graph.transactions.valueByDay"></app-transaction-by-day-graph>
+        </div>
+        <div fxLayout="column" fxFlex>
+          <div fxLayout="row" fxLayoutAlign="center center"> Transaction Amount by Day</div>
+          <app-transaction-by-day-graph fxFlex [graphData]="report.graph.transactions.amountByDay"
+                                        [graphTitle]="'Amount'" dataProperty="amount"></app-transaction-by-day-graph>
+        </div>
+      </div>
+    </mat-card>
+
+    <br>
+    <!--PRODUCT GRAPHS-->
+    <mat-card fxLayout="column">
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <h2 class="h2">Products</h2>
+      </div>
+      <div fxLayout="row" fxLayoutGap="10px" fxFlex fxLayout.sm="column">
+        <div fxLayout="column" fxFlex>
+          <div fxLayout="row" fxLayoutAlign="center center"> Product Value by Day</div>
+          <app-product-by-day-graph
+            fxFlex [colorScheme]="{domain: ['#4e93ff']}"
+            [graphData]="report.graph.products.valueByDay"></app-product-by-day-graph>
+        </div>
+        <div fxLayout="column" fxFlex>
+          <div fxLayout="row" fxLayoutAlign="center center"> Product Stock by Day</div>
+          <app-product-by-day-graph
+            fxFlex [graphData]="report.graph.products.stockByDay"
+            [graphTitle]="'Stock'" [colorScheme]="{domain: ['#4e93ff']}"></app-product-by-day-graph>
+        </div>
+
+
+      </div>
+      <div fxLayout="row" fxLayoutGap="10px" fxFlex fxLayout.sm="column">
+        <div fxLayout="column" fxFlex>
+          <div fxLayout="row" fxLayoutAlign="center center"> Product Stock by Category</div>
+          <ngx-charts-pie-chart
+            [results]="report.graph.products.stockByCategory"
+            [gradient]="false"
+            [legend]="true">
+          </ngx-charts-pie-chart>
+        </div>
+        <div fxLayout="column" fxFlex>
+          <div fxLayout="row" fxLayoutAlign="center center"> Product Value by Category</div>
+          <ngx-charts-pie-chart
+            [results]="report.graph.products.valueByCategory"
+            [gradient]="false"
+            [legend]="true">
+          </ngx-charts-pie-chart>
+        </div>
+
+      </div>
+    </mat-card>
+
+    <br>
+    <div fxLayout="row" fxLayoutGap="20px" fxLayout.sm="column">
+      <mat-card fxLayout="column" fxFlex>
+        <div fxLayout="row" fxLayoutAlign="center center"> Recent Transactions</div>
+        <mat-list role="list">
+          <mat-list-item role="listitem" class="transaction-item"
+                         *ngFor="let transaction of report.data.transactions.slice().reverse() | slice:0:6">
+            <span class="date">{{transaction.dateStr}}</span>
+            <span class="type">{{transaction.type}}</span>
+            <span class="value">{{transaction.value | currency:'EUR'}}</span>
+            <span class="amount">{{transaction.amount + ' Items'}}</span>
+            <span class="reference">{{transaction.reference | slice:0:50}}</span>
+          </mat-list-item>
+        </mat-list>
+      </mat-card>
+      <mat-card fxLayout="column" fxFlex>
+        <div fxLayout="row" fxLayoutAlign="center center"> Recent Products</div>
+        <mat-list role="list">
+          <mat-list-item role="listitem" class="product-item"
+                         *ngFor="let transaction of report.data.products.slice().reverse() | slice:0:6">
+            <span class="date">{{transaction.dateStr}}</span>
+            <span class="category">{{transaction.category}}</span>
+            <span class="name">{{transaction.name}}</span>
+            <span class="value">{{transaction.current_value | currency:'EUR'}}</span>
+            <span class="stock">{{transaction.current_stock + '   Stock'}}</span>
+          </mat-list-item>
+        </mat-list>
+      </mat-card>
+    </div>
+
+    <br>
+    <div fxLayout="row" fxLayoutGap="20px">
+      <mat-card fxLayout="column" fxFlex="50%" fxFlex.sm="100">
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <h2 class="h2">Users</h2>
+        </div>
+
+        <mat-list role="list">
+          <mat-list-item role="listitem" class="user-item"
+                         *ngFor="let user of report.data.users | slice:0:6">
+            <div fxLayout="column">
+              <div fxLayout="row">
+                <span class="username">{{'@' + user.username}}</span>
+                <span class="name">{{user.name}}</span>
+              </div>
+              <span class="email">{{user.email}}</span>
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </mat-card>
+    </div>
+  </div>
+</div>

@@ -18,7 +18,8 @@ export class TransactionDataService {
   }
 
   list(): Observable<TransactionData[]> {
-    const url = this.userURL + '?filter[order]=date DESC';
+    const company_id = JSON.parse(localStorage.getItem('currentUser')).company_id;
+    const url = this.userURL + '?filter[order]=date DESC&filter[where][company_id]=' + company_id;
     return this.http.get<TransactionData[]>(url, {headers: httpOptions});
   }
 
@@ -36,13 +37,13 @@ export class TransactionDataService {
     const url = this.userURL + '/' + transaction.id;
     return this.http.delete(url, {headers: httpOptions});
   }
-  
-  import(json:any[], selectedData:string): Observable<any[]>{
-	  console.log(json);
-	  //let data:TransactionData = json[0];
-	  //data.value = +json[0].value;
-	  console.log(json[0].date);
-	  return this.http.post<any[]>(environment.apiBaseURL+"/api/"+selectedData,json,{headers: httpOptions});
+
+  import(json: any[], selectedData: string): Observable<any[]> {
+    console.log(json);
+    //let data:TransactionData = json[0];
+    //data.value = +json[0].value;
+    console.log(json[0].date);
+    return this.http.post<any[]>(environment.apiBaseURL + '/api/' + selectedData, json, {headers: httpOptions});
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
