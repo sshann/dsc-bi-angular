@@ -40,7 +40,7 @@ import {ProductByDayGraphComponent} from './product-data/product-by-day-graph/pr
     TransactionFormDialogComponent,
     ProductDataComponent,
     ProductFormDialogComponent,
-    ProductByDayGraphComponent
+    ProductByDayGraphComponent,
 	ExportComponent
   ],
   entryComponents: [
