@@ -43,7 +43,7 @@ export class UserService {
   }
 
   getUserRoles(id: string): Observable<any> {
-    const url = this.userURL + '/getRolesById?id=' + id;
+    const url = this.userURL + '/roles?id=' + id;
     return this.http.get<any>(url, httpOptions).pipe(
       map(response => {
         const user = JSON.parse(localStorage.getItem('currentUser'));
