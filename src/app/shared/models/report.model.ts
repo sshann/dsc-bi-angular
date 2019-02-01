@@ -1,6 +1,7 @@
 import {TransactionData} from './transaction-data.model';
 import {ProductData} from './product-data.model';
 import {User} from './User.model';
+import {EmployeeData} from './employee-data.model';
 
 export class CompanyReport {
   graph: {
@@ -8,7 +9,12 @@ export class CompanyReport {
       valueByDay: Graph[],
       amountByDay: Graph[],
     },
-    // employee: {},
+    employees: {
+      teamsByDay: Graph[],
+      employeesByDay: Graph[],
+      salaryByDay: Graph[],
+      thisYearSalaryByDepartment: Graph[],
+    },
     products: {
       stockByDay: Graph[],
       valueByDay: Graph[],
@@ -18,7 +24,7 @@ export class CompanyReport {
   };
   data: {
     transactions: TransactionData[],
-    // employee: Graph[],
+    employees: EmployeeData[],
     products: ProductData[],
     users: User[],
   };

@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
     html2canvas(data).then(canvas => {
       // Few necessary setting options
       const imgWidth = 208;
-      const imgHeight = 0.9 * canvas.height * imgWidth / canvas.width;
+      const imgHeight = 0.6 * canvas.height * imgWidth / canvas.width;
       const contentDataURL = canvas.toDataURL('image/png');
       const position = 0;
       const pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
