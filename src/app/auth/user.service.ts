@@ -51,6 +51,11 @@ export class UserService {
     return this.http.delete(url, httpOptions);
   }
 
+  create(user: User): Observable<User> {
+    const url = this.userURL;
+    return this.http.post<User>(url, user, httpOptions);
+  }
+
   logout(): Observable<any> {
     return this.http.post(this.userURL + '/logout', httpOptions).pipe(
       tap(() => {
@@ -60,10 +65,12 @@ export class UserService {
       catchError(this.handleError('logout User')));
   }
 
-  update(user: User): Observable<any> {
+  update(user: User, isCurrentUser: boolean): Observable<any> {
     return this.http.put(this.userURL, user, httpOptions).pipe(
       map(users => {
-        localStorage.setItem('currentUser', JSON.stringify(users));
+        if (isCurrentUser) {
+          localStorage.setItem('currentUser', JSON.stringify(users));
+        }
         return users;
       }));
   }

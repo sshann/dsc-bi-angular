@@ -7,6 +7,7 @@ import {MatDialog, MatSnackBar} from '@angular/material';
 import {UserService} from '../../auth/user.service';
 import {DeleteConfirmationComponent} from '../../shared/dialog/delete-confirmation/delete-confirmation.component';
 import {User} from '../../shared/models/User.model';
+import {UserFormDialogComponent} from '../../auth/user-form-dialog/user-form-dialog.component';
 
 @Component({
   selector: 'app-company-management',
@@ -48,6 +49,21 @@ export class CompanyManagementComponent implements OnInit {
       .subscribe(updatedCompany => {
         if (updatedCompany) {
           this.company = updatedCompany;
+        }
+      });
+  }
+
+  openCreateDialog() {
+    const createDialogRef = this.dialog.open(UserFormDialogComponent, {
+      data: {
+        company_id: this.company.id
+      }
+    });
+    createDialogRef
+      .afterClosed()
+      .subscribe(user => {
+        if (user) {
+          this.company.clients.push(user);
         }
       });
   }

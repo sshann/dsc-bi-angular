@@ -1,0 +1,12 @@
+.user-item span {
+  padding-right: 10px;
+}
+
+.user-item .username {
+  font-style: italic;
+}
+
+.secondary-text {
+  color: slategray;
+  font-size: 14px;
+}
