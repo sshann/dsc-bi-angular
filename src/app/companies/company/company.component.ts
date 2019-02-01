@@ -4,6 +4,7 @@ import {CompanyFormDialogComponent} from './company-form-dialog/company-form-dia
 import {DeleteConfirmationComponent} from '../../shared/dialog/delete-confirmation/delete-confirmation.component';
 import {Company} from '../../shared/Company';
 import {CompanyService} from '../company.service';
+import {UserFormDialogComponent} from '../../auth/user-form-dialog/user-form-dialog.component';
 
 @Component({
   selector: 'app-company-data',
@@ -50,6 +51,15 @@ export class CompanyComponent implements OnInit, AfterViewInit {
           this.dataSource.data = this.companys;
         }
       });
+  }
+
+  openUserCreateDialog($event, company) {
+    event.stopPropagation();
+    this.dialog.open(UserFormDialogComponent, {
+      data: {
+        company_id: company.id
+      }
+    });
   }
 
   openDeleteDialog(event, company) {
