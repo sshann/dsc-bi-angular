@@ -1,9 +1,9 @@
 /* tslint:disable:no-inferrable-types prefer-const */
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {TransactionData} from '../../shared/models/transaction-data.model';
 import {ProductData} from '../../shared/models/product-data.model';
 import {EmployeeData} from '../../shared/models/employee-data.model';
-import {MatSnackBar} from '@angular/material';
+import {MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
 import {ProductDataService} from '../product-data/product-data.service';
 import {TransactionDataService} from '../transaction-data/transaction-data.service';
 import {EmployeeDataService} from '../employee-data/employee-data.service';
@@ -16,7 +16,7 @@ import {EmployeeDataService} from '../employee-data/employee-data.service';
 export class ImportDialogComponent implements OnInit {
 
   trial: any;
-  selectedData: string = 'EmployeeData';
+  selectedData: string;
   transactionJson: TransactionData[] = [];
   temp: TransactionData;
   productJson: ProductData[] = [];
@@ -31,11 +31,14 @@ export class ImportDialogComponent implements OnInit {
   constructor(private transactionService: TransactionDataService,
               private productService: ProductDataService,
               private employeeService: EmployeeDataService,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              @Inject(MAT_DIALOG_DATA) private data) {
   }
 
 
   ngOnInit() {
+    this.selectedData = this.data ? this.data.type : 'ProductData';
+
     this.temp = {
       date: ' ',
       value: ' ',

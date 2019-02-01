@@ -52,12 +52,18 @@
     </ng-container>
 
     <ng-container matColumnDef="actions">
-      <mat-header-cell *matHeaderCellDef fxFlex="85px" fxLayout="row" fxLayoutAlign="end">
+      <mat-header-cell *matHeaderCellDef fxFlex="125px" fxLayout="row" fxLayoutAlign="end">
+        <button mat-icon-button color="primary" (click)="openExportDialog($event)">
+          <mat-icon aria-label="Add employee">archive</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="openImportDialog($event)">
+          <mat-icon aria-label="Add employee">unarchive</mat-icon>
+        </button>
         <button mat-icon-button color="primary" (click)="openCreateDialog()">
           <mat-icon aria-label="Add product">add</mat-icon>
         </button>
       </mat-header-cell>
-      <mat-cell *matCellDef="let row;" fxFlex="85px" fxLayout="row" fxLayoutAlign="end">
+      <mat-cell *matCellDef="let row;" fxFlex="125px" fxLayout="row" fxLayoutAlign="end">
         <button mat-icon-button color="primary" (click)="openEditDialog($event, row);">
           <mat-icon aria-label="Edit product">edit</mat-icon>
         </button>

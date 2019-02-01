@@ -1,8 +1,9 @@
 /* tslint:disable:prefer-const no-inferrable-types triple-equals */
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {TransactionDataService} from '../transaction-data/transaction-data.service';
 import {ProductDataService} from '../product-data/product-data.service';
 import {EmployeeDataService} from '../employee-data/employee-data.service';
+import {MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'app-export-dialog',
@@ -10,15 +11,16 @@ import {EmployeeDataService} from '../employee-data/employee-data.service';
   styleUrls: ['./export-dialog.component.css']
 })
 export class ExportDialogComponent implements OnInit {
-
-  selected: string = 'ProductData';
+  selected: string;
 
   constructor(private transactionService: TransactionDataService,
               private productService: ProductDataService,
-              private employeeService: EmployeeDataService) {
+              private employeeService: EmployeeDataService,
+              @Inject(MAT_DIALOG_DATA) private data) {
   }
 
   ngOnInit() {
+    this.selected = this.data ? this.data.type : 'ProductData';
   }
 
   toCSV(obj: any[]) {

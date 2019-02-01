@@ -5,6 +5,8 @@ import {ProductDataService} from './product-data.service';
 import {ProductData} from '../../shared/models/product-data.model';
 import {ProductFormDialogComponent} from './product-form-dialog/product-form-dialog.component';
 import {DeleteConfirmationComponent} from '../../shared/dialog/delete-confirmation/delete-confirmation.component';
+import {ImportDialogComponent} from '../import/import-dialog.component';
+import {ExportDialogComponent} from '../export/export-dialog.component';
 
 @Component({
   selector: 'app-product-data',
@@ -91,7 +93,24 @@ export class ProductDataComponent implements OnInit, AfterViewInit {
           this.dataSource.data = this.products;
         }
       });
+  }
 
+  openImportDialog(event) {
+    event.stopPropagation();
+    this.dialog.open(ImportDialogComponent, {
+      data: {
+        type: 'ProductData'
+      }
+    });
+  }
+
+  openExportDialog(event) {
+    event.stopPropagation();
+    this.dialog.open(ExportDialogComponent, {
+      data: {
+        type: 'ProductData'
+      }
+    });
   }
 
   private getProductIndex(product) {

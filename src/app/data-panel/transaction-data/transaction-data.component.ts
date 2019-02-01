@@ -5,6 +5,8 @@ import {TransactionDataService} from './transaction-data.service';
 import {TransactionData} from '../../shared/models/transaction-data.model';
 import {TransactionFormDialogComponent} from './transaction-form-dialog/transaction-form-dialog.component';
 import {DeleteConfirmationComponent} from '../../shared/dialog/delete-confirmation/delete-confirmation.component';
+import {ImportDialogComponent} from '../import/import-dialog.component';
+import {ExportDialogComponent} from '../export/export-dialog.component';
 
 @Component({
   selector: 'app-transaction-data',
@@ -91,7 +93,24 @@ export class TransactionDataComponent implements OnInit, AfterViewInit {
           this.dataSource.data = this.transactions;
         }
       });
+  }
 
+  openImportDialog(event) {
+    event.stopPropagation();
+    this.dialog.open(ImportDialogComponent, {
+      data: {
+        type: 'TransactionData'
+      }
+    });
+  }
+
+  openExportDialog(event) {
+    event.stopPropagation();
+    this.dialog.open(ExportDialogComponent, {
+      data: {
+        type: 'TransactionData'
+      }
+    });
   }
 
   private getTransactionIndex(transaction) {

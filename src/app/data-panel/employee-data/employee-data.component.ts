@@ -4,6 +4,8 @@ import {EmployeeDataService} from './employee-data.service';
 import {EmployeeData} from '../../shared/models/employee-data.model';
 import {EmployeeFormDialogComponent} from './employee-form-dialog/employee-form-dialog.component';
 import {DeleteConfirmationComponent} from '../../shared/dialog/delete-confirmation/delete-confirmation.component';
+import {ImportDialogComponent} from '../import/import-dialog.component';
+import {ExportDialogComponent} from '../export/export-dialog.component';
 
 @Component({
   selector: 'app-employee-data',
@@ -90,6 +92,24 @@ export class EmployeeDataComponent implements OnInit, AfterViewInit {
         }
       });
 
+  }
+
+  openImportDialog(event) {
+    event.stopPropagation();
+    this.dialog.open(ImportDialogComponent, {
+      data: {
+        type: 'EmployeeData'
+      }
+    });
+  }
+
+  openExportDialog(event) {
+    event.stopPropagation();
+    this.dialog.open(ExportDialogComponent, {
+      data: {
+        type: 'EmployeeData'
+      }
+    });
   }
 
   private getEmployeeIndex(employee) {
