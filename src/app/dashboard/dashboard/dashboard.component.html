@@ -26,6 +26,14 @@
       </div>
       <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center center" fxFlex>
         <mat-card fxLayout="column" fxLayoutAlign="center center" fxFlex>
+          <span>{{report.summary.employees.amount + ' Employees records'}}</span>
+        </mat-card>
+        <mat-card fxLayout="column" fxLayoutAlign="center center" fxFlex>
+          <span>{{report.summary.employees.departments + ' Departments'}}</span>
+        </mat-card>
+      </div>
+      <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center center" fxFlex>
+        <mat-card fxLayout="column" fxLayoutAlign="center center" fxFlex>
           <span>{{report.summary.products.amount + ' Products'}}</span>
         </mat-card>
         <mat-card fxLayout="column" fxLayoutAlign="center center" fxFlex>
@@ -74,8 +82,6 @@
             fxFlex [graphData]="report.graph.products.stockByDay"
             [graphTitle]="'Stock'" [colorScheme]="{domain: ['#4e93ff']}"></app-product-by-day-graph>
         </div>
-
-
       </div>
       <div fxLayout="row" fxLayoutGap="10px" fxFlex fxLayout.sm="column">
         <div fxLayout="column" fxFlex>
@@ -95,6 +101,45 @@
           </ngx-charts-pie-chart>
         </div>
 
+      </div>
+    </mat-card>
+
+
+    <br>
+    <!--EMPLOYEE GRAPHS-->
+    <mat-card fxLayout="column">
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <h2 class="h2">Employees</h2>
+      </div>
+      <div fxLayout="row" fxLayoutGap="10px" fxFlex fxLayout.sm="column">
+        <div fxLayout="column" fxFlex>
+          <div fxLayout="row" fxLayoutAlign="center center"> Number of Employees by Month</div>
+          <app-employee-by-month-graph
+            fxFlex [graphData]="report.graph.employees.employeesByDay"
+            graphTitle="Employees"></app-employee-by-month-graph>
+        </div>
+        <div fxLayout="column" fxFlex>
+          <div fxLayout="row" fxLayoutAlign="center center"> Number of Teams by Month</div>
+          <app-employee-by-month-graph
+            fxFlex [graphData]="report.graph.employees.teamsByDay"
+            graphTitle="Teams"></app-employee-by-month-graph>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutGap="10px" fxFlex fxLayout.sm="column">
+        <div fxLayout="column" fxFlex>
+          <div fxLayout="row" fxLayoutAlign="center center"> Salary paid by Month</div>
+          <app-employee-by-month-graph
+            fxFlex [graphData]="report.graph.employees.salaryByDay"
+            graphTitle="Salary"></app-employee-by-month-graph>
+        </div>
+        <div fxLayout="column" fxFlex>
+          <div fxLayout="row" fxLayoutAlign="center center"> Salary paid this year per departmentr</div>
+          <ngx-charts-pie-chart
+            [results]="report.graph.employees.thisYearSalaryByDepartment"
+            [gradient]="false"
+            [legend]="true">
+          </ngx-charts-pie-chart>
+        </div>
       </div>
     </mat-card>
 
@@ -145,8 +190,8 @@
     </div>
 
     <br>
-    <div fxLayout="row" fxLayoutGap="20px">
-      <mat-card fxLayout="column" fxFlex="50%" fxFlex.sm="100">
+    <div fxLayout="row" fxLayoutGap="20px" fxLayout.sm="column">
+      <mat-card fxLayout="column" fxFlex>
         <div fxLayout="row" fxLayoutAlign="center center">
           <h2 class="h2">Users</h2>
         </div>
@@ -164,6 +209,29 @@
           </mat-list-item>
         </mat-list>
       </mat-card>
+      <mat-card fxLayout="column" fxFlex>
+        <div fxLayout="row" fxLayoutAlign="center center"> Recent Products</div>
+        <mat-list role="list">
+          <mat-list-item role="listitem" class="product-item"
+                         *ngFor="let employee of report.data.employees.slice().reverse() | slice:0:6">
+
+            <div fxLayout="column">
+              <div fxLayout="row">
+                {{'The ' + employee.department + ' have ' }}
+                {{employee.total_employees + ' employees in '}}
+                {{employee.total_teams + ' teams, with a total '}}
+                {{employee.total_salary_paid | currency:'EUR'}}
+                {{' salary in '}}
+                {{employee.dateStr}}
+              </div>
+              <div fxLayout="row" class="secondary-text">
+                {{employee.reference | slice:0:50}}
+              </div>
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </mat-card>
     </div>
   </div>
+
 </div>

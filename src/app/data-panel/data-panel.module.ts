@@ -55,7 +55,8 @@ import {ImportDialogComponent} from './import/import-dialog.component';
   ],
   exports: [
     TransactionByDayGraphComponent,
-    ProductByDayGraphComponent
+    ProductByDayGraphComponent,
+    EmployeeByMonthGraphComponent
   ]
 })
 export class DataPanelModule {
