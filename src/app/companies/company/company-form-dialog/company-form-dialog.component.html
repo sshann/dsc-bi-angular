@@ -1,0 +1,43 @@
+<form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="form" (submit)="onSubmit()">
+
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <h1 *ngIf="isNew" mat-dialog-title>Create Company</h1>
+    <h1 *ngIf="!isNew" mat-dialog-title>Edit Company</h1>
+  </div>
+  <mat-dialog-content>
+
+    <div fxLayout="row" fxLayoutGap="15px">
+      <mat-form-field>
+        <input matInput formControlName="name" type="text" name="name" placeholder="Company name">
+        <mat-error *ngIf="form.get('name').hasError('required')"> Company name is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput formControlName="responsibleName" type="text" name="responsibleName"
+               placeholder="Responsible name">
+        <mat-error *ngIf="form.get('responsibleName').hasError('required')"> Responsible name is required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="15px">
+      <mat-form-field>
+        <input matInput formControlName="responsibleEmail" type="email" name="responsibleEmail"
+               placeholder="Responsible email">
+        <mat-error *ngIf="form.get('responsibleEmail').hasError('required')"> Responsible email is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput formControlName="responsiblePhone" type="text" name="responsiblePhone"
+               placeholder="Responsible phone">
+        <mat-error *ngIf="form.get('responsiblePhone').hasError('required')"> Responsible phone is required</mat-error>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <button mat-raised-button color="primary" [disabled]="!form.valid">
+      <span *ngIf="isNew">Create</span>
+      <span *ngIf="!isNew">Update</span>
+    </button>
+    <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</form>

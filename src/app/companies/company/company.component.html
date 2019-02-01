@@ -1,0 +1,68 @@
+<div fxLayout="column">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <button mat-icon-button routerLink="/data">
+      <mat-icon aria-label="Return">arrow_back</mat-icon>
+    </button>
+
+    <div fxLayout="row" fxLayoutAlign="center center" class="page-title-with-return-button" fxFlex>
+      <h1 class=""> Companys</h1>
+    </div>
+  </div>
+
+  <div>
+    <span class="mat-body-2">Total Companys:</span>
+    <span> {{' ' + companys.length}}</span>
+  </div>
+  <mat-table #table [dataSource]="dataSource" class="mat-elevation-z2"
+             matSort matSortDirection="desc" matSortActive="date">
+    <ng-container matColumnDef="name">
+      <mat-header-cell mat-sort-header *matHeaderCellDef>name</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.name }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="responsibleName">
+      <mat-header-cell mat-sort-header *matHeaderCellDef>Responsible Name</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.responsibleName }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="responsibleEmail">
+      <mat-header-cell mat-sort-header *matHeaderCellDef>Responsible Email</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.responsibleEmail}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="responsiblePhone">
+      <mat-header-cell mat-sort-header *matHeaderCellDef>Responsible Phone</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.responsiblePhone }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef fxFlex="85px" fxLayout="row" fxLayoutAlign="end">
+        <button mat-icon-button color="primary" (click)="openCreateDialog()">
+          <mat-icon aria-label="Add company">add</mat-icon>
+        </button>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row;" fxFlex="85px" fxLayout="row" fxLayoutAlign="end">
+        <button mat-icon-button color="primary" (click)="openEditDialog($event, row);">
+          <mat-icon aria-label="Edit company">edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="openDeleteDialog($event, row)">
+          <mat-icon aria-label="Delete company">delete</mat-icon>
+        </button>
+
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"
+             (click)="openEditDialog($event, row)"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator
+                 [pageSize]="25"
+                 [pageSizeOptions]="[5, 10, 25, 50, 100]"
+                 [showFirstLastButtons]="true"></mat-paginator>
+
+  <div>
+    <button mat-button routerLink="/companies-old">Switch to old company view</button>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+app-company-by-month-graph {
+  height: 350px;
+}
+
+mat-row {
+  cursor: pointer;
+}
