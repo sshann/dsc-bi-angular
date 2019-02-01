@@ -7,6 +7,7 @@ import {TransactionDataComponent} from './transaction-data/transaction-data.comp
 import {ProductDataComponent} from './product-data/product-data.component';
 import {ReportComponent} from './report/report.component';
 import {ImportComponent} from './import/import.component';
+import {ExportComponent} from './export/export.component';
 import {BusinessManagerGuard} from '../auth/guards/business-manager-guard.service';
 import {BusinessOwnerGuard} from '../auth/guards/business-owner-guard.service';
 import {AdminGuard} from '../auth/guards/admin-guard.service';
@@ -40,7 +41,7 @@ const routes: Routes = [
   },
   {
     path: 'data/export',
-    component: ReportComponent,
+    component: ExportComponent,
     canActivate: [AuthGuard, BusinessManagerGuard || BusinessOwnerGuard || AdminGuard]
   },
   {

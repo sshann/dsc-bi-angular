@@ -14,6 +14,7 @@ import {DataRoutingModule} from './data-routing.module';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {TransactionByDayGraphComponent} from './transaction-data/transaction-by-day-graph/transaction-by-day-graph.component';
 import {TransactionFormDialogComponent} from './transaction-data/transaction-form-dialog/transaction-form-dialog.component';
+import { ExportComponent } from './export/export.component';
 import {ProductFormDialogComponent} from './product-data/product-form-dialog/product-form-dialog.component';
 import {ProductByDayGraphComponent} from './product-data/product-by-day-graph/product-by-day-graph.component';
 
@@ -39,7 +40,8 @@ import {ProductByDayGraphComponent} from './product-data/product-by-day-graph/pr
     TransactionFormDialogComponent,
     ProductDataComponent,
     ProductFormDialogComponent,
-    ProductByDayGraphComponent
+    ProductByDayGraphComponent,
+	ExportComponent
   ],
   entryComponents: [
     TransactionFormDialogComponent,
