@@ -10,9 +10,9 @@
   </div>
 
   <div fxLayout="row" fxLayout.sm="column">
-    <app-product-by-day-graph fxFlex [products]="products" *ngIf="dataFetched"
+    <app-product-by-day-graph fxFlex="50%" [products]="products" *ngIf="dataFetched"
                               dataProperty="current_value"></app-product-by-day-graph>
-    <app-product-by-day-graph fxFlex [products]="products" *ngIf="dataFetched" dataProperty="current_stock"
+    <app-product-by-day-graph fxFlex="50%" [products]="products" *ngIf="dataFetched" dataProperty="current_stock"
                               graphTitle="Stock"></app-product-by-day-graph>
   </div>
   <div>
@@ -46,13 +46,24 @@
       <mat-cell *matCellDef="let row;">{{ row.current_stock}}</mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="reference">
+      <mat-header-cell *matHeaderCellDef>Reference</mat-header-cell>
+      <mat-cell *matCellDef="let row;">{{ row.reference}}</mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="actions">
-      <mat-header-cell *matHeaderCellDef fxFlex="85px" fxLayout="row" fxLayoutAlign="end">
+      <mat-header-cell *matHeaderCellDef fxFlex="125px" fxLayout="row" fxLayoutAlign="end">
+        <button mat-icon-button color="primary" (click)="openExportDialog($event)">
+          <mat-icon aria-label="Add employee">archive</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="openImportDialog($event)">
+          <mat-icon aria-label="Add employee">unarchive</mat-icon>
+        </button>
         <button mat-icon-button color="primary" (click)="openCreateDialog()">
           <mat-icon aria-label="Add product">add</mat-icon>
         </button>
       </mat-header-cell>
-      <mat-cell *matCellDef="let row;" fxFlex="85px" fxLayout="row" fxLayoutAlign="end">
+      <mat-cell *matCellDef="let row;" fxFlex="125px" fxLayout="row" fxLayoutAlign="end">
         <button mat-icon-button color="primary" (click)="openEditDialog($event, row);">
           <mat-icon aria-label="Edit product">edit</mat-icon>
         </button>

@@ -8,7 +8,8 @@ import {ProductData} from '../../shared/models/product-data.model';
 
 const httpOptions = new HttpHeaders({
   'Content-Type': 'application/json',
-  'Access-Control-Allow-Credentials': 'true'
+  'Access-Control-Allow-Credentials': 'true',
+  'Access-Control-Allow-Origin': '*'
 });
 
 @Injectable()
@@ -37,6 +38,11 @@ export class ProductDataService {
   delete(product: ProductData): Observable<object> {
     const url = this.userURL + '/' + product.id;
     return this.http.delete(url, {headers: httpOptions});
+  }
+
+  import(json: ProductData[]): Observable<ProductData[]> {
+    const url = this.userURL;
+    return this.http.post<ProductData[]>(url, json, {headers: httpOptions});
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

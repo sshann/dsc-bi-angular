@@ -25,7 +25,7 @@
         </mat-card>
       </div>
       <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center center" fxFlex>
-      <mat-card fxLayout="column" fxLayoutAlign="center center" fxFlex>
+        <mat-card fxLayout="column" fxLayoutAlign="center center" fxFlex>
           <span>{{report.summary.products.amount + ' Products'}}</span>
         </mat-card>
         <mat-card fxLayout="column" fxLayoutAlign="center center" fxFlex>
@@ -105,11 +105,18 @@
         <mat-list role="list">
           <mat-list-item role="listitem" class="transaction-item"
                          *ngFor="let transaction of report.data.transactions.slice().reverse() | slice:0:6">
-            <span class="date">{{transaction.dateStr}}</span>
-            <span class="type">{{transaction.type}}</span>
-            <span class="value">{{transaction.value | currency:'EUR'}}</span>
-            <span class="amount">{{transaction.amount + ' Items'}}</span>
-            <span class="reference">{{transaction.reference | slice:0:50}}</span>
+            <div fxLayout="column">
+              <div fxLayout="row">
+                {{transaction.amount + ' Items '}}
+                {{transaction.type === 'Buy' ? 'bought for ' : 'sold for '}}
+                {{transaction.value | currency:'EUR'}}
+                {{' in '}}
+                {{transaction.dateStr}}
+              </div>
+              <div fxLayout="row" class="secondary-text">
+                {{transaction.reference | slice:0:50}}
+              </div>
+            </div>
           </mat-list-item>
         </mat-list>
       </mat-card>
@@ -118,11 +125,20 @@
         <mat-list role="list">
           <mat-list-item role="listitem" class="product-item"
                          *ngFor="let transaction of report.data.products.slice().reverse() | slice:0:6">
-            <span class="date">{{transaction.dateStr}}</span>
-            <span class="category">{{transaction.category}}</span>
-            <span class="name">{{transaction.name}}</span>
-            <span class="value">{{transaction.current_value | currency:'EUR'}}</span>
-            <span class="stock">{{transaction.current_stock + '   Stock'}}</span>
+
+            <div fxLayout="column">
+              <div fxLayout="row">
+                {{transaction.name }}
+                {{' (' + transaction.category + ') with value '}}
+                {{transaction.value | currency:'EUR'}}
+                {{'(' + transaction.current_stock + ' in Stock) '}}
+                {{' in '}}
+                {{transaction.dateStr}}
+              </div>
+              <div fxLayout="row" class="secondary-text">
+                {{transaction.reference | slice:0:50}}
+              </div>
+            </div>
           </mat-list-item>
         </mat-list>
       </mat-card>
@@ -143,7 +159,7 @@
                 <span class="username">{{'@' + user.username}}</span>
                 <span class="name">{{user.name}}</span>
               </div>
-              <span class="email">{{user.email}}</span>
+              <span class="email secondary-text">{{user.email}}</span>
             </div>
           </mat-list-item>
         </mat-list>

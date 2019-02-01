@@ -3,8 +3,8 @@ export class TransactionData {
   value: string;
   type: string;
   amount: number;
-  description: string;
-  reference: string;
+  description?: string;
+  reference?: string;
   company_id: string;
   id?: string;
   _rev?: string;

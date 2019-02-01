@@ -62,8 +62,7 @@ export class CompanyService {
     return this.http.get<{ payload: CompanyReport }>(url, httpOptions).pipe(map(response => {
         return response.payload;
       }
-    ))
-      ;
+    ));
   }
 
 }

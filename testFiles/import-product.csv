@@ -1,0 +1,3 @@
+current_value,current_stock,date,category,name,description
+100,10,2019-01-29T12:48:56.446Z,Phone,Test2,"Trial"
+150,15,2019-01-29T12:48:56.446Z,Book,Test,"Trial 2"

@@ -1,0 +1,56 @@
+<form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="form" (submit)="onSubmit()">
+
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <h1 *ngIf="isNew" mat-dialog-title>Create Employee</h1>
+    <h1 *ngIf="!isNew" mat-dialog-title>Edit Employee</h1>
+  </div>
+  <mat-dialog-content>
+
+    <div fxLayout="row" fxLayoutGap="15px">
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Date" formControlName="date" name="date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+        <mat-error *ngIf="form.get('date').hasError('required')"> Date is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput formControlName="department" type="text" name="department" placeholder="Department">
+        <mat-error *ngIf="form.get('department').hasError('required')"> Department is required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="15px">
+      <mat-form-field>
+        <input matInput formControlName="total_employees" type="number" name="total_employees"
+               placeholder="Number of employees">
+        <mat-error *ngIf="form.get('total_employees').hasError('required')"> Number of employees is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput formControlName="total_teams" type="number" name="total_teams" placeholder="Number of teams">
+        <mat-error *ngIf="form.get('total_teams').hasError('required')"> Number of teams is required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="15px">
+
+      <mat-form-field>
+        <input matInput formControlName="total_salary_paid" type="number" name="total_salary_paid"
+               placeholder="Total salary paid">
+        <mat-error *ngIf="form.get('total_salary_paid').hasError('required')"> Total salary paid is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput formControlName="reference" type="text" name="reference" placeholder="Reference">
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <button mat-raised-button color="primary" [disabled]="!form.valid">
+      <span *ngIf="isNew">Create</span>
+      <span *ngIf="!isNew">Update</span>
+    </button>
+    <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</form>

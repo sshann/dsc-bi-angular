@@ -4,10 +4,12 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {of} from 'rxjs/observable/of';
 import {TransactionData} from '../../shared/models/transaction-data.model';
+import {EmployeeData} from '../../shared/models/employee-data.model';
 
 const httpOptions = new HttpHeaders({
   'Content-Type': 'application/json',
-  'Access-Control-Allow-Credentials': 'true'
+  'Access-Control-Allow-Credentials': 'true',
+  'Access-Control-Allow-Origin': '*'
 });
 
 @Injectable()
@@ -17,9 +19,13 @@ export class TransactionDataService {
   constructor(private http: HttpClient) {
   }
 
-  list(): Observable<TransactionData[]> {
+  list(fieldFilter?: string): Observable<TransactionData[]> {
     const company_id = JSON.parse(localStorage.getItem('currentUser')).company_id;
-    const url = this.userURL + '?filter[order]=date DESC&filter[where][company_id]=' + company_id;
+    let url = this.userURL + '?filter[order]=date DESC&filter[where][company_id]=' + company_id;
+    console.log(fieldFilter);
+    if (fieldFilter) {
+      url += '&' + fieldFilter;
+    }
     return this.http.get<TransactionData[]>(url, {headers: httpOptions});
   }
 
@@ -38,12 +44,9 @@ export class TransactionDataService {
     return this.http.delete(url, {headers: httpOptions});
   }
 
-  import(json: any[], selectedData: string): Observable<any[]> {
-    console.log(json);
-    //let data:TransactionData = json[0];
-    //data.value = +json[0].value;
-    console.log(json[0].date);
-    return this.http.post<any[]>(environment.apiBaseURL + '/api/' + selectedData, json, {headers: httpOptions});
+  import(json: TransactionData[]): Observable<TransactionData[]> {
+    const url = this.userURL;
+    return this.http.post<TransactionData[]>(url, json, {headers: httpOptions});
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

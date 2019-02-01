@@ -5,16 +5,16 @@ import {ProductDataService} from './product-data.service';
 import {ProductData} from '../../shared/models/product-data.model';
 import {ProductFormDialogComponent} from './product-form-dialog/product-form-dialog.component';
 import {DeleteConfirmationComponent} from '../../shared/dialog/delete-confirmation/delete-confirmation.component';
+import {ImportDialogComponent} from '../import/import-dialog.component';
+import {ExportDialogComponent} from '../export/export-dialog.component';
 
-// Expandable row source conde found at
-// https://stackblitz.com/edit/angular-material-expandable-table-rows?file=app%2Ftable%2Ftable.component.html
 @Component({
   selector: 'app-product-data',
   templateUrl: './product-data.component.html',
   styleUrls: ['./product-data.component.css']
 })
 export class ProductDataComponent implements OnInit, AfterViewInit {
-  displayedColumns = ['date', 'category', 'name', 'current_stock', 'current_value', 'actions'];
+  displayedColumns = ['date', 'category', 'name', 'current_stock', 'current_value', 'reference', 'actions'];
   dataSource = new MatTableDataSource();
   dataFetched = false;
   products: ProductData[] = [];
@@ -93,7 +93,24 @@ export class ProductDataComponent implements OnInit, AfterViewInit {
           this.dataSource.data = this.products;
         }
       });
+  }
 
+  openImportDialog(event) {
+    event.stopPropagation();
+    this.dialog.open(ImportDialogComponent, {
+      data: {
+        type: 'ProductData'
+      }
+    });
+  }
+
+  openExportDialog(event) {
+    event.stopPropagation();
+    this.dialog.open(ExportDialogComponent, {
+      data: {
+        type: 'ProductData'
+      }
+    });
   }
 
   private getProductIndex(product) {

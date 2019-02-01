@@ -1,3 +1,86 @@
-<p>
-  employee-data works!
-</p>
+<div fxLayout="column">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <button mat-icon-button routerLink="/data">
+      <mat-icon aria-label="Return">arrow_back</mat-icon>
+    </button>
+
+    <div fxLayout="row" fxLayoutAlign="center center" class="page-title-with-return-button" fxFlex>
+      <h1 class=""> Employees</h1>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayout.sm="column">
+    <app-employee-by-month-graph fxFlex="50%" [employees]="employees" *ngIf="dataFetched" graphTitle="Amount"
+                                 [dataProperty]="['total_teams','total_employees']"></app-employee-by-month-graph>
+    <app-employee-by-month-graph fxFlex="50%" [employees]="employees" *ngIf="dataFetched" graphTitle="Salary"
+                                 [dataProperty]="['total_salary_paid']"></app-employee-by-month-graph>
+  </div>
+  <div>
+    <span class="mat-body-2">Total Employees:</span>
+    <span> {{' ' + employees.length}}</span>
+  </div>
+  <mat-table #table [dataSource]="dataSource" class="mat-elevation-z2"
+             matSort matSortDirection="desc" matSortActive="date">
+    <ng-container matColumnDef="date">
+      <mat-header-cell mat-sort-header *matHeaderCellDef>Date</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.date | date }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="department">
+      <mat-header-cell mat-sort-header *matHeaderCellDef>Department</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.department }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="total_salary_paid">
+      <mat-header-cell mat-sort-header *matHeaderCellDef>Total Salary Paid</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.total_salary_paid | currency:'EUR'}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="total_teams">
+      <mat-header-cell mat-sort-header *matHeaderCellDef>Number of Teams</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.total_teams | number:'1.0-0' }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="total_employees">
+      <mat-header-cell *matHeaderCellDef>Number of Employees</mat-header-cell>
+      <mat-cell *matCellDef="let row;">{{ row.total_employees | number:'1.0-0'}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="reference">
+      <mat-header-cell *matHeaderCellDef>Reference</mat-header-cell>
+      <mat-cell *matCellDef="let row;">{{ row.reference}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef fxFlex="125px" fxLayout="row" fxLayoutAlign="end">
+        <button mat-icon-button color="primary" (click)="openExportDialog($event)">
+          <mat-icon aria-label="Add employee">archive</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="openImportDialog($event)">
+          <mat-icon aria-label="Add employee">unarchive</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="openCreateDialog()">
+          <mat-icon aria-label="Add employee">add</mat-icon>
+        </button>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row;" fxFlex="125px" fxLayout="row" fxLayoutAlign="end">
+        <button mat-icon-button color="primary" (click)="openEditDialog($event, row);">
+          <mat-icon aria-label="Edit employee">edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="openDeleteDialog($event, row)">
+          <mat-icon aria-label="Delete employee">delete</mat-icon>
+        </button>
+
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"
+             (click)="openEditDialog($event, row)"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator
+                 [pageSize]="25"
+                 [pageSizeOptions]="[5, 10, 25, 50, 100]"
+                 [showFirstLastButtons]="true"></mat-paginator>
+</div>

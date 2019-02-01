@@ -1,8 +1,8 @@
-export class Company { 
+export class Company {
   name: string;
   responsibleName: string;
   responsibleEmail: string;
   responsiblePhone: string;
-  id: string;
-
+  id?: string;
+  _rev?: string;
 }
