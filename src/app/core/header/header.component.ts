@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit {
         this.companyName = company.name;
         this.companyId = company.id;
       });
-    }, 2000);
+    }, 2500);
   }
 
   isAuthenticated() {

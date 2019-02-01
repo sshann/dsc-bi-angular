@@ -36,8 +36,11 @@ export class CompanyService {
         }));
   }
 
-  get(id: string): Observable<Company> {
-    const url = this.companyURL + '/' + id;
+  get(id: string, filter?: string): Observable<Company> {
+    let url = this.companyURL + '/' + id;
+    if (filter) {
+      url += '?' + filter;
+    }
     return this.http.get<Company>(url);
   }
 

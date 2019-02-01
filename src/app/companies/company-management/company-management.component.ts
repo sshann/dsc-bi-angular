@@ -3,7 +3,10 @@ import {CompanyService} from '../company.service';
 import {Company} from '../../shared/Company';
 import {ActivatedRoute} from '@angular/router';
 import {CompanyFormDialogComponent} from '../company/company-form-dialog/company-form-dialog.component';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
+import {UserService} from '../../auth/user.service';
+import {DeleteConfirmationComponent} from '../../shared/dialog/delete-confirmation/delete-confirmation.component';
+import {User} from '../../shared/models/User.model';
 
 @Component({
   selector: 'app-company-management',
@@ -12,20 +15,23 @@ import {MatDialog} from '@angular/material';
 })
 export class CompanyManagementComponent implements OnInit {
   company: Company;
-  dataFetched = false;
+  companyDataFetched = false;
 
   constructor(private companyService: CompanyService,
+              private userService: UserService,
               private route: ActivatedRoute,
+              private snackBar: MatSnackBar,
               private dialog: MatDialog) {
   }
 
   ngOnInit() {
+    const filter = 'filter[include][clients]=company_id';
     setTimeout(() => {
       this.route.params.subscribe(params => {
-        this.dataFetched = false;
-        this.companyService.get(params['id']).subscribe(company => {
+        this.companyDataFetched = false;
+        this.companyService.get(params['id'], filter).subscribe(company => {
           this.company = company;
-          this.dataFetched = true;
+          this.companyDataFetched = true;
         });
       });
     });
@@ -44,7 +50,27 @@ export class CompanyManagementComponent implements OnInit {
           this.company = updatedCompany;
         }
       });
+  }
 
+  openDeleteDialog(user: User, index: number) {
+    event.stopPropagation();
+    const deleteDialogRef = this.dialog.open(DeleteConfirmationComponent, {
+      data: {
+        modelId: user.name + '(' + user.id + ')',
+        modelName: 'company'
+      }
+    });
+
+    deleteDialogRef.afterClosed().subscribe(confirmation => {
+      if (confirmation) {
+        this.userService.delete(user).subscribe(response => {
+          this.snackBar.open('User deleted! ', null, {
+            duration: 3000,
+          });
+          this.company.clients.splice(index, 1);
+        });
+      }
+    });
   }
 
 }

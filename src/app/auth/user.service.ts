@@ -7,6 +7,7 @@ import {environment} from '../../environments/environment';
 import {catchError, map, tap} from 'rxjs/operators';
 import {of} from 'rxjs/observable/of';
 import {Subject} from 'rxjs/Subject';
+import {EmployeeData} from '../shared/models/employee-data.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -40,6 +41,16 @@ export class UserService {
       }), catchError(this.handleError('login', null)));
   }
 
+  list(company_id: string): Observable<User[]> {
+    const url = this.userURL + '?filter[where][company_id]=' + company_id;
+    return this.http.get<User[]>(url);
+  }
+
+  delete(user: User): Observable<object> {
+    const url = this.userURL + '/' + user.id;
+    return this.http.delete(url, httpOptions);
+  }
+
   logout(): Observable<any> {
     return this.http.post(this.userURL + '/logout', httpOptions).pipe(
       tap(() => {
@@ -48,16 +59,14 @@ export class UserService {
       }),
       catchError(this.handleError('logout User')));
   }
-  
-  update(user:User): Observable<any>{
-	  return this.http.put(this.userURL, user, httpOptions).pipe(
-	  map(users => {
-		  //console.log(users);
-		  localStorage.setItem('currentUser', JSON.stringify(users));
-		  return users;
-	  }))  }
-	  
-	  //getUser()
+
+  update(user: User): Observable<any> {
+    return this.http.put(this.userURL, user, httpOptions).pipe(
+      map(users => {
+        localStorage.setItem('currentUser', JSON.stringify(users));
+        return users;
+      }));
+  }
 
   getUserRoles(id: string): Observable<any> {
     const url = this.userURL + '/roles?id=' + id;
