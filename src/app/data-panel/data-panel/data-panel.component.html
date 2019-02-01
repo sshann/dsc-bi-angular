@@ -30,7 +30,7 @@
     </div>
     <div fxFlex.md="33%" fxFlex.lg="25%" fxFlex.gt-lg="20%" fxFlex.sm="50%" class="card-container">
       <mat-card fxLayout="row" fxLayoutAlign="center center" matRipple [matRippleCentered]="true"
-                routerLink="/data/export">
+                (click)="openExportDialog()">
         <span class="mat-h1">Export Data </span>
       </mat-card>
     </div>

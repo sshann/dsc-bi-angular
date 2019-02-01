@@ -1,0 +1,28 @@
+<!--<div>-->
+  <!--<form action="">-->
+    <!--<input type="radio" [(ngModel)]="selected" name="data" value="ProductData" checked> Product Data<br>-->
+    <!--<input type="radio" [(ngModel)]="selected" name="data" value="EmployeeData"> Employee Data<br>-->
+    <!--<input type="radio" [(ngModel)]="selected" name="data" value="TransactionData"> Transaction Data-->
+  <!--</form>-->
+  <!--<br>-->
+  <!--<button (click)="export()">Export Data</button>-->
+<!--</div>-->
+
+<div fxLayout="column" fxLayoutGap="10px">
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <h1 mat-dialog-title>Export Data</h1>
+  </div>
+  <mat-dialog-content>
+    <mat-select [(ngModel)]="selected">
+      <mat-option value="EmployeeData">Employee Data</mat-option>
+      <mat-option value="ProductData">Product Data</mat-option>
+      <mat-option value="TransactionData">Transaction Data</mat-option>
+    </mat-select>
+  </mat-dialog-content>
+  <mat-dialog-actions fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <button mat-raised-button color="primary" (click)="export()">
+      <span>Export</span>
+    </button>
+    <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</div>

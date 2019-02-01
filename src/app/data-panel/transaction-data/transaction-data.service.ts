@@ -19,9 +19,13 @@ export class TransactionDataService {
   constructor(private http: HttpClient) {
   }
 
-  list(): Observable<TransactionData[]> {
+  list(fieldFilter?: string): Observable<TransactionData[]> {
     const company_id = JSON.parse(localStorage.getItem('currentUser')).company_id;
-    const url = this.userURL + '?filter[order]=date DESC&filter[where][company_id]=' + company_id;
+    let url = this.userURL + '?filter[order]=date DESC&filter[where][company_id]=' + company_id;
+    console.log(fieldFilter);
+    if (fieldFilter) {
+      url += '&' + fieldFilter;
+    }
     return this.http.get<TransactionData[]>(url, {headers: httpOptions});
   }
 
