@@ -23,6 +23,7 @@ import {LoadingService} from '../shared/loading.service';
 import {AdminGuard} from '../auth/guards/admin-guard.service';
 import {BusinessManagerGuard} from '../auth/guards/business-manager-guard.service';
 import {BusinessOwnerGuard} from '../auth/guards/business-owner-guard.service';
+import {ProfileModule} from '../profile/profile.module';
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import {BusinessOwnerGuard} from '../auth/guards/business-owner-guard.service';
     CompaniesModule,
     DataPanelModule,
     SharedModule,
-    DashboardModule
+    DashboardModule,
+	ProfileModule
   ],
   declarations: [
     HeaderComponent,

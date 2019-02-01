@@ -41,6 +41,16 @@ export class UserService {
       }),
       catchError(this.handleError('logout User')));
   }
+  
+  update(user:User): Observable<any>{
+	  console.log(user.name+" "+user.email);
+	  return this.http.put(this.userURL, user, httpOptions).pipe(
+	  map(users => {
+		  this.login(users);
+		  return users;
+	  }))  }
+	  
+	  //getUser()
 
   getUserRoles(id: string): Observable<any> {
     const url = this.userURL + '/getRolesById?id=' + id;

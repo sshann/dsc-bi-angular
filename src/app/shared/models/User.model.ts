@@ -3,4 +3,6 @@ export class User {
   username?: string;
   name?: string;
   password: string;
+  _rev?: string;
+  phone?: string;
 }
