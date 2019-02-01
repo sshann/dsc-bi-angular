@@ -6,6 +6,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {catchError, map, tap} from 'rxjs/operators';
 import {of} from 'rxjs/observable/of';
+import {Subject} from 'rxjs/Subject';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -18,8 +19,13 @@ const httpOptions = {
 @Injectable()
 export class UserService {
   private userURL = environment.apiBaseURL + '/api/Users';
+  private userChanged = new Subject<void>();
 
   constructor(private http: HttpClient) {
+  }
+
+  isUserChanged(): Observable<void> {
+    return this.userChanged.asObservable();
   }
 
   login(user: User): Observable<any> {
@@ -28,6 +34,7 @@ export class UserService {
         if (loginOutput.id && loginOutput.userId) {
           localStorage.setItem('currentUser', JSON.stringify(loginOutput.user));
           localStorage.setItem('accessToken', loginOutput.id);
+          this.userChanged.next();
         }
         return loginOutput;
       }), catchError(this.handleError('login', null)));

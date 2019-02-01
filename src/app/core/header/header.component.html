@@ -1,8 +1,11 @@
 <mat-toolbar color="primary">
   <div fxLayout="row" fxFLayoutGap="5px" fxFlex>
     <div fxFlex>
-      <a routerLink="" class="home-title">{{title}}</a>
+      <a routerLink="" class="home-title" style="padding-right: 10px">{{title}}</a>
+      <span>{{companyName}}</span>
     </div>
+
+
 
     <div fxLayout="row" fxFLayoutGap="5px" *ngIf="isAuthenticated()" fxHide.xs>
       <button mat-button routerLink="/dashboard">Dashboard</button>

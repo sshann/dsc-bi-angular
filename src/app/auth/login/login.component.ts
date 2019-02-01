@@ -35,19 +35,19 @@ export class LoginComponent implements OnInit {
         if (user) {
           /* Added a timer here as the user roles were not being returned without it. */
           // setTimeout(() => {
-            this.userService.getUserRoles(user.userId).subscribe(roles => {
-              let message: string;
-              this.router.navigate([this.returnURL]);
-              message = 'Login successful! ';
+          this.userService.getUserRoles(user.userId).subscribe(roles => {
+            let message: string;
+            this.router.navigate([this.returnURL]);
+            message = 'Login successful! ';
 
-              if (!roles) {
-                message += 'You have no access permissions! ';
-              }
+            if (!roles) {
+              message += 'You have no access permissions! ';
+            }
 
-              this.snackBar.open(message, null, {
-                duration: 4000,
-              });
+            this.snackBar.open(message, null, {
+              duration: 4000,
             });
+          });
           // }, 1000);
         } else {
           this.snackBar.open('Failed to login, user not registered! ', null, {

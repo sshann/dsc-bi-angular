@@ -31,6 +31,11 @@ export class CompanyService {
         }));
   }
 
+  get(id: string): Observable<Company> {
+    const url = this.companyURL + '/' + id;
+    return this.http.get<Company>(url);
+  }
+
   deleteCompany(comp: Company | number): Observable<Company> {
     const id = typeof comp === 'number' ? comp : comp.id;
     // const url = `${this.companyURL}/${id}`;
