@@ -5,15 +5,29 @@
     </button>
 
     <div fxLayout="row" fxLayoutAlign="center center" class="page-title-with-return-button" fxFlex>
-      <h1 class=""> Company {{': ' + company.name}}</h1>
+      <h1 class=""> Company <span *ngIf="dataFetched">{{': ' + company.name}}</span></h1>
     </div>
   </div>
 
-  <div fxLayout="column" >
-    <span class="mat-body-2">Responsible contacts</span>
-    <span class="mat-body-2">{{company.name}}</span>
-    <span class="mat-body-2">{{company.responsiblePhone}}</span>
-    <span class="mat-body-2">{{company.responsibleEmail}}</span>
+  <div fxLayout="row" fxLayout.sm="row" *ngIf="dataFetched">
+    <div fxLayout="column" fxFlex>
+     <div>
+       <button mat-raised-button (click)="openEditDialog()" color="primary">Edit</button>
+     </div>
+      <span class="mat-body-2 mat-body-strong">Responsible contacts</span>
+      <div fxLayout="row" fxLayoutGap="5px">
+        <span class="mat-body-2">Name:</span>
+        <span class="mat-body-2">{{company.responsibleName}}</span>
+      </div>
+      <div fxLayout="row" fxLayoutGap="5px">
+        <span class="mat-body-2">Phone:</span>
+        <span class="mat-body-2">{{company.responsiblePhone}}</span>
+      </div>
+      <div fxLayout="row" fxLayoutGap="5px">
+        <span class="mat-body-2">Email:</span>
+        <span class="mat-body-2">{{company.responsibleEmail}}</span>
+      </div>
+    </div>
+    <div fxLayout="column" fxFlex></div>
   </div>
-
 </div>

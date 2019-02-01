@@ -11,6 +11,7 @@ import {CompanyService} from '../../companies/company.service';
 export class HeaderComponent implements OnInit {
   title = environment.title;
   companyName: string;
+  companyId: string;
 
   constructor(private userService: UserService,
               private companyService: CompanyService) {
@@ -18,20 +19,29 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser) {
+      this.setCompanyName(currentUser.company_id);
+    }
+
     this.userService.isUserChanged().subscribe(() => {
       const company_id = JSON.parse(localStorage.getItem('currentUser')).company_id;
       this.setCompanyName(company_id);
     });
 
-    if (currentUser) {
-      this.setCompanyName(currentUser.company_id);
-    }
+    this.companyService.haveCompanyChanged().subscribe((company) => {
+      if (company.id === this.companyId) {
+        this.companyName = company.name;
+      }
+    });
   }
 
   private setCompanyName(company_id) {
-    this.companyService.get(company_id).subscribe((company) => {
-      this.companyName = company ? company.name : '';
-    });
+    setTimeout(() => {
+      this.companyService.get(company_id).subscribe((company) => {
+        this.companyName = company.name;
+        this.companyId = company.id;
+      });
+    }, 2000);
   }
 
   isAuthenticated() {
