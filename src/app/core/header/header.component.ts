@@ -17,11 +17,20 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.userService.isUserChanged().subscribe(() => {
       const company_id = JSON.parse(localStorage.getItem('currentUser')).company_id;
-      this.companyService.get(company_id).subscribe((company) => {
-        this.companyName = company ? company.name : '';
-      });
+      this.setCompanyName(company_id);
+    });
+
+    if (currentUser) {
+      this.setCompanyName(currentUser.company_id);
+    }
+  }
+
+  private setCompanyName(company_id) {
+    this.companyService.get(company_id).subscribe((company) => {
+      this.companyName = company ? company.name : '';
     });
   }
 
