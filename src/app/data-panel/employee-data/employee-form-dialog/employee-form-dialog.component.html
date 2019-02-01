@@ -10,7 +10,7 @@
       <mat-form-field>
         <input matInput [matDatepicker]="picker" placeholder="Date" formControlName="date" name="date">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
         <mat-error *ngIf="form.get('date').hasError('required')"> Date is required</mat-error>
       </mat-form-field>
 
@@ -22,7 +22,8 @@
 
     <div fxLayout="row" fxLayoutGap="15px">
       <mat-form-field>
-        <input matInput formControlName="total_employees" type="number" name="total_employees" placeholder="Number of employees">
+        <input matInput formControlName="total_employees" type="number" name="total_employees"
+               placeholder="Number of employees">
         <mat-error *ngIf="form.get('total_employees').hasError('required')"> Number of employees is required</mat-error>
       </mat-form-field>
 
@@ -35,7 +36,8 @@
     <div fxLayout="row" fxLayoutGap="15px">
 
       <mat-form-field>
-        <input matInput formControlName="total_salary_paid" type="number" name="total_salary_paid" placeholder="Total salary paid">
+        <input matInput formControlName="total_salary_paid" type="number" name="total_salary_paid"
+               placeholder="Total salary paid">
         <mat-error *ngIf="form.get('total_salary_paid').hasError('required')"> Total salary paid is required</mat-error>
       </mat-form-field>
 

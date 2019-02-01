@@ -12,6 +12,7 @@ import {EmployeeDataService} from '../employee-data.service';
 export class EmployeeFormDialogComponent implements OnInit {
   form: FormGroup;
   isNew = true;
+  startDate = this.data ? new Date(this.data.employee.date) : new Date();
 
   constructor(private employeeService: EmployeeDataService,
               private dialogRef: MatDialogRef<EmployeeFormDialogComponent>,

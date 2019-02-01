@@ -48,7 +48,8 @@ import {EmployeeFormDialogComponent} from './employee-data/employee-form-dialog/
   ],
   entryComponents: [
     TransactionFormDialogComponent,
-    ProductFormDialogComponent
+    ProductFormDialogComponent,
+    EmployeeFormDialogComponent
   ],
   exports: [
     TransactionByDayGraphComponent,
