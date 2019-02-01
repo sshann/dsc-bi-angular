@@ -7,7 +7,8 @@ import {TransactionData} from '../../shared/models/transaction-data.model';
 
 const httpOptions = new HttpHeaders({
   'Content-Type': 'application/json',
-  'Access-Control-Allow-Credentials': 'true'
+  'Access-Control-Allow-Credentials': 'true',
+  'Access-Control-Allow-Origin': '*'
 });
 
 @Injectable()

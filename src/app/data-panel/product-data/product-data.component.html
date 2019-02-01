@@ -10,9 +10,9 @@
   </div>
 
   <div fxLayout="row" fxLayout.sm="column">
-    <app-product-by-day-graph fxFlex [products]="products" *ngIf="dataFetched"
+    <app-product-by-day-graph fxFlex="50%" [products]="products" *ngIf="dataFetched"
                               dataProperty="current_value"></app-product-by-day-graph>
-    <app-product-by-day-graph fxFlex [products]="products" *ngIf="dataFetched" dataProperty="current_stock"
+    <app-product-by-day-graph fxFlex="50%" [products]="products" *ngIf="dataFetched" dataProperty="current_stock"
                               graphTitle="Stock"></app-product-by-day-graph>
   </div>
   <div>
@@ -44,6 +44,11 @@
     <ng-container matColumnDef="current_stock">
       <mat-header-cell *matHeaderCellDef>Stock</mat-header-cell>
       <mat-cell *matCellDef="let row;">{{ row.current_stock}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="reference">
+      <mat-header-cell *matHeaderCellDef>Reference</mat-header-cell>
+      <mat-cell *matCellDef="let row;">{{ row.reference}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="actions">

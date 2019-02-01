@@ -26,6 +26,7 @@ export class ProductFormDialogComponent implements OnInit {
         this.data ? this.data.product.date : new Date().toISOString().substring(0, 10),
         [Validators.required]),
       category: new FormControl(this.data ? this.data.product.category : '', [Validators.required]),
+      reference: new FormControl(this.data ? this.data.product.reference : '', [Validators.required]),
       name: new FormControl(this.data ? this.data.product.name : '', [Validators.required]),
       current_stock: new FormControl(this.data ? this.data.product.current_stock : '', [Validators.required]),
       current_value: new FormControl(this.data ? this.data.product.current_value : '', []),
@@ -37,6 +38,7 @@ export class ProductFormDialogComponent implements OnInit {
   onSubmit() {
     const product: ProductData = {
       category: this.form.value.category,
+      reference: this.form.value.reference,
       description: this.form.value.description,
       current_value: this.form.value.current_value,
       date: this.form.value.date,

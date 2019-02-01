@@ -8,7 +8,8 @@ import {EmployeeData} from '../../shared/models/employee-data.model';
 
 const httpOptions = new HttpHeaders({
   'Content-Type': 'application/json',
-  'Access-Control-Allow-Credentials': 'true'
+  'Access-Control-Allow-Credentials': 'true',
+  'Access-Control-Allow-Origin': '*'
 });
 
 @Injectable()

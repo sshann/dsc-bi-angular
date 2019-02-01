@@ -12,7 +12,7 @@ import {DeleteConfirmationComponent} from '../../shared/dialog/delete-confirmati
   styleUrls: ['./product-data.component.css']
 })
 export class ProductDataComponent implements OnInit, AfterViewInit {
-  displayedColumns = ['date', 'category', 'name', 'current_stock', 'current_value', 'actions'];
+  displayedColumns = ['date', 'category', 'name', 'current_stock', 'current_value', 'reference', 'actions'];
   dataSource = new MatTableDataSource();
   dataFetched = false;
   products: ProductData[] = [];

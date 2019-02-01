@@ -5,7 +5,7 @@ export class EmployeeData {
   total_salary_paid: number;
   total_teams: number;
   company_id: string;
-  reference: string;
+  reference?: string;
   id?: string;
   _rev?: string;
 }

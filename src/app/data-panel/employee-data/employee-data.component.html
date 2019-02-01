@@ -10,9 +10,9 @@
   </div>
 
   <div fxLayout="row" fxLayout.sm="column">
-    <app-employee-by-month-graph fxFlex [employees]="employees" *ngIf="dataFetched" graphTitle="Amount"
+    <app-employee-by-month-graph fxFlex="50%" [employees]="employees" *ngIf="dataFetched" graphTitle="Amount"
                                  [dataProperty]="['total_teams','total_employees']"></app-employee-by-month-graph>
-    <app-employee-by-month-graph fxFlex [employees]="employees" *ngIf="dataFetched" graphTitle="Salary"
+    <app-employee-by-month-graph fxFlex="50%" [employees]="employees" *ngIf="dataFetched" graphTitle="Salary"
                                  [dataProperty]="['total_salary_paid']"></app-employee-by-month-graph>
   </div>
   <div>
