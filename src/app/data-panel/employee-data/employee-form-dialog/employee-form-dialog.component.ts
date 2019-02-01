@@ -25,23 +25,23 @@ export class EmployeeFormDialogComponent implements OnInit {
       date: new FormControl(
         this.data ? this.data.employee.date : new Date().toISOString().substring(0, 10),
         [Validators.required]),
-      category: new FormControl(this.data ? this.data.employee.category : '', [Validators.required]),
-      name: new FormControl(this.data ? this.data.employee.name : '', [Validators.required]),
-      current_stock: new FormControl(this.data ? this.data.employee.current_stock : '', [Validators.required]),
-      current_value: new FormControl(this.data ? this.data.employee.current_value : '', []),
-      description: new FormControl(this.data ? this.data.employee.description : '', [])
+      reference: new FormControl(this.data ? this.data.employee.reference : '', []),
+      total_teams: new FormControl(this.data ? this.data.employee.total_teams : '', [Validators.required]),
+      total_salary_paid: new FormControl(this.data ? this.data.employee.total_salary_paid : '', [Validators.required]),
+      total_employees: new FormControl(this.data ? this.data.employee.total_employees : '', [Validators.required]),
+      department: new FormControl(this.data ? this.data.employee.department : '', [Validators.required])
     });
   }
 
 
   onSubmit() {
     const employee: EmployeeData = {
-      category: this.form.value.category,
-      description: this.form.value.description,
-      current_value: this.form.value.current_value,
+      reference: this.form.value.reference,
+      department: this.form.value.department,
+      total_employees: this.form.value.total_employees,
       date: this.form.value.date,
-      current_stock: this.form.value.current_stock,
-      name: this.form.value.name,
+      total_salary_paid: this.form.value.total_salary_paid,
+      total_teams: this.form.value.total_teams,
       company_id: JSON.parse(localStorage.getItem('currentUser')).company_id
     };
 

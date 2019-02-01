@@ -51,6 +51,7 @@ export class ImportComponent implements OnInit {
     this.tempEmployee = {
       date: '',
       department: '',
+      reference: '',
       total_employees: 0,
       total_salary_paid: 0,
       total_teams: 0,
@@ -153,6 +154,7 @@ export class ImportComponent implements OnInit {
               total_employees: 0,
               total_salary_paid: 0,
               total_teams: 0,
+              reference: '',
               company_id: this.company_id
             };
           }

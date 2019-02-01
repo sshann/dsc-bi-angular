@@ -1,5 +1,4 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
 import {EmployeeDataService} from './employee-data.service';
 import {EmployeeData} from '../../shared/models/employee-data.model';
@@ -12,7 +11,7 @@ import {DeleteConfirmationComponent} from '../../shared/dialog/delete-confirmati
   styleUrls: ['./employee-data.component.css']
 })
 export class EmployeeDataComponent implements OnInit, AfterViewInit {
-  displayedColumns = ['date', 'category', 'name', 'current_stock', 'current_value', 'actions'];
+  displayedColumns = ['date', 'department', 'total_teams', 'total_employees', 'total_salary_paid', 'reference', 'actions'];
   dataSource = new MatTableDataSource();
   dataFetched = false;
   employees: EmployeeData[] = [];
@@ -20,8 +19,7 @@ export class EmployeeDataComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private http: HttpClient,
-              private employeeService: EmployeeDataService,
+  constructor(private employeeService: EmployeeDataService,
               private dialog: MatDialog,
               private snackBar: MatSnackBar) {
   }

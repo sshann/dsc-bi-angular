@@ -10,10 +10,10 @@
   </div>
 
   <div fxLayout="row" fxLayout.sm="column">
-    <app-employee-by-day-graph fxFlex [employees]="employees" *ngIf="dataFetched"
-                              dataProperty="current_value"></app-employee-by-day-graph>
-    <app-employee-by-day-graph fxFlex [employees]="employees" *ngIf="dataFetched" dataProperty="current_stock"
-                              graphTitle="Stock"></app-employee-by-day-graph>
+    <!--<app-employee-by-month-graph fxFlex [employees]="employees" *ngIf="dataFetched"-->
+    <!--dataProperty="current_value"></app-employee-by-month-graph>-->
+    <!--<app-employee-by-month-graph fxFlex [employees]="employees" *ngIf="dataFetched" dataProperty="current_stock"-->
+    <!--graphTitle="Stock"></app-employee-by-month-graph>-->
   </div>
   <div>
     <span class="mat-body-2">Total Employees:</span>
@@ -26,24 +26,29 @@
       <mat-cell *matCellDef="let row">{{ row.date | date }}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="category">
-      <mat-header-cell mat-sort-header *matHeaderCellDef>Category</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.category }}</mat-cell>
+    <ng-container matColumnDef="department">
+      <mat-header-cell mat-sort-header *matHeaderCellDef>Department</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.department }}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="name">
-      <mat-header-cell mat-sort-header *matHeaderCellDef>Name</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.name }}</mat-cell>
+    <ng-container matColumnDef="total_salary_paid">
+      <mat-header-cell mat-sort-header *matHeaderCellDef>Total Salary Paid</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.total_salary_paid | currency:'EUR'}}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="current_value">
-      <mat-header-cell mat-sort-header *matHeaderCellDef>Value</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.current_value | currency:'EUR' }}</mat-cell>
+    <ng-container matColumnDef="total_teams">
+      <mat-header-cell mat-sort-header *matHeaderCellDef>Number of Teams</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.total_teams | number:'1.0-0' }}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="current_stock">
-      <mat-header-cell *matHeaderCellDef>Stock</mat-header-cell>
-      <mat-cell *matCellDef="let row;">{{ row.current_stock}}</mat-cell>
+    <ng-container matColumnDef="total_employees">
+      <mat-header-cell *matHeaderCellDef>Number of Employees</mat-header-cell>
+      <mat-cell *matCellDef="let row;">{{ row.total_employees | number:'1.0-0'}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="reference">
+      <mat-header-cell *matHeaderCellDef>Reference</mat-header-cell>
+      <mat-cell *matCellDef="let row;">{{ row.reference}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="actions">
@@ -64,7 +69,7 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" [matTooltip]="row.description"
+    <mat-row *matRowDef="let row; columns: displayedColumns;"
              (click)="openEditDialog($event, row)"></mat-row>
   </mat-table>
 

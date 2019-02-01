@@ -3,11 +3,11 @@ import {EmployeeData} from '../../../shared/models/employee-data.model';
 
 
 @Component({
-  selector: 'app-employee-by-day-graph',
-  templateUrl: './employee-by-day-graph.component.html',
-  styleUrls: ['./employee-by-day-graph.component.css']
+  selector: 'app-employee-by-month-graph',
+  templateUrl: './employee-by-month-graph.component.html',
+  styleUrls: ['./employee-by-month-graph.component.css']
 })
-export class EmployeeByDayGraphComponent implements OnInit {
+export class EmployeeByMonthGraphComponent implements OnInit {
   @Input() employees: EmployeeData[];
   @Input() graphData: { name: string, series: any[] }[];
   @Input() graphTitle: string;

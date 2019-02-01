@@ -15,31 +15,32 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput formControlName="category" type="text" name="category" placeholder="Category">
-        <mat-error *ngIf="form.get('category').hasError('required')"> Category is required</mat-error>
+        <input matInput formControlName="department" type="text" name="department" placeholder="Department">
+        <mat-error *ngIf="form.get('department').hasError('required')"> Department is required</mat-error>
       </mat-form-field>
     </div>
 
     <div fxLayout="row" fxLayoutGap="15px">
       <mat-form-field>
-        <input matInput formControlName="current_stock" type="number" name="current_stock" placeholder="Current Stock">
-        <mat-error *ngIf="form.get('current_stock').hasError('required')"> Current Stock is required</mat-error>
+        <input matInput formControlName="total_employees" type="number" name="total_employees" placeholder="Number of employees">
+        <mat-error *ngIf="form.get('total_employees').hasError('required')"> Number of employees is required</mat-error>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput formControlName="current_value" type="number" name="current_value" placeholder="Current Value">
-        <mat-error *ngIf="form.get('current_value').hasError('required')"> Current Value is required</mat-error>
+        <input matInput formControlName="total_teams" type="number" name="total_teams" placeholder="Number of teams">
+        <mat-error *ngIf="form.get('total_teams').hasError('required')"> Number of teams is required</mat-error>
       </mat-form-field>
     </div>
 
     <div fxLayout="row" fxLayoutGap="15px">
+
       <mat-form-field>
-        <input matInput formControlName="name" type="text" name="name" placeholder="name">
-        <mat-error *ngIf="form.get('name').hasError('required')"> Name is required</mat-error>
+        <input matInput formControlName="total_salary_paid" type="number" name="total_salary_paid" placeholder="Total salary paid">
+        <mat-error *ngIf="form.get('total_salary_paid').hasError('required')"> Total salary paid is required</mat-error>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput formControlName="description" type="text" name="description" placeholder="Description">
+        <input matInput formControlName="reference" type="text" name="reference" placeholder="Reference">
       </mat-form-field>
     </div>
   </mat-dialog-content>
