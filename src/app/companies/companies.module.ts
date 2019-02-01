@@ -8,6 +8,7 @@ import {CompanyFormDialogComponent} from './company/company-form-dialog/company-
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {AngularMaterialModule} from '../angular_material.module';
 import {ReactiveFormsModule} from '@angular/forms';
+import { CompanyManagementComponent } from './company-management/company-management.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import {ReactiveFormsModule} from '@angular/forms';
   declarations: [
     CompanylistComponent,
     CompanyComponent,
-    CompanyFormDialogComponent
+    CompanyFormDialogComponent,
+    CompanyManagementComponent
   ],
   entryComponents: [
     CompanyFormDialogComponent
