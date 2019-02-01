@@ -6,8 +6,6 @@ import {ProductData} from '../../shared/models/product-data.model';
 import {ProductFormDialogComponent} from './product-form-dialog/product-form-dialog.component';
 import {DeleteConfirmationComponent} from '../../shared/dialog/delete-confirmation/delete-confirmation.component';
 
-// Expandable row source conde found at
-// https://stackblitz.com/edit/angular-material-expandable-table-rows?file=app%2Ftable%2Ftable.component.html
 @Component({
   selector: 'app-product-data',
   templateUrl: './product-data.component.html',
