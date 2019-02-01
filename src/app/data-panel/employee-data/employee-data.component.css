@@ -1,0 +1,7 @@
+app-employee-by-day-graph {
+  height: 350px;
+}
+
+mat-row {
+  cursor: pointer;
+}

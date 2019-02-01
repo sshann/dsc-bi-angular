@@ -19,7 +19,8 @@ export class EmployeeDataService {
   }
 
   list(): Observable<EmployeeData[]> {
-    const url = this.userURL + '?filter[order]=date DESC';
+    const company_id = JSON.parse(localStorage.getItem('currentUser')).company_id;
+    const url = this.userURL + '?filter[order]=date DESC&filter[where][company_id]=' + company_id;
     return this.http.get<EmployeeData[]>(url, {headers: httpOptions});
   }
 
