@@ -43,10 +43,10 @@ export class UserService {
   }
   
   update(user:User): Observable<any>{
-	  console.log(user.name+" "+user.email);
 	  return this.http.put(this.userURL, user, httpOptions).pipe(
 	  map(users => {
-		  this.login(users);
+		  //console.log(users);
+		  localStorage.setItem('currentUser', JSON.stringify(users));
 		  return users;
 	  }))  }
 	  

@@ -12,8 +12,11 @@
 <label>Phone #: </label>
 <input name="phone" [(ngModel)]="user.phone" type="text" placeholder="New Phone# !" value="{{user.phone}}"><br><br>
 
-<label>Password: (To confirm updating data)</label>
-<input name="userPassword" [(ngModel)]="user.password" type="password" placeholder="New Password !" value="{{user?.password}}"> <br><br>
+<label>Password: </label>
+<input name="userPassword" [(ngModel)]="user.password" type="password" placeholder="Password" value="{{user?.password}}">
+<button type="button" (click)="showNote()"><strong>IMPORTANT!</strong></button> <br><br>
+
+<div *ngIf="showMSG">If you <strong>DON"T</strong> want to update your password enter the same password you used to login. If you enter different password your password will be updated</div>
 
 <button [disabled]="f.invalid" type="submit">Update Info</button>
 </form>

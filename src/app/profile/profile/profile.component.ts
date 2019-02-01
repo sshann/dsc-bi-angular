@@ -11,13 +11,13 @@ export class ProfileComponent implements OnInit {
 	
 	user:User;
 	switching: string = "Enable";
+	showMSG: boolean = false;
   constructor(private userService: UserService) {
   }
 
   ngOnInit() {
 	  var currentUser = JSON.parse(localStorage.getItem('currentUser'));
 	  this.user = currentUser;
-	  console.log(this.user);
 	  this.displayData(this.user);
   }
 
@@ -29,9 +29,15 @@ export class ProfileComponent implements OnInit {
 	  this.user._rev = current._rev;
   }
   
+  showNote():void{
+	  this.showMSG = !this.showMSG;
+  }
+  
   update():void{
+	  console.log(this.user);
 	  this.userService.update(this.user).subscribe(users => {
 		  console.log(users);
+		  this.user = users
 	  });
   }
 
