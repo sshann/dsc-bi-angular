@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {of} from 'rxjs/observable/of';
 import {TransactionData} from '../../shared/models/transaction-data.model';
+import {EmployeeData} from '../../shared/models/employee-data.model';
 
 const httpOptions = new HttpHeaders({
   'Content-Type': 'application/json',
@@ -39,12 +40,9 @@ export class TransactionDataService {
     return this.http.delete(url, {headers: httpOptions});
   }
 
-  import(json: any[], selectedData: string): Observable<any[]> {
-    console.log(json);
-    //let data:TransactionData = json[0];
-    //data.value = +json[0].value;
-    console.log(json[0].date);
-    return this.http.post<any[]>(environment.apiBaseURL + '/api/' + selectedData, json, {headers: httpOptions});
+  import(json: TransactionData[]): Observable<TransactionData[]> {
+    const url = this.userURL;
+    return this.http.post<TransactionData[]>(url, json, {headers: httpOptions});
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

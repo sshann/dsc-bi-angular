@@ -5,6 +5,7 @@ import {environment} from '../../../environments/environment';
 import {catchError, map, tap} from 'rxjs/operators';
 import {of} from 'rxjs/observable/of';
 import {EmployeeData} from '../../shared/models/employee-data.model';
+import {ProductData} from '../../shared/models/product-data.model';
 
 const httpOptions = new HttpHeaders({
   'Content-Type': 'application/json',
@@ -38,6 +39,11 @@ export class EmployeeDataService {
   delete(employee: EmployeeData): Observable<object> {
     const url = this.userURL + '/' + employee.id;
     return this.http.delete(url, {headers: httpOptions});
+  }
+
+  import(json: EmployeeData[]): Observable<EmployeeData[]> {
+    const url = this.userURL;
+    return this.http.post<EmployeeData[]>(url, json, {headers: httpOptions});
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

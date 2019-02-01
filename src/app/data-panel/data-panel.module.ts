@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {DataPanelComponent} from './data-panel/data-panel.component';
 import {ReportComponent} from './report/report.component';
-import {ImportComponent} from './import/import.component';
 import {EmployeeDataComponent} from './employee-data/employee-data.component';
 import {TransactionDataComponent} from './transaction-data/transaction-data.component';
 import {ProductDataComponent} from './product-data/product-data.component';
@@ -19,6 +18,7 @@ import {ProductFormDialogComponent} from './product-data/product-form-dialog/pro
 import {ProductByDayGraphComponent} from './product-data/product-by-day-graph/product-by-day-graph.component';
 import {EmployeeByMonthGraphComponent} from './employee-data/employee-by-month-graph/employee-by-month-graph.component';
 import {EmployeeFormDialogComponent} from './employee-data/employee-form-dialog/employee-form-dialog.component';
+import {ImportDialogComponent} from './import/import-dialog.component';
 
 @NgModule({
   imports: [
@@ -34,7 +34,7 @@ import {EmployeeFormDialogComponent} from './employee-data/employee-form-dialog/
   declarations: [
     DataPanelComponent,
     ReportComponent,
-    ImportComponent,
+    ImportDialogComponent,
     EmployeeDataComponent,
     EmployeeByMonthGraphComponent,
     EmployeeFormDialogComponent,
@@ -49,7 +49,8 @@ import {EmployeeFormDialogComponent} from './employee-data/employee-form-dialog/
   entryComponents: [
     TransactionFormDialogComponent,
     ProductFormDialogComponent,
-    EmployeeFormDialogComponent
+    EmployeeFormDialogComponent,
+    ImportDialogComponent
   ],
   exports: [
     TransactionByDayGraphComponent,

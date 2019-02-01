@@ -40,6 +40,11 @@ export class ProductDataService {
     return this.http.delete(url, {headers: httpOptions});
   }
 
+  import(json: ProductData[]): Observable<ProductData[]> {
+    const url = this.userURL;
+    return this.http.post<ProductData[]>(url, json, {headers: httpOptions});
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

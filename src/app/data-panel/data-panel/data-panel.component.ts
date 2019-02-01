@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {MatDialog, MatSnackBar} from '@angular/material';
+import {ImportDialogComponent} from '../import/import-dialog.component';
 
 @Component({
   selector: 'app-data-panel',
@@ -7,10 +9,14 @@ import {Component, OnInit} from '@angular/core';
 })
 export class DataPanelComponent implements OnInit {
 
-  constructor() {
+  constructor(private dialog: MatDialog) {
   }
 
   ngOnInit() {
+  }
+
+  openImportDialog() {
+    this.dialog.open(ImportDialogComponent);
   }
 
 }

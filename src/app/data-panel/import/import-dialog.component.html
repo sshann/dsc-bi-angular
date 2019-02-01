@@ -1,0 +1,38 @@
+<!--<div style="text-align:center">-->
+<!--<select name="data" #ddl (change)="selected(ddl.value)">-->
+<!--<option value="EmployeeData">Employee Data</option>-->
+<!--<option value="ProductData">Product Data</option>-->
+<!--<option value="TransactionData">Transaction Data</option>-->
+<!--</select><br><br>-->
+
+<!--<input #importData type="file" accept=".csv" (change)="csvToJson($event)" required>-->
+<!--<br><br>-->
+<!--<button (click)="import()" [disabled]="file == 0">Import {{selectedData}}</button>-->
+
+<!--</div>-->
+
+<div fxLayout="column" fxLayoutGap="10px">
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <h1 mat-dialog-title>Import Data</h1>
+  </div>
+  <mat-dialog-content>
+    <div fxLayout="column" fxLayoutGap="10px">
+      <mat-select [(ngModel)]="selectedData">
+        <mat-option value="EmployeeData">Employee Data</mat-option>
+        <mat-option value="ProductData">Product Data</mat-option>
+        <mat-option value="TransactionData">Transaction Data</mat-option>
+      </mat-select>
+
+      <div fxLayout="row" fxLayoutAlign="center center" style="padding-bottom: 10px">
+        <button type="button" mat-raised-button (click)="imgFileInput.click()">Select a File</button>
+        <input hidden type="file" #imgFileInput (change)="csvToJson($event)" accept=".csv">
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <button mat-raised-button color="primary" [disabled]="!enableImportButton" (click)="import()">
+      <span>Import</span>
+    </button>
+    <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</div>

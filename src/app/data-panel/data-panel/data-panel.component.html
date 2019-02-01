@@ -24,7 +24,7 @@
     </div>
     <div fxFlex.md="33%" fxFlex.lg="25%" fxFlex.gt-lg="20%" fxFlex.sm="50%" class="card-container">
       <mat-card fxLayout="row" fxLayoutAlign="center center" matRipple [matRippleCentered]="true"
-                routerLink="/data/import">
+                (click)="openImportDialog()">
         <span class="mat-h1">Import Data </span>
       </mat-card>
     </div>

@@ -6,7 +6,7 @@ import {EmployeeDataComponent} from './employee-data/employee-data.component';
 import {TransactionDataComponent} from './transaction-data/transaction-data.component';
 import {ProductDataComponent} from './product-data/product-data.component';
 import {ReportComponent} from './report/report.component';
-import {ImportComponent} from './import/import.component';
+import {ImportDialogComponent} from './import/import-dialog.component';
 import {ExportComponent} from './export/export.component';
 import {BusinessManagerGuard} from '../auth/guards/business-manager-guard.service';
 import {BusinessOwnerGuard} from '../auth/guards/business-owner-guard.service';
@@ -44,11 +44,11 @@ const routes: Routes = [
     component: ExportComponent,
     canActivate: [AuthGuard, BusinessManagerGuard || BusinessOwnerGuard || AdminGuard]
   },
-  {
-    path: 'data/import',
-    component: ImportComponent,
-    canActivate: [AuthGuard, BusinessManagerGuard || BusinessOwnerGuard || AdminGuard]
-  }
+  // {
+  //   path: 'data/import',
+  //   component: ImportDialogComponent,
+  //   canActivate: [AuthGuard, BusinessManagerGuard || BusinessOwnerGuard || AdminGuard]
+  // }
 ];
 
 @NgModule({

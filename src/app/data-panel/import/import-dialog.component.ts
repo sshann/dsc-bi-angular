@@ -1,16 +1,19 @@
 /* tslint:disable:no-inferrable-types prefer-const */
 import {Component, OnInit} from '@angular/core';
-import {TransactionDataService} from '../transaction-data/transaction-data.service';
 import {TransactionData} from '../../shared/models/transaction-data.model';
 import {ProductData} from '../../shared/models/product-data.model';
 import {EmployeeData} from '../../shared/models/employee-data.model';
+import {MatSnackBar} from '@angular/material';
+import {ProductDataService} from '../product-data/product-data.service';
+import {TransactionDataService} from '../transaction-data/transaction-data.service';
+import {EmployeeDataService} from '../employee-data/employee-data.service';
 
 @Component({
-  selector: 'app-import',
-  templateUrl: './import.component.html',
-  styleUrls: ['./import.component.css']
+  selector: 'app-import-dialog',
+  templateUrl: './import-dialog.component.html',
+  styleUrls: ['./import-dialog.component.css']
 })
-export class ImportComponent implements OnInit {
+export class ImportDialogComponent implements OnInit {
 
   trial: any;
   selectedData: string = 'EmployeeData';
@@ -21,10 +24,14 @@ export class ImportComponent implements OnInit {
   employeeJson: EmployeeData[] = [];
   tempEmployee: EmployeeData;
   file: number = 0;
+  enableImportButton = false;
   company_id = JSON.parse(localStorage.getItem('currentUser')).company_id;
 
 
-  constructor(private dataService: TransactionDataService) {
+  constructor(private transactionService: TransactionDataService,
+              private productService: ProductDataService,
+              private employeeService: EmployeeDataService,
+              private snackBar: MatSnackBar) {
   }
 
 
@@ -59,12 +66,14 @@ export class ImportComponent implements OnInit {
     };
   }
 
-  selected(ddlValue: string): void {
-    this.selectedData = ddlValue;
-  }
+  // selected(ddlValue: string): void {
+  //   this.selectedData = ddlValue;
+  // }
 
   csvToJson(t: any): void {
+    this.enableImportButton = false;
     this.file = t.srcElement.files.length;
+    // tslint:disable-next-line:triple-equals
     if (this.file != 0) {
       this.trial = t.target.files[0];
 
@@ -93,7 +102,6 @@ export class ImportComponent implements OnInit {
         // all rows in the csv file
         console.log('>>>>>>>>>>>>>>>>>', lines);
         if (this.selectedData === 'TransactionData') {
-          alert('IN TransactionData');
           for (let i = 0; i < lines.length; i++) {
             this.temp.date = lines[i].date;
             this.temp.description = lines[i].description;
@@ -117,7 +125,6 @@ export class ImportComponent implements OnInit {
           }
           console.log(this.transactionJson);
         } else if (this.selectedData === 'ProductData') {
-          alert('IN ProductData');
           for (let i = 0; i < lines.length; i++) {
             this.tempProduct.date = lines[i].date;
             this.tempProduct.name = lines[i].name;
@@ -125,6 +132,7 @@ export class ImportComponent implements OnInit {
             this.tempProduct.current_stock = lines[i].current_stock;
             this.tempProduct.category = lines[i].category;
             this.tempProduct.description = lines[i].description;
+            this.tempProduct.reference = lines[i].reference;
 
 
             this.productJson.push(this.tempProduct);
@@ -132,6 +140,7 @@ export class ImportComponent implements OnInit {
               date: '',
               name: '',
               current_value: 0,
+              reference: '',
               current_stock: 0,
               category: '',
               description: '',
@@ -145,6 +154,7 @@ export class ImportComponent implements OnInit {
             this.tempEmployee.total_employees = lines[i].total_employees;
             this.tempEmployee.total_salary_paid = lines[i].total_salary_paid;
             this.tempEmployee.total_teams = lines[i].total_teams;
+            this.tempEmployee.reference = lines[i].reference;
 
 
             this.employeeJson.push(this.tempEmployee);
@@ -161,6 +171,7 @@ export class ImportComponent implements OnInit {
 
         }
       };
+      this.enableImportButton = true;
     } else {
       alert('Choose a file to import');
     }
@@ -168,19 +179,28 @@ export class ImportComponent implements OnInit {
 
 
   import(): void {
+    console.log('data', this.transactionJson, this.productJson, this.employeeJson);
     if (this.selectedData === 'TransactionData') {
-      this.dataService.import(this.transactionJson, this.selectedData).subscribe(comp => {
+      this.transactionService.import(this.transactionJson).subscribe(comp => {
         console.log(comp);
+        this.displaySuccessMessage();
       });
     } else if (this.selectedData === 'ProductData') {
-      this.dataService.import(this.productJson, this.selectedData).subscribe(comp => {
+      this.productService.import(this.productJson).subscribe(comp => {
         console.log(comp);
+        this.displaySuccessMessage();
       });
     } else {
-      this.dataService.import(this.employeeJson, this.selectedData).subscribe(comp => {
+      this.employeeService.import(this.employeeJson).subscribe(comp => {
         console.log(comp);
+        this.displaySuccessMessage();
       });
     }
   }
 
+  private displaySuccessMessage() {
+    this.snackBar.open('Data imported', null, {
+      duration: 3000,
+    });
+  }
 }
