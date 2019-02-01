@@ -1,0 +1,59 @@
+<div fxLayout="column">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <!--<button mat-icon-button routerLink="/data">-->
+      <!--<mat-icon aria-label="Return">arrow_back</mat-icon>-->
+    <!--</button>-->
+
+    <div fxLayout="row" fxLayoutAlign="center center" class="page-title-with-return-button" fxFlex>
+      <h1 class=""> Company <span *ngIf="companyDataFetched">{{': ' + company.name}}</span></h1>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayout.sm="column" *ngIf="companyDataFetched">
+    <div fxLayout="column" fxFlex>
+      <div>
+        <button mat-raised-button (click)="openEditDialog()" color="primary">Edit</button>
+      </div>
+      <span class="h2">Responsible contacts</span>
+      <div fxLayout="row" fxLayoutGap="5px">
+        <span class="mat-body-2">Name:</span>
+        <span class="mat-body-2">{{company.responsibleName}}</span>
+      </div>
+      <div fxLayout="row" fxLayoutGap="5px">
+        <span class="mat-body-2">Phone:</span>
+        <span class="mat-body-2">{{company.responsiblePhone}}</span>
+      </div>
+      <div fxLayout="row" fxLayoutGap="5px">
+        <span class="mat-body-2">Email:</span>
+        <span class="mat-body-2">{{company.responsibleEmail}}</span>
+      </div>
+    </div>
+    <div fxLayout="column" fxFlex>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <button mat-icon-button color="primary" (click)="openCreateDialog()">
+          <mat-icon aria-label="Add user">add</mat-icon>
+        </button>
+        <span class="h2"> Users </span>
+      </div>
+      <mat-list role="list">
+        <mat-list-item role="listitem" class="user-item"
+                       *ngFor="let user of company.clients; let index = index;">
+          <div fxLayout="row">
+            <div fxLayout="row" fxLayoutAlign="center center">
+              <button mat-icon-button color="warn" (click)="openDeleteDialog(user, index)">
+                <mat-icon aria-label="Delete user">delete</mat-icon>
+              </button>
+            </div>
+            <div fxLayout="column" fxFlex>
+              <div fxLayout="row">
+                <span class="username">{{'@' + user.username}}</span>
+                <span class="name">{{user.name}}</span>
+              </div>
+              <span class="email secondary-text">{{user.email}}</span>
+            </div>
+          </div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+</div>

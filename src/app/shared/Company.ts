@@ -1,3 +1,5 @@
+import {User} from './models/User.model';
+
 export class Company {
   name: string;
   responsibleName: string;
@@ -5,4 +7,5 @@ export class Company {
   responsiblePhone: string;
   id?: string;
   _rev?: string;
+  clients?: User[];
 }

@@ -1,0 +1,50 @@
+<form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="form" (submit)="onSubmit()">
+
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <h1 *ngIf="isNew" mat-dialog-title>Create User</h1>
+    <h1 *ngIf="!isNew" mat-dialog-title>Edit User</h1>
+  </div>
+  <mat-dialog-content>
+
+    <div fxLayout="row" fxLayoutGap="15px">
+      <mat-form-field>
+        <input matInput formControlName="name" type="text" name="name" placeholder="Name">
+        <mat-error *ngIf="form.get('name').hasError('required')"> Name is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput formControlName="phone" type="text" name="phone" placeholder="Phone">
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="15px">
+      <mat-form-field>
+        <input matInput formControlName="email" type="email" name="email" placeholder="Email">
+        <mat-error *ngIf="form.get('email').hasError('required')"> Email is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput formControlName="password" type="password" name="password" placeholder="Password">
+        <mat-error *ngIf="form.get('password').hasError('required')"> Password is required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="15px">
+      <mat-form-field>
+        <mat-select formControlName="role" placeholder="Role">
+          <mat-option value="business_manager"> Bussiness Manager</mat-option>
+          <mat-option value="business_owner"> Bussiness Onwer</mat-option>
+          <mat-option value="admin" *ngIf="isAdmin()"> Admin</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('role').hasError('required')"> Password is required</mat-error>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <button mat-raised-button color="primary" [disabled]="!form.valid">
+      <span *ngIf="isNew">Create</span>
+      <span *ngIf="!isNew">Update</span>
+    </button>
+    <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</form>
