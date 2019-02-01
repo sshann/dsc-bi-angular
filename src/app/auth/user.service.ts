@@ -48,6 +48,16 @@ export class UserService {
       }),
       catchError(this.handleError('logout User')));
   }
+  
+  update(user:User): Observable<any>{
+	  return this.http.put(this.userURL, user, httpOptions).pipe(
+	  map(users => {
+		  //console.log(users);
+		  localStorage.setItem('currentUser', JSON.stringify(users));
+		  return users;
+	  }))  }
+	  
+	  //getUser()
 
   getUserRoles(id: string): Observable<any> {
     const url = this.userURL + '/roles?id=' + id;
