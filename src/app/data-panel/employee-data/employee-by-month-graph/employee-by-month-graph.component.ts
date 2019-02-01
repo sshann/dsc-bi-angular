@@ -12,9 +12,8 @@ export class EmployeeByMonthGraphComponent implements OnInit {
   @Input() graphData: { name: string, series: any[] }[];
   @Input() graphTitle: string;
   @Input() colorScheme: { domain: string[] };
-  @Input() dataProperty: string;
+  @Input() dataProperty: string[];
   data: any[];
-  _colorScheme: { domain: string[] };
   _graphTitle: string;
 
   constructor() {
@@ -24,43 +23,74 @@ export class EmployeeByMonthGraphComponent implements OnInit {
     if (this.graphData) {
       this.data = this.graphData;
     } else {
-      this.data = this.formatData();
+      this.data = [];
+      this.dataProperty.forEach(property => {
+        this.data.push(this.formatData(property));
+      });
     }
+    console.log(this.data);
 
-    this._graphTitle = this.graphTitle ? this.graphTitle : 'Value (€)';
-    this._colorScheme = this.colorScheme ? this.colorScheme : {
-      domain: ['#4b7ca1']
-    };
+    this._graphTitle = this.graphTitle;
   }
 
-  private formatData() {
-    const array = [
-      {
-        name: this.dataProperty === 'current_value' ? 'Value' : 'Stock',
-        series: []
-      }
-    ];
+  private getPropertyLabel(property: string): string {
+    let label = '';
+    switch (property) {
+      case 'total_employees':
+        label = 'Number of employees';
+        break;
+      case 'total_salary_paid':
+        label = 'Total salary paid';
+        break;
+      case 'total_teams':
+        label = 'Number of teams';
+        break;
+    }
+    return label;
+  }
+
+  private getPropertyDecimal(property: string): number {
+    let decimal = 0;
+    switch (property) {
+      case 'total_employees':
+        decimal = 0;
+        break;
+      case 'total_salary_paid':
+        decimal = 2;
+        break;
+      case 'total_teams':
+        decimal = 0;
+        break;
+    }
+    return decimal;
+  }
+
+  private formatData(property) {
+    const line = {
+      name: this.getPropertyLabel(property),
+      series: []
+    };
+    const decimal = this.getPropertyDecimal(property);
 
     this.employees.slice().reverse().forEach(employee => {
       const obj = {
         name: employee.date.substr(0, 10),
-        value: employee[this.dataProperty]
+        value: (employee[property]).toFixed(decimal)
       };
-      array[0].series.push(obj);
+      line.series.push(obj);
     });
-    array[0].series = this.sumSameDayEmployees(array[0].series);
-    return array;
+    line.series = this.sumSameDayEmployees(line.series, decimal);
+    return line;
   }
 
-  private sumSameDayEmployees(array) {
-    const fractionDigits = this.dataProperty === 'current_value' ? 2 : 0;
+  private sumSameDayEmployees(array, decimal) {
     const newArray = [];
     let index = 0;
 
     newArray.push(array[0]);
     array.slice(1).forEach((element) => {
       if (newArray[index].name === element.name) {
-        newArray[index].value = (parseFloat(newArray[index].value) + parseFloat(element.value)).toFixed(fractionDigits);
+        newArray[index].value = (parseFloat(newArray[index].value) + parseFloat(element.value)).toFixed(decimal);
       } else {
         index++;
         newArray.push(element);
