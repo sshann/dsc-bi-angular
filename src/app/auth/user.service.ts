@@ -20,12 +20,12 @@ const httpOptions = {
 @Injectable()
 export class UserService {
   private userURL = environment.apiBaseURL + '/api/Users';
-  private userChanged = new Subject<void>();
+  private userChanged = new Subject<boolean>();
 
   constructor(private http: HttpClient) {
   }
 
-  isUserChanged(): Observable<void> {
+  isUserChanged(): Observable<boolean> {
     return this.userChanged.asObservable();
   }
 
@@ -35,7 +35,7 @@ export class UserService {
         if (loginOutput.id && loginOutput.userId) {
           localStorage.setItem('currentUser', JSON.stringify(loginOutput.user));
           localStorage.setItem('accessToken', loginOutput.id);
-          this.userChanged.next();
+          this.userChanged.next(true);
         }
         return loginOutput;
       }), catchError(this.handleError('login', null)));
@@ -61,6 +61,7 @@ export class UserService {
       tap(() => {
         localStorage.removeItem('currentUser');
         localStorage.removeItem('accessToken');
+        this.userChanged.next(false);
       }),
       catchError(this.handleError('logout User')));
   }

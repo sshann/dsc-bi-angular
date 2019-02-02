@@ -23,9 +23,14 @@ export class HeaderComponent implements OnInit {
       this.setCompanyName(currentUser.company_id);
     }
 
-    this.userService.isUserChanged().subscribe(() => {
-      const company_id = JSON.parse(localStorage.getItem('currentUser')).company_id;
-      this.setCompanyName(company_id);
+    this.userService.isUserChanged().subscribe((loggedIn) => {
+      if (loggedIn) {
+        const company_id = JSON.parse(localStorage.getItem('currentUser')).company_id;
+        this.setCompanyName(company_id);
+      } else {
+        this.companyId = null;
+        this.companyName = null;
+      }
     });
 
     this.companyService.haveCompanyChanged().subscribe((company) => {
