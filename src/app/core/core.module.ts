@@ -36,7 +36,7 @@ import {ProfileModule} from '../profile/profile.module';
     DataPanelModule,
     SharedModule,
     DashboardModule,
-	ProfileModule
+    ProfileModule
   ],
   declarations: [
     HeaderComponent,

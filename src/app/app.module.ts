@@ -6,6 +6,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {CoreModule} from './core/core.module';
 import {AppRoutingModule} from './/app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 
 
 @NgModule({
@@ -17,10 +18,15 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     AngularMaterialModule,
     FlexLayoutModule,
-    AppRoutingModule,
     CoreModule,
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
