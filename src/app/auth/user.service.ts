@@ -12,8 +12,8 @@ import {EmployeeData} from '../shared/models/employee-data.model';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Credentials': 'true',
-    'Access-Control-Allow-Origin': '*'
+    // 'Access-Control-Allow-Credentials': 'true',
+    // 'Access-Control-Allow-Origin': '*'
   })
 };
 
