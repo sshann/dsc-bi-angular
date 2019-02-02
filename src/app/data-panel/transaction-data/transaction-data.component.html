@@ -9,7 +9,7 @@
     </div>
   </div>
 
-  <div fxLayout="row" fxLayout.sm="column">
+  <div fxLayout="row" fxLayout.sm="column" *ngIf="dataFetched && transactions.length">
     <app-transaction-by-day-graph fxFlex="50%" [transactions]="transactions" *ngIf="dataFetched"
                                   [dataProperty]="'value'"></app-transaction-by-day-graph>
     <app-transaction-by-day-graph fxFlex="50%" [transactions]="transactions" *ngIf="dataFetched"

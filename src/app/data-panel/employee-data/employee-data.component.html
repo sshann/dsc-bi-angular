@@ -9,7 +9,7 @@
     </div>
   </div>
 
-  <div fxLayout="row" fxLayout.sm="column">
+  <div fxLayout="row" fxLayout.sm="column" *ngIf="dataFetched && employees.length">
     <app-employee-by-month-graph fxFlex="50%" [employees]="employees" *ngIf="dataFetched" graphTitle="Amount"
                                  [dataProperty]="['total_teams','total_employees']"></app-employee-by-month-graph>
     <app-employee-by-month-graph fxFlex="50%" [employees]="employees" *ngIf="dataFetched" graphTitle="Salary"

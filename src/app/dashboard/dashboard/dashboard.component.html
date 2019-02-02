@@ -8,10 +8,15 @@
       <h1 class=""> Dashboard</h1>
     </div>
 
-    <button mat-raised-button [disabled]="!dataFeched" color="primary" (click)="downloadReport()">Download</button>
+    <button mat-raised-button [disabled]="!(dataFeched && report.data.users.length && report.data.transactions.length && report.data.employees.length && report.data.products.length)" color="primary" (click)="downloadReport()">Download</button>
   </div>
 
-  <div fxLayout="column" *ngIf="dataFeched" id="dashboard">
+  <div *ngIf="!(dataFeched && report.data.users.length && report.data.transactions.length && report.data.employees.length && report.data.products.length)">
+    <h1> Not enought data. Go import data or add new data</h1>
+  </div>
+  <div fxLayout="column"
+       *ngIf="dataFeched && report.data.users.length && report.data.transactions.length && report.data.employees.length && report.data.products.length"
+       id="dashboard">
     <!--SUMMARY-->
     <div fxLayout="row" class="summary" fxLayout.sm="column" fxLayoutGap="15px">
       <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="center center" fxFlex>
