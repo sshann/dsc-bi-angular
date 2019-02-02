@@ -5,6 +5,8 @@ This project was developed for the course assignment of the 2018-2019 edition of
 
 This application is intended to be used as a complement of companies internal applications, providing insights into the company business. In this first version, we provide an analysis regarding the transactions, products and employees.
 
+You can access a [test environment](https://wgenizshannstudentvunl-vuspace.apic.eu-gb.mybluemix.net/) of the application with the credentials ``mr.test@test.com`` email and ``test`` password. Note that this account is shared across other users. In the case that your browser display a invalid certificate warning, add the application as an exception. This should be fixed and future versions.
+
 ## Features
 
 - See a visual report of the current situation of your company.
@@ -56,3 +58,5 @@ This Angular application was designed splitting the functionalities in different
 - Add user confirmation by email.
 - Allow updating an existent user role.
 - Specify the import file format and structure or provide a template for the users.
+- Fix invalid HTTPS certificates.
+- Create production, test and development environments.
